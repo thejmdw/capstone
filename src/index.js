@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { SwipeHome } from "./components/SwipeHome"
+import { BrowserRouter as Router } from "react-router-dom"
 import './index.css';
 // import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SwipeHome />
+    <Router>
+      <SwipeHome />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
