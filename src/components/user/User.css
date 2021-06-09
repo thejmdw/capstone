@@ -1,4 +1,4 @@
-.houseCard {
+.userCard {
   background-position: center;
   background-size: cover;
   box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
@@ -10,13 +10,13 @@
   width: 600px
 }
 
-.houseCard > h3 {
+.userCard > h3 {
   position: aboslute;
   bottom: 10px;
-  color: white;
+  /* color: white; */
 }
 
-.houseCards__container {
+.userCard__container {
   display: flex;
   justify-content: center;
   margin-top: 5vh;
