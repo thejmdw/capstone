@@ -5,17 +5,20 @@ import { useHistory } from "react-router-dom"
 import { UserContext } from "./UserProvider"
 import "./User.css"
 import TinderCard from "react-tinder-card"
+import Button from '@material-ui/core/Button';
+
 
 export const User = () => {
   // const alreadyRemoved = []
   
-  const { user, users, getUsers, getUserById } = useContext(UserContext)
+  const { user, users, getUsers, getUserById, setUser } = useContext(UserContext)
   // const [ matches, setMatches ] = useState(houses)
   const [lastDirection, setLastDirection] = useState()
   // let housesState = houses
   
   useEffect(() => {
     getUserById(parseInt(localStorage.getItem("swipeHome_user")))
+     
   }, [])
 
   // const history = useHistory()
@@ -56,7 +59,13 @@ export const User = () => {
   //   console.log(name + ' left the screen!')
   // }
   const currentUser = user
-  debugger
+  const history =useHistory()
+
+  const logOut = () => {
+    localStorage.removeItem("swipeHome_user")
+    history.push("/")
+  }
+  // debugger
   return (
     <>
       <section className="userCard__container">
@@ -64,6 +73,11 @@ export const User = () => {
               <div className="userCard">
                 <h3>{currentUser.name}</h3>
                 <h5>{currentUser.email}</h5>
+              <div>
+                <Button>Faves</Button>
+                <Button>Edit Info</Button>
+                <Button onClick={logOut}>Log Out</Button>
+              </div>
               </div>
             </TinderCard>
       </section>
