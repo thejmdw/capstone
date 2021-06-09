@@ -19,7 +19,7 @@ export const NavBar = () => {
         </IconButton>
       </Link>
       NavBar
-      <Link className="navbar__link" to="/">
+      <Link className="navbar__link" to="/houses">
         <IconButton>
           <HomeWorkIcon fontSize="large" />
         </IconButton>

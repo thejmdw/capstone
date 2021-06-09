@@ -2,20 +2,20 @@
 import React from "react"
 import { useContext, useEffect, useState, useMemo } from "react"
 import { useHistory } from "react-router-dom"
-import { HouseContext } from "./HouseProvider"
-import "./House.css"
+import { UserContext } from "./UserProvider"
+import "./User.css"
 import TinderCard from "react-tinder-card"
 
-export const HouseList = () => {
+export const User = () => {
   // const alreadyRemoved = []
   
-  const { houses, getHouses } = useContext(HouseContext)
+  const { user, users, getUsers, getUserById } = useContext(UserContext)
   // const [ matches, setMatches ] = useState(houses)
   const [lastDirection, setLastDirection] = useState()
   // let housesState = houses
   
   useEffect(() => {
-    getHouses()
+    getUserById(parseInt(localStorage.getItem("swipeHome_user")))
   }, [])
 
   // const history = useHistory()
@@ -47,34 +47,27 @@ export const HouseList = () => {
 
   //Simple Swipe Left and right...
   //
-  const swiped = (direction, nameToDelete) => {
-    console.log('removing: ' + nameToDelete)
-    setLastDirection(direction)
-  }
+  // const swiped = (direction, nameToDelete) => {
+  //   console.log('removing: ' + nameToDelete)
+  //   setLastDirection(direction)
+  // }
 
-  const outOfFrame = (name) => {
-    console.log(name + ' left the screen!')
-  }
-  
-  // onSwipe={(dir) => swiped(dir, house.property_id)}
-  // onCardLeftScreen={() => outOfFrame(house.property_id)} 
-  
-
+  // const outOfFrame = (name) => {
+  //   console.log(name + ' left the screen!')
+  // }
+  const currentUser = user
+  debugger
   return (
     <>
-      <section className="houseCards__container">
-        { houses.map((house, index) => {
-          return (
-            <TinderCard className='swipe house' preventSwipe={["up", "down"]} key={house.property_id} onSwipe={(dir) => swiped(dir, house.property_id)} onCardLeftScreen={() => outOfFrame(house.property_id)}>
-              <div style={{backgroundImage: `url(${house.photos[0].href})`}} className="houseCard">
-                <h3>{house.address.line}</h3>
-                <h5>{house.property_id}</h5>
+      <section className="userCard__container">
+            <TinderCard className='swipe' key={currentUser.id}>
+              <div className="userCard">
+                <h3>{currentUser.name}</h3>
+                <h5>{currentUser.email}</h5>
               </div>
             </TinderCard>
-          )
-        })}
       </section>
-      {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
+      {/* {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />} */}
       {/* <div className='buttons'>
         <button onClick={() => swipe('left')}>Swipe left!</button>
         <button onClick={() => swipe('right')}>Swipe right!</button>

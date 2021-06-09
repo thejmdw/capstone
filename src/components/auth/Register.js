@@ -6,7 +6,7 @@ export const Register = (props) => {
     const firstName = useRef()
     const lastName = useRef()
     const email = useRef()
-    const userName = useRef()
+    const password = useRef()
     const verifyPassword = useRef()
     const conflictDialog = useRef()
     const history = useHistory()
@@ -37,7 +37,7 @@ export const Register = (props) => {
                         .then(res => res.json())
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
-                                localStorage.setItem("SwipeHome_user", createdUser.id)
+                                localStorage.setItem("swipeHome_user", createdUser.id)
                                 history.push("/")
                             }
                         })
@@ -60,10 +60,6 @@ export const Register = (props) => {
             <form className="form--login" onSubmit={handleRegister}>
                 <h1 className="h3 mb-3 font-weight-normal">Please Register for Swipe Home</h1>
                 <fieldset>
-                    <label htmlFor="userName"> User Name </label>
-                    <input ref={userName} type="text" name="userName" className="form-control" placeholder="User Name" required autoFocus />
-                </fieldset>
-                <fieldset>
                     <label htmlFor="userName"> First Name </label>
                     <input ref={firstName} type="text" name="firstName" className="form-control" placeholder="First Name" required autoFocus />
                 </fieldset>
@@ -76,8 +72,12 @@ export const Register = (props) => {
                     <input ref={email} type="email" name="email" className="form-control" placeholder="Email Address" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="inputEmail"> Password </label>
-                    <input ref={email} type="email" name="email" className="form-control" placeholder="Email Address" required />
+                    <label htmlFor="password"> Password </label>
+                    <input ref={password} type="password" name="password" className="form-control" placeholder="Password" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="verifyPassword"> Password </label>
+                    <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify Password" required />
                 </fieldset>
                 <fieldset>
                     <button type="submit"> Sign in </button>
