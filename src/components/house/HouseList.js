@@ -9,13 +9,13 @@ import TinderCard from "react-tinder-card"
 export const HouseList = () => {
   // const alreadyRemoved = []
   
-  const { houses, getHouses } = useContext(HouseContext)
+  const { houses, getHousesTest } = useContext(HouseContext)
   // const [ matches, setMatches ] = useState(houses)
   const [lastDirection, setLastDirection] = useState()
   // let housesState = houses
   
   useEffect(() => {
-    getHouses()
+    getHousesTest()
   }, [])
 
   // const history = useHistory()

@@ -7,7 +7,7 @@ export const HouseContext = createContext()
 export const HouseProvider = (props) => {
   const [ houses, setHouses ] = useState([])
 
-  const getHouses = () => {
+  const getHousesTest = () => {
     return fetch(`https://realtor.p.rapidapi.com/properties/v2/list-for-rent?city=Nashville&state_code=TN&limit=20&offset=0&sort=relevance&postal_code=37207&beds_min=0&allows_dog=true&price_max=3000`, {
       "method": "GET",
       "headers": {
@@ -52,7 +52,7 @@ export const HouseProvider = (props) => {
   return (
     <HouseContext.Provider value ={
       {
-        houses, getHouses
+        houses, getHousesTest
       }
     }>
       {props.children}

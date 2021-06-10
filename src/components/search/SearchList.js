@@ -9,14 +9,14 @@ import TinderCard from "react-tinder-card"
 export const SearchList = () => {
   // const alreadyRemoved = []
   
-  const { searches, getSearches } = useContext(SearchContext)
+  const { houses, getHouses } = useContext(SearchContext)
   // const [ matches, setMatches ] = useState(searchs)
   const [lastDirection, setLastDirection] = useState()
   // let searchsState = searchs
   
-  useEffect(() => {
-    getSearches()
-  }, [])
+  // useEffect(() => {
+  //   getHouses()
+  // }, [])
 
   // const history = useHistory()
 
@@ -62,8 +62,8 @@ export const SearchList = () => {
 
   return (
     <>
-      <section className="searchCards__container">
-        { searches.map((search, index) => {
+      <section className="searchCard__container">
+        { houses.map((search) => {
           return (
             <TinderCard className='swipe search' preventSwipe={["up", "down"]} key={search.property_id} onSwipe={(dir) => swiped(dir, search.property_id)} onCardLeftScreen={() => outOfFrame(search.property_id)}>
               <div style={{backgroundImage: `url(${search.photos[0].href})`}} className="searchCard">

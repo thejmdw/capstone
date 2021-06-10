@@ -3,20 +3,16 @@ import { SearchContext } from "./SearchProvider"
 import { useState, createContext } from "react"
 import { stateCodes } from './stateCodes'
 import "./Search.css"
+import { useHistory } from 'react-router'
 
 // export const SearchContext = createContext()
 
 export const SearchForm = () => {
-  const { getSearch, postSearchToLocal } = useContext(SearchContext)
+  const { getSearch, addSearch, getHouses } = useContext(SearchContext)
+  const history = useHistory()
 
   const [ search, setSearch ] = useState({
     userId: parseInt(localStorage.getItem("swipeHome_user")),
-    city: "",
-    state_code: 0,
-    postal_code: "",
-    price_max: "",
-    beds_min: 0,
-    baths_min: 0,
     allows_dogs: "true"
   })
 
@@ -43,15 +39,15 @@ export const SearchForm = () => {
     if (search.city === "" || search.state_code === 0 ) {
       window.alert("Please select a city and state")
     } else {
-        postSearchToLocal(search)
-        window.alert("sibmitted!")
-          // .then(() => history.push("/matches"))
+        addSearch(search)
+        getHouses(search)
+          .then(() => history.push("/searchList"))
     }
   }
   
   return (
-    <div className="searchCard__Container">
-      <form className="searchCard">
+    <div className="searchForm__Container">
+      <form className="searchForm">
       <h2 className="searchForm__title">House Search</h2>
       <fieldset>
         <div className="form-group">
@@ -108,7 +104,7 @@ export const SearchForm = () => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="stateCode">Allows Dogs</label>
-          <input type="radio" id="allows_dogs" className="form-control" value={search.allows_dogs = "false"} onChange={handleControlledInputChange} />
+          <input type="radio" id="allows_dogs" className="form-control" value={search.allows_dogs = "true"} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <button className="btn btn-primary"
@@ -116,6 +112,7 @@ export const SearchForm = () => {
           onClick={event => {
             event.preventDefault() // Prevent browser from submitting the form and refreshing the page
             handleClickSaveSearch()
+            
           }}>
           Submit Search</button>
     </form>
