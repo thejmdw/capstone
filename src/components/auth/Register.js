@@ -31,7 +31,8 @@ export const Register = (props) => {
                         },
                         body: JSON.stringify({
                             email: email.current.value,
-                            name: `${firstName.current.value} ${lastName.current.value}`
+                            name: `${firstName.current.value} ${lastName.current.value}`,
+                            avatarURL: `https://www.tinygraphs.com/squares/${firstName.current.value}%20${lastName.current.value}?theme=heatwave&numcolors=4&size=220&fmt=svg`
                         })
                     })
                         .then(res => res.json())

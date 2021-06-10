@@ -74,13 +74,14 @@ export const User = () => {
       <section className="userCard__container">
             <div className='userProfile_container' key={currentUser.id}>
               <div className="userCard">
+                <img src={currentUser.avatarURL}></img>
                 <h3>{currentUser.name}</h3>
                 <h5>{currentUser.email}</h5>
                 <div>
                   <div>Search List</div>
                   {currentUserSearches.length === 0 ? <div>You Haven't Searched for Anything Yet</div> :
                   <div>
-                    {currentUserSearches.map((search) => {return (<div>{search.city}{search.state_code}{search.postal_code}</div>)})}
+                    {currentUserSearches.map((search) => {return (<div>{`${search.city},${search.state_code} ${search.postal_code}`}</div>)})}
                   </div>}
                 </div>
                 <div>
