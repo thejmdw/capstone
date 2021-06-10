@@ -18,10 +18,10 @@ export const SearchProvider = (props) => {
     .then(setSearch)
   }
 
-  const getSearches = () => {
-      return fetch(`http://localhost:8088/searches`)
+  const getSearchesByUserId = (userId) => {
+      return fetch(`http://localhost:8088/searches?userId=${userId}`)
       .then(res => res.json())
-      .then(data => setSearches(data.properties))
+      .then(data => setSearches(data))
   }
 
   const getHouses = (search) => {
@@ -40,7 +40,7 @@ export const SearchProvider = (props) => {
   return (
     <SearchContext.Provider value ={
       {
-        search, searches, addSearch, getSearches, houses, getHouses, 
+        search, searches, addSearch, getSearchesByUserId, houses, getHouses, 
       }
     }>
       {props.children}
