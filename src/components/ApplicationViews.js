@@ -7,6 +7,7 @@ import { SearchForm } from "./search/SearchForm"
 import { SearchList } from "./search/SearchList"
 import { UserProvider } from "./user/UserProvider"
 import { User } from "./user/User"
+import { Home } from "./home/Home"
 
 
 export const ApplicationViews = () => {
@@ -17,12 +18,11 @@ export const ApplicationViews = () => {
         <UserProvider>
           
         <Route exact path="/profile">
-        {/* <HouseList /> */}
           <User />
         </Route>
 
-        <Route exact path="/houses">
-        <HouseList />
+        <Route exact path="/">
+          <Home />
         </Route>
 
         <Route exact path="/search">

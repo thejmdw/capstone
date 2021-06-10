@@ -48,7 +48,7 @@ export const SearchForm = () => {
   return (
     <div className="searchForm__Container">
       <form className="searchForm">
-      <h2 className="searchForm__title">House Search</h2>
+      <h2 className="searchForm__title">Search</h2>
       <fieldset>
         <div className="form-group">
           <label htmlFor="city">City</label>
