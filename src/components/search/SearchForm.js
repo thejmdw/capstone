@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { SearchContext } from "./SearchProvider"
 import { useState, createContext } from "react"
 import { stateCodes } from './stateCodes'
+import "./Search.css"
 
 // export const SearchContext = createContext()
 
@@ -12,8 +13,8 @@ export const SearchForm = () => {
     userId: parseInt(localStorage.getItem("swipeHome_user")),
     city: "",
     state_code: 0,
-    postal_code: null,
-    price_max: null,
+    postal_code: "",
+    price_max: "",
     beds_min: 0,
     baths_min: 0,
     allows_dogs: "true"
@@ -49,7 +50,8 @@ export const SearchForm = () => {
   }
   
   return (
-      <form className="searchForm">
+    <div className="searchCard__Container">
+      <form className="searchCard">
       <h2 className="searchForm__title">House Search</h2>
       <fieldset>
         <div className="form-group">
@@ -78,7 +80,7 @@ export const SearchForm = () => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="priceMax">:</label>
+          <label htmlFor="priceMax">Max Price:</label>
           <input type="num" id="price_max" className="form-control" placeholder="$" value={search.price_max} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
@@ -117,5 +119,6 @@ export const SearchForm = () => {
           }}>
           Submit Search</button>
     </form>
+    </div>
   )
 }

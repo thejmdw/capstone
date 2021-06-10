@@ -69,7 +69,7 @@ export const User = () => {
   return (
     <>
       <section className="userCard__container">
-            <TinderCard className='swipe' key={currentUser.id}>
+            <div className='userProfile_container' key={currentUser.id}>
               <div className="userCard">
                 <h3>{currentUser.name}</h3>
                 <h5>{currentUser.email}</h5>
@@ -79,7 +79,7 @@ export const User = () => {
                 <Button onClick={logOut}>Log Out</Button>
               </div>
               </div>
-            </TinderCard>
+            </div>
       </section>
       {/* {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />} */}
       {/* <div className='buttons'>

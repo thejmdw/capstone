@@ -5,18 +5,19 @@ export const SearchContext = createContext()
 export const SearchProvider = (props) => {
   const [ search, setSearch ] = useState()
 
-  const postSearchToLocal = (searchArray) => {
+  const postSearchToLocal = (searchObj) => {
     return fetch(`http://localhost:8088/searches`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(searchArray)
+      body: JSON.stringify(searchObj)
     })
+    .then(getSearch(searchObj))
   }
 
-  const getSearch = (query) => {
-    return fetch(`https://realtor.p.rapidapi.com/properties/v2/list-for-rent?city=${query.city}&state_code=${query.state_code}&limit=200&offset=0&sort=relevance&postal_code=${query.postal_code}&baths_min=${query.baths_min}&beds_min=${query.beds_min}&price_max=${query.priceMax}&allows_dogs=${query.allows_dogs}`, {
+  const getSearch = (searchObj) => {
+    return fetch(`https://realtor.p.rapidapi.com/properties/v2/list-for-rent?city=${searchObj.city}&state_code=${searchObj.state_code}&limit=200&offset=0&sort=relevance&postal_code=${searchObj.postal_code}&baths_min=${searchObj.baths_min}&beds_min=${searchObj.beds_min}&price_max=${searchObj.priceMax}&allows_dogs=${searchObj.allows_dogs}`, {
       "method": "GET",
       "headers": {
         "x-rapidapi-key": "bc293e4707msh4961366c18bcffep125e04jsnfbdb172d68a0",
@@ -27,7 +28,7 @@ export const SearchProvider = (props) => {
       response.json()
     )    
     .then(data =>
-      postSearchToLocal(data.properties))
+      setSearch(data.properties))
     .catch(err => {
       console.error(err);
     })
