@@ -6,6 +6,7 @@ export const Register = (props) => {
     const firstName = useRef()
     const lastName = useRef()
     const email = useRef()
+    const isBuyer = useRef()
     const password = useRef()
     const verifyPassword = useRef()
     const conflictDialog = useRef()
@@ -32,7 +33,8 @@ export const Register = (props) => {
                         body: JSON.stringify({
                             email: email.current.value,
                             name: `${firstName.current.value} ${lastName.current.value}`,
-                            avatarURL: `https://www.tinygraphs.com/squares/${firstName.current.value}%20${lastName.current.value}?theme=heatwave&numcolors=4&size=220&fmt=svg`
+                            avatarURL: `https://www.tinygraphs.com/squares/${firstName.current.value}%20${lastName.current.value}?theme=heatwave&numcolors=4&size=220&fmt=svg`,
+                            isBuyer: isBuyer.current.value
                         })
                     })
                         .then(res => res.json())
@@ -72,14 +74,20 @@ export const Register = (props) => {
                     <label htmlFor="inputEmail"> Email address </label>
                     <input ref={email} type="email" name="email" className="form-control" placeholder="Email Address" required />
                 </fieldset>
-                <fieldset>
+                {/* <fieldset>
+                    <label htmlFor="isBuyer">Buying?</label>
+                    <input ref={isBuyer} type="checkbox" checked="true" onChange={() => {
+                        isBuyer = !isBuyer
+                    }}/>
+                </fieldset> */}
+                {/* <fieldset>
                     <label htmlFor="password"> Password </label>
                     <input ref={password} type="password" name="password" className="form-control" placeholder="Password" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="verifyPassword"> Password </label>
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify Password" required />
-                </fieldset>
+                </fieldset> */}
                 <fieldset>
                     <button type="submit"> Sign in </button>
                 </fieldset>

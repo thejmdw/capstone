@@ -11,6 +11,7 @@ import { SearchList } from "./search/SearchList"
 import { FaveList } from "./fave/FaveList"
 //forms
 import { SearchForm } from "./search/SearchForm"
+import { UserForm } from "./user/UserForm"
 //items
 import { User } from "./user/User"
 import { Home } from "./home/Home"
@@ -31,6 +32,9 @@ export const ApplicationViews = () => {
           
             <Route exact path="/profile">
               <User />
+            </Route>
+            <Route path="/profile/edit/:userId(\d+)">
+              <UserForm />
             </Route>
 
             <Route exact path="/">

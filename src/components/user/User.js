@@ -12,14 +12,16 @@ import { SearchContext } from "../search/SearchProvider"
 export const User = () => {
   // const alreadyRemoved = []
   
-  const { user, users, getUsers, getUserById, setUser } = useContext(UserContext)
+  const { users, getUsers, getUserById } = useContext(UserContext)
   const { searches, getSearchesByUserId } = useContext(SearchContext)
   // const [ matches, setMatches ] = useState(houses)
   const [lastDirection, setLastDirection] = useState()
   // let housesState = houses
-  
+  const [profile, setProfile] = useState({})
+
   useEffect(() => {
     getUserById(parseInt(localStorage.getItem("swipeHome_user")))
+     .then(setProfile)
      .then(getSearchesByUserId(localStorage.getItem("swipeHome_user")))
   }, [])
 
@@ -60,7 +62,7 @@ export const User = () => {
   // const outOfFrame = (name) => {
   //   console.log(name + ' left the screen!')
   // }
-  const currentUser = user
+  const currentUser = profile
   const currentUserSearches = searches
   const history =useHistory()
 
@@ -86,7 +88,7 @@ export const User = () => {
                 </div>
                 <div>
                   <Button onClick={() => {history.push("/faves")}}>Faves</Button>
-                  <Button>Edit Info</Button>
+                  <Button onClick={() => {history.push(`/profile/edit/${currentUser.id}`)}}>Edit Info</Button>
                   <Button onClick={logOut}>Log Out</Button>
                 </div>
               </div>
