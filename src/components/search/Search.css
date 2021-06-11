@@ -3,7 +3,7 @@
   background-size: cover;
   box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
   border-radius: 20px;
-  height: 72vh;
+  height: 50vh;
   max-width: 85vh;
   padding: 20px;
   position: relative;
@@ -25,3 +25,33 @@
 .swipe {
   position: absolute;
 }
+
+.searchForm {
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  border-radius: 20px;
+  height: 72vh;
+  max-width: 85vh;
+  padding: 20px;
+  position: relative;
+  width: 600px
+}
+
+.searchForm > h3 {
+  position: aboslute;
+  bottom: 10px;
+  color: white;
+}
+
+.searchForm__Container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5vh;
+}
+
+.form-group {
+  flex-basis: 40%;
+}
+
+

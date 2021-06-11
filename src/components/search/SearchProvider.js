@@ -3,9 +3,11 @@ import React, { createContext, useState } from 'react'
 export const SearchContext = createContext()
 
 export const SearchProvider = (props) => {
-  const [ search, setSearch ] = useState()
+  const [ search, setSearch ] = useState({})
+  const [ searches, setSearches ] = useState([])
+  const [houses, setHouses] = useState([])
 
-  const postSearchToLocal = (searchObj) => {
+  const addSearch = (searchObj) => {
     return fetch(`http://localhost:8088/searches`, {
       method: "POST",
       headers: {
@@ -13,31 +15,32 @@ export const SearchProvider = (props) => {
       },
       body: JSON.stringify(searchObj)
     })
-    .then(getSearch(searchObj))
+    .then(setSearch)
   }
 
-  const getSearch = (searchObj) => {
-    return fetch(`https://realtor.p.rapidapi.com/properties/v2/list-for-rent?city=${searchObj.city}&state_code=${searchObj.state_code}&limit=200&offset=0&sort=relevance&postal_code=${searchObj.postal_code}&baths_min=${searchObj.baths_min}&beds_min=${searchObj.beds_min}&price_max=${searchObj.priceMax}&allows_dogs=${searchObj.allows_dogs}`, {
+  const getSearchesByUserId = (userId) => {
+      return fetch(`http://localhost:8088/searches?userId=${userId}`)
+      .then(res => res.json())
+      .then(data => setSearches(data))
+  }
+
+  const getHouses = (search) => {
+    return fetch(`https://realtor.p.rapidapi.com/properties/v2/list-for-rent?city=${search.city.replace(/"/g,"")}&state_code=${search.state_code.replace(/"/g,"")}&limit=200&offset=0&sort=relevance&postal_code=${search.postal_code.replace(/"/g,"")}`, {
       "method": "GET",
       "headers": {
         "x-rapidapi-key": "bc293e4707msh4961366c18bcffep125e04jsnfbdb172d68a0",
         "x-rapidapi-host": "realtor.p.rapidapi.com"
       }
     })
-    .then(response => 
-      response.json()
-    )    
-    .then(data =>
-      setSearch(data.properties))
-    .catch(err => {
-      console.error(err);
-    })
+    .then(response => response.json())    
+    .then(data => setHouses(data.properties))
+    .catch(err => {console.error(err)})
   }
 
   return (
     <SearchContext.Provider value ={
       {
-        search, getSearch, postSearchToLocal
+        search, searches, addSearch, getSearchesByUserId, houses, getHouses, 
       }
     }>
       {props.children}

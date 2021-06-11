@@ -6,19 +6,21 @@ import { UserContext } from "./UserProvider"
 import "./User.css"
 import TinderCard from "react-tinder-card"
 import Button from '@material-ui/core/Button';
+import { SearchContext } from "../search/SearchProvider"
 
 
 export const User = () => {
   // const alreadyRemoved = []
   
   const { user, users, getUsers, getUserById, setUser } = useContext(UserContext)
+  const { searches, getSearchesByUserId } = useContext(SearchContext)
   // const [ matches, setMatches ] = useState(houses)
   const [lastDirection, setLastDirection] = useState()
   // let housesState = houses
   
   useEffect(() => {
     getUserById(parseInt(localStorage.getItem("swipeHome_user")))
-     
+     .then(getSearchesByUserId(localStorage.getItem("swipeHome_user")))
   }, [])
 
   // const history = useHistory()
@@ -59,6 +61,7 @@ export const User = () => {
   //   console.log(name + ' left the screen!')
   // }
   const currentUser = user
+  const currentUserSearches = searches
   const history =useHistory()
 
   const logOut = () => {
@@ -71,26 +74,25 @@ export const User = () => {
       <section className="userCard__container">
             <div className='userProfile_container' key={currentUser.id}>
               <div className="userCard">
+                <img src={currentUser.avatarURL}></img>
                 <h3>{currentUser.name}</h3>
                 <h5>{currentUser.email}</h5>
-              <div>
-                <Button>Faves</Button>
-                <Button>Edit Info</Button>
-                <Button onClick={logOut}>Log Out</Button>
-              </div>
+                <div>
+                  <div>Search List</div>
+                  {currentUserSearches.length === 0 ? <div>You Haven't Searched for Anything Yet</div> :
+                  <div>
+                  {currentUserSearches.map((search) => {return (<div>{`${search.city},${search.state_code} ${search.postal_code}`}</div>)})}
+                  </div>}
+                </div>
+                <div>
+                  <Button onClick={() => {history.push("/faves")}}>Faves</Button>
+                  <Button>Edit Info</Button>
+                  <Button onClick={logOut}>Log Out</Button>
+                </div>
               </div>
             </div>
       </section>
-      {/* {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />} */}
-      {/* <div className='buttons'>
-        <button onClick={() => swipe('left')}>Swipe left!</button>
-        <button onClick={() => swipe('right')}>Swipe right!</button>
-      </div>
-      {lastDirection ? <h2 key={lastDirection} className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText'>Swipe a card or press a button to get started!</h2>} */}
     </>
   )
 }
-            // <>
-            // <img className="house_profilePic"src={house.photos[0].href}></img>
-            // <div key={house.listing_id}>{house.listing_id}</div>
-            // </>
+
