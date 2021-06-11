@@ -81,7 +81,7 @@ export const User = () => {
                   <div>Search List</div>
                   {currentUserSearches.length === 0 ? <div>You Haven't Searched for Anything Yet</div> :
                   <div>
-                    {currentUserSearches.map((search) => {return (<div>{`${search.city},${search.state_code} ${search.postal_code}`}</div>)})}
+                  {currentUserSearches.map((search) => {return (<div>{`${search.city},${search.state_code} ${search.postal_code}`}</div>)})}
                   </div>}
                 </div>
                 <div>

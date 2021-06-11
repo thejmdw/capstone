@@ -3,20 +3,46 @@ import React from "react"
 import { useContext, useEffect, useState, useMemo } from "react"
 import { useHistory } from "react-router-dom"
 import { HouseContext } from "./HouseProvider"
+import { FaveContext } from "../fave/FaveProvider"
 import "./House.css"
 import TinderCard from "react-tinder-card"
+import { SearchContext } from "../search/SearchProvider"
 
 export const HouseList = () => {
-  // const alreadyRemoved = []
   
-  const { houses, getHousesTest } = useContext(HouseContext)
+  // const { houses, getHousesTest } = useContext(HouseContext)
+  const { fave, faves, addFave, getFaves } = useContext(FaveContext)
   // const [ matches, setMatches ] = useState(houses)
   const [lastDirection, setLastDirection] = useState()
   // let housesState = houses
   
-  useEffect(() => {
-    getHousesTest()
-  }, [])
+  // useEffect(() => {
+  //   getHousesTest()
+  // }, [])
+
+  const houses = [
+    {
+      property_id: 1,
+      address: {
+        line: "main"
+      },
+      photos: ["https://brokenlinnk"]
+    },
+    {
+      property_id: 2,
+      address: {
+        line: "miching"
+      },
+      photos: ["https://brokenlinnk"]
+    },
+    {
+      property_id: 3,
+      address: {
+        line: "really"
+      },
+      photos: ["https://brokenlinnk"]
+    },
+  ]
 
   // const history = useHistory()
 
@@ -47,8 +73,16 @@ export const HouseList = () => {
 
   //Simple Swipe Left and right...
   //
-  const swiped = (direction, nameToDelete) => {
-    console.log('removing: ' + nameToDelete)
+  const swiped = (direction, property_id) => {
+    const newFave = {
+      userId: parseInt(localStorage.getItem("swipeHome_user")),
+      property_id,
+      timeStamp: Date.now()
+    }
+    console.log('added Fave: ' + property_id)
+    if (direction === "right") {
+      addFave(newFave)
+    }
     setLastDirection(direction)
   }
 
@@ -63,7 +97,7 @@ export const HouseList = () => {
   return (
     <>
       <section className="houseCards__container">
-        { houses.map((house, index) => {
+        { houses.map((house) => {
           return (
             <TinderCard className='swipe house' preventSwipe={["up", "down"]} key={house.property_id} onSwipe={(dir) => swiped(dir, house.property_id)} onCardLeftScreen={() => outOfFrame(house.property_id)}>
               <div style={{backgroundImage: `url(${house.photos[0].href})`}} className="houseCard">

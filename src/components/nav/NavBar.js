@@ -18,7 +18,7 @@ export const NavBar = () => {
           <SearchIcon fontSize="large" />
         </IconButton>
       </Link>
-      <Link className="navbar__link" to="/">
+      <Link className="navbar__link" to="/houseList">
         <IconButton>
           <HomeWorkIcon fontSize="large" />
         </IconButton>
