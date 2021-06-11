@@ -25,7 +25,8 @@ export const FaveList = () => {
   return (
     <>
       <section className="faveCards__container">
-        { faves.map((fave) => {
+        {faves.length === 0 ? <div>Please select some faves to display your faves list</div> : 
+         faves.map((fave) => {
           return (
             <TinderCard className='swipe fave' preventSwipe={["up", "down"]} key={fave.property_id} onSwipe={(dir) => swiped(dir, fave.property_id)} onCardLeftScreen={() => outOfFrame(fave.property_id)}>
               <div className="faveCard">

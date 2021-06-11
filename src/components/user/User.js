@@ -85,7 +85,7 @@ export const User = () => {
                   </div>}
                 </div>
                 <div>
-                  <Button onClick={history.push("/faves")}>Faves</Button>
+                  <Button onClick={() => {history.push("/faves")}}>Faves</Button>
                   <Button>Edit Info</Button>
                   <Button onClick={logOut}>Log Out</Button>
                 </div>
