@@ -6,8 +6,12 @@ import "./Fave.css"
 import TinderCard from "react-tinder-card"
 
 export const FaveList = () => {
-  const { faves, getFaves } = useContext(FaveContext)
+  const { faves, getFaves, getFavesByUserId } = useContext(FaveContext)
   const [lastDirection, setLastDirection] = useState()
+
+  useEffect(() => {
+    getFavesByUserId(localStorage.getItem("swipeHome_user"))
+  }, [])
 
   const swiped = (direction, nameToDelete) => {
     console.log('removing: ' + nameToDelete)
@@ -20,14 +24,14 @@ export const FaveList = () => {
 
   return (
     <>
-      <section className="faveCard__container">
+      <section className="faveCards__container">
         { faves.map((fave) => {
           return (
             <TinderCard className='swipe fave' preventSwipe={["up", "down"]} key={fave.property_id} onSwipe={(dir) => swiped(dir, fave.property_id)} onCardLeftScreen={() => outOfFrame(fave.property_id)}>
-              {faves.length === 0 ? <div>You Haven't Selected Any Faves</div> : <div style={{backgroundImage: `url(${fave.photos[0].href})`}} className="faveCard">
-                <h3>{fave.address.line}</h3>
+              <div className="faveCard">
+                {/* <h3>{fave.address.line}</h3> */}
                 <h5>{fave.property_id}</h5>
-              </div>}
+              </div>
             </TinderCard>
           )
         })}

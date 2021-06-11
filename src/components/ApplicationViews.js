@@ -44,7 +44,7 @@ export const ApplicationViews = () => {
               <SearchList />
             </Route>
 
-            <Route exact path="/faves/:userId(\d+)">
+            <Route exact path="/faves">
               <FaveList />
             </Route>
 

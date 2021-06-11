@@ -107,8 +107,10 @@ export const HouseList = () => {
             </TinderCard>
           )
         })}
+        <button>Click Here</button>
       </section>
       {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
+      <div>{houses.length}</div>
       {/* <div className='buttons'>
         <button onClick={() => swipe('left')}>Swipe left!</button>
         <button onClick={() => swipe('right')}>Swipe right!</button>

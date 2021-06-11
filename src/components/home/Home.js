@@ -30,7 +30,7 @@ export const Home = () => {
                 <h5>{currentUser.email}</h5>
               <div>
                 <Button onClick={() => history.push("/search")}>New Search</Button>
-                <Button>Faves</Button>
+                <Button onClick={() => history.push("/faves")}>Faves</Button>
               </div>
               </div>
             </div>
