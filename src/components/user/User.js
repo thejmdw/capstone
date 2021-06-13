@@ -53,13 +53,13 @@ export const User = () => {
                   </div>
                 </div>
                 <div className="test">
-                  <div>Search List</div>
+                  <div>Last 5 Searches</div>
                   {currentUserSearches.length === 0 ? <div>You Haven't Searched for Anything Yet</div> :
-                  <div>
-                  {currentUserSearches.map((search) => {return (<div>{`${search.city},${search.state_code} ${search.postal_code}`}</div>)})}
+              
+                  <div>{`${currentUserSearches[0].city},${currentUserSearches[0].state_code} ${currentUserSearches[0].postal_code}`}
                   </div>}
                 </div>
-                <div className="test">
+                <div className="buttons">
                   <Button onClick={() => {history.push(`/profile/edit/${currentUser.id}`)}}>Edit Info</Button>
                   <Button onClick={logOut}>Log Out</Button>
                 </div>
