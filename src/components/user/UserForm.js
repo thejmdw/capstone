@@ -54,8 +54,9 @@ export const UserForm = () => {
   }
 
   return (
+    <div className="userForm__container">
     <form className="userForm">
-      <h2 className="userForm__title">Edit user</h2>
+      <h2 className="userForm__title">Edit Profile</h2>
       <fieldset>
         <div className="form-group">
           <label htmlFor="name">Name:</label>
@@ -88,11 +89,6 @@ export const UserForm = () => {
           <input type="radio" id="userTypeId" className="form-control" checked={parseInt(user.userTypeId) === 3 ? true : false} value="3" onChange={handleControlledInputChange} />
         </div>
       </fieldset>
-      <fieldset>
-      </fieldset>
-      <fieldset>
-      </fieldset>
-      
       <button className="btn btn-primary"
           disabled={isLoading}
           onClick={event => {
@@ -102,5 +98,6 @@ export const UserForm = () => {
           Update user
       </button>
     </form>
+    </div>
   )
 }
