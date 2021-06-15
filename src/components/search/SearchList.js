@@ -6,6 +6,7 @@ import { SearchContext } from "./SearchProvider"
 import { FaveContext } from "../fave/FaveProvider"
 import "./Search.css"
 import TinderCard from "react-tinder-card"
+import { Buttons } from "../buttons/Buttons"
 
 export const SearchList = () => {
   const { houses, getHouses } = useContext(SearchContext)
@@ -32,12 +33,15 @@ export const SearchList = () => {
       <section className="searchCard__container">
         { houses.map((search) => {
           return (
+            <>
             <TinderCard className='swipe search' preventSwipe={["up", "down"]} key={search.property_id} onSwipe={(dir) => swiped(dir, search.property_id)} onCardLeftScreen={() => outOfFrame(search.property_id)}>
               <div style={{backgroundImage: `url(${search.photos[0].href})`}} className="searchCard">
                 <h3>{search.address.line}</h3>
                 <h5>{search.property_id}</h5>
               </div>
             </TinderCard>
+            <Buttons />
+            </>
           )
         })}
       </section>

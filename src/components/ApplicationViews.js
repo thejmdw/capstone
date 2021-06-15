@@ -15,6 +15,7 @@ import { UserForm } from "./user/UserForm"
 //items
 import { User } from "./user/User"
 import { Home } from "./home/Home"
+import { Fave } from "./fave/Fave"
 
 
 export const ApplicationViews = () => {
@@ -51,6 +52,9 @@ export const ApplicationViews = () => {
             <Route exact path="/faves">
               <FaveList />
             </Route>
+            {/* <Route exact path="/faves/detail/:faveId(\d+)">
+              <Fave />
+            </Route> */}
 
           </FaveProvider>
         </UserProvider>

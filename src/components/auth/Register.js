@@ -12,9 +12,7 @@ export const Register = (props) => {
     // const verifyPassword = useRef()
     const conflictDialog = useRef()
     const history = useHistory()
-    const user = {
-      userTypeId: 0
-    }
+
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/users?email=${email.current.value}`)
             .then(res => res.json())
@@ -37,7 +35,7 @@ export const Register = (props) => {
                             email: email.current.value,
                             name: `${firstName.current.value} ${lastName.current.value}`,
                             avatarURL: `https://www.tinygraphs.com/squares/${firstName.current.value}%20${lastName.current.value}?theme=heatwave&numcolors=4&size=220&fmt=svg`,
-                            userTypeId: user.userTypeId
+                            userTypeId: 0
                         })
                     })
                         .then(res => res.json())
@@ -83,30 +81,30 @@ export const Register = (props) => {
                   <input ref={userTypeId} type="radio" id="userTypeId" className="form-control" 
                   onChange={
                     (e) => {
-                      user.userTypeId = !user.userTypeId
+                      userTypeId = !userTypeId
                     }
                   }
-                  checked={parseInt(user.userTypeId) === 1 ? true : false} value="1"  />
+                  checked={parseInt(userTypeId) === 1 ? true : false} value="1"  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="userTypeId">Buyer:</label>
                   <input ref={userTypeId} type="radio" id="userTypeId" className="form-control" 
                   onChange={
                     (e) => {
-                      user.userTypeId = !user.userTypeId
+                      userTypeId = !userTypeId
                     }
                   }
-                  checked={parseInt(user.userTypeId) === 2 ? true : false } value="2"  />
+                  checked={parseInt(userTypeId) === 2 ? true : false } value="2"  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="userTypeId">Agent:</label>
                   <input ref={userTypeId} type="radio" id="userTypeId" className="form-control" 
                   onChange={
                     (e) => {
-                      user.userTypeId = !user.userTypeId
+                      userTypeId = !userTypeId
                     }
                   }
-                  checked={parseInt(user.userTypeId) === 3 ? true : false} value="3"  />
+                  checked={parseInt(userTypeId) === 3 ? true : false} value="3"  />
                 </div>
               </fieldset>
               <fieldset>

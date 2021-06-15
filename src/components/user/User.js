@@ -8,7 +8,7 @@ import TinderCard from "react-tinder-card"
 import Button from '@material-ui/core/Button';
 import { SearchContext } from "../search/SearchProvider"
 import { FaveContext } from "../fave/FaveProvider"
-import { ExposurePlus1 } from "@material-ui/icons"
+import { ExposurePlus } from "@material-ui/icons"
 
 
 export const User = () => {
@@ -55,13 +55,13 @@ export const User = () => {
                 </div>
                 <div className="test">
                   <div>Last 5 Searches</div>
-                  {currentUserSearches.length === 0 ? <div>You Haven't Searched for Anything Yet</div> :
+                  {currentUserSearches.length === 0 ? <div>You Haven't Searched Yet</div> :
                   <div>
                   <div>{`1. ${currentUserSearches[0].city},${currentUserSearches[0].state_code} ${currentUserSearches[0].postal_code}`}</div>
                   <div>{currentUserSearches[1] ? `2. ${currentUserSearches[1].city},${currentUserSearches[1].state_code} ${currentUserSearches[1].postal_code}`  : `2.`}</div>
                   <div>{currentUserSearches[2] ? `3. ${currentUserSearches[2].city},${currentUserSearches[2].state_code} ${currentUserSearches[2].postal_code}` : `3.`}</div>
                   <div>{currentUserSearches[3] ? `4. ${currentUserSearches[3].city},${currentUserSearches[3].state_code} ${currentUserSearches[3].postal_code}` : `4.`}</div>
-                  <div>{currentUserSearches[4] ? `5. ${currentUserSearches[4].city},${currentUserSearches[4].state_code} ${currentUserSearches[4].postal_code}` : `5. Sort This List`}</div>
+                  <div>{currentUserSearches[4] ? `5. ${currentUserSearches[4].city},${currentUserSearches[4].state_code} ${currentUserSearches[4].postal_code}` : `5.`}</div>
                   </div>}
                 </div>
                 <div className="buttons">
