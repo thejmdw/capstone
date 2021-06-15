@@ -7,7 +7,7 @@ import "./User.css"
 
 export const UserForm = () => {
   const { updateUser, getUserById } = useContext(UserContext)
-  const [isLoading, setIsLoading] = useState(true)
+  const [ isLoading, setIsLoading ] = useState(true)
   const { userId } = useParams()
   const history = useHistory()
   

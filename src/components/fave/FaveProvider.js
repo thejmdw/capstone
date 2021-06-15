@@ -8,7 +8,7 @@ export const FaveProvider = (props) => {
   // const [houses, setHouses] = useState([])
 
   const addFave = (faveObj) => {
-    debugger
+    // debugger
     return fetch(`http://localhost:8088/faves`, {
       method: "POST",
       headers: {
@@ -25,12 +25,19 @@ export const FaveProvider = (props) => {
       .then(data => setFaves(data))
   }
 
+  const removeFave = faveId => {
+    return fetch(`http://localhost:8088/faves/${faveId}`, {
+      method: "DELETE"
+    })
+    // .then(getEmployees)
+  }
+
   
 
   return (
     <FaveContext.Provider value ={
       {
-        fave, faves, addFave, getFavesByUserId
+        fave, faves, addFave, getFavesByUserId, removeFave
       }
     }>
       {props.children}

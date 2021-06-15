@@ -14,11 +14,11 @@ import { ExposurePlus } from "@material-ui/icons"
 export const User = () => {
   
   const { users, getUsers, getUserById } = useContext(UserContext)
-  const { searches, getSearchesByUserId } = useContext(SearchContext)
+  const { searches, getSearchesByUserId, deleteSearch } = useContext(SearchContext)
   const { faves, getFavesByUserId } = useContext(FaveContext)
-  // const [ matches, setMatches ] = useState(houses)
+ 
   const [lastDirection, setLastDirection] = useState()
-  // let housesState = houses
+
   const [profile, setProfile] = useState({})
 
   useEffect(() => {
@@ -31,10 +31,16 @@ export const User = () => {
   const currentUser = profile
   const currentUserSearches = searches.sort((s1, s2) => (s1.id < s2.id ? 1 : -1))
   const history = useHistory()
+  const currentUserId = parseInt(localStorage.getItem("swipeHome_user"))
 
   const logOut = () => {
     localStorage.removeItem("swipeHome_user")
     history.push("/")
+  }
+
+  const removeSearch = (searchId, currentUserId) => {
+    deleteSearch(searchId)
+      .then(getSearchesByUserId(currentUserId))
   }
   // debugger
   return (
@@ -51,17 +57,18 @@ export const User = () => {
                   <div className="test">
                     {/* <div>{`Total Faves: ${faves.length}`}</div> */}
                     <Button onClick={() => {history.push("/faves")}}>Faves: {`${faves.length}`}</Button>
+                    <Button onClick={() => {history.push("/searches")}}>Searches: {`${currentUserSearches.length}`}</Button>
                   </div>
                 </div>
                 <div className="test">
                   <div>Last 5 Searches</div>
                   {currentUserSearches.length === 0 ? <div>You Haven't Searched Yet</div> :
                   <div>
-                  <div>{`1. ${currentUserSearches[0].city},${currentUserSearches[0].state_code} ${currentUserSearches[0].postal_code}`}</div>
-                  <div>{currentUserSearches[1] ? `2. ${currentUserSearches[1].city},${currentUserSearches[1].state_code} ${currentUserSearches[1].postal_code}`  : `2.`}</div>
-                  <div>{currentUserSearches[2] ? `3. ${currentUserSearches[2].city},${currentUserSearches[2].state_code} ${currentUserSearches[2].postal_code}` : `3.`}</div>
-                  <div>{currentUserSearches[3] ? `4. ${currentUserSearches[3].city},${currentUserSearches[3].state_code} ${currentUserSearches[3].postal_code}` : `4.`}</div>
-                  <div>{currentUserSearches[4] ? `5. ${currentUserSearches[4].city},${currentUserSearches[4].state_code} ${currentUserSearches[4].postal_code}` : `5.`}</div>
+                  <div>{`1. ${currentUserSearches[0].city},${currentUserSearches[0].state_code} ${currentUserSearches[0].postal_code}`} <Button onClick={() => {removeSearch(currentUserSearches[0].id, currentUserId)}}>remove</Button></div>
+                  <div>{currentUserSearches[1] ? <> 2. {currentUserSearches[1].city},{currentUserSearches[1].state_code} {currentUserSearches[1].postal_code} <Button onClick={() => {removeSearch(currentUserSearches[1].id, currentUserId)}}>remove</Button> </> : `2.`}</div>
+                  <div>{currentUserSearches[2] ? <> 3. {currentUserSearches[2].city},{currentUserSearches[2].state_code} {currentUserSearches[2].postal_code} <Button onClick={() => {removeSearch(currentUserSearches[2].id, currentUserId)}}>remove</Button> </> : `3.`}</div>
+                  <div>{currentUserSearches[3] ? <> 4. {currentUserSearches[3].city},{currentUserSearches[3].state_code} {currentUserSearches[3].postal_code} <Button onClick={() => {removeSearch(currentUserSearches[3].id, currentUserId)}}>remove</Button> </> : `4.`}</div>
+                  <div>{currentUserSearches[4] ? <> 5. {currentUserSearches[4].city},{currentUserSearches[4].state_code} {currentUserSearches[4].postal_code} <Button onClick={() => {removeSearch(currentUserSearches[4].id, currentUserId)}}>remove</Button> </> : `5.`}</div>
                   </div>}
                 </div>
                 <div className="buttons">

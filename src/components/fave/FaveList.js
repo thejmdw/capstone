@@ -7,7 +7,7 @@ import TinderCard from "react-tinder-card"
 import { Buttons } from "../buttons/Buttons"
 
 export const FaveList = () => {
-  const { faves, getFaves, getFavesByUserId } = useContext(FaveContext)
+  const { faves, getFaves, getFavesByUserId, removeFave } = useContext(FaveContext)
   const [lastDirection, setLastDirection] = useState()
   const history = useHistory()
 
@@ -15,8 +15,11 @@ export const FaveList = () => {
     getFavesByUserId(localStorage.getItem("swipeHome_user"))
   }, [])
 
-  const swiped = (direction, nameToDelete) => {
-    console.log('removing: ' + nameToDelete)
+  const swiped = (direction, id) => {
+    console.log('removing: ' + id)
+    if (direction === "left") {
+      removeFave(id)
+    }
     setLastDirection(direction)
   }
 
@@ -31,10 +34,12 @@ export const FaveList = () => {
          faves.map((fave) => {
           return (
             <>
-            <TinderCard className='swipe fave' preventSwipe={["up", "down"]} key={fave.property_id} onSwipe={(dir) => swiped(dir, fave.property_id)} onCardLeftScreen={() => outOfFrame(fave.property_id)}>
-              <div className="faveCard" onClick={() => history.push(`/faves/detail/${fave.id}`)}>
+            <TinderCard className='swipe fave' preventSwipe={["up", "down"]} key={fave.property_id} onSwipe={(dir) => swiped(dir, fave.id)} onCardLeftScreen={() => outOfFrame(fave.property_id)}>
+              <div className="faveCard" >
+                <div onClick={() => history.push(`/faves/detail/${fave.id}`)}>
                 {/* <h3>{fave.address.line}</h3> */}
                 <h5>{fave.property_id}</h5>
+                </div>
               </div>
             </TinderCard>
             <Buttons />

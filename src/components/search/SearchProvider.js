@@ -18,6 +18,12 @@ export const SearchProvider = (props) => {
     .then(setSearch)
   }
 
+  const deleteSearch = (searchId)=> {
+    return fetch(`http://localhost:8088/searches/${searchId}`, {
+      method: "DELETE"
+    })
+  }
+
   const getSearchesByUserId = (userId) => {
       return fetch(`http://localhost:8088/searches?userId=${userId}`)
       .then(res => res.json())
@@ -40,7 +46,7 @@ export const SearchProvider = (props) => {
   return (
     <SearchContext.Provider value ={
       {
-        search, searches, addSearch, getSearchesByUserId, houses, getHouses, 
+        search, searches, addSearch, getSearchesByUserId, houses, getHouses, deleteSearch
       }
     }>
       {props.children}

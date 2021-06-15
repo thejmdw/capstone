@@ -1,5 +1,6 @@
 import React, { useRef } from "react"
 import { useHistory } from "react-router-dom"
+import { useState } from "react"
 import "./Login.css"
 
 export const Register = (props) => {
@@ -7,11 +8,13 @@ export const Register = (props) => {
     const lastName = useRef()
     const email = useRef()
     
-    const userTypeId = useRef()
+    let userTypeId = useRef()
     // const password = useRef()
     // const verifyPassword = useRef()
     const conflictDialog = useRef()
     const history = useHistory()
+
+    const [ userTypeIdState, setUserTypeIdState ] = useState(0)
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/users?email=${email.current.value}`)
@@ -21,7 +24,6 @@ export const Register = (props) => {
 
     const handleRegister = (e) => {
         e.preventDefault()
-
 
         existingUserCheck()
             .then((userExists) => {
@@ -35,7 +37,7 @@ export const Register = (props) => {
                             email: email.current.value,
                             name: `${firstName.current.value} ${lastName.current.value}`,
                             avatarURL: `https://www.tinygraphs.com/squares/${firstName.current.value}%20${lastName.current.value}?theme=heatwave&numcolors=4&size=220&fmt=svg`,
-                            userTypeId: 0
+                            userTypeId: userTypeIdState
                         })
                     })
                         .then(res => res.json())
@@ -75,36 +77,43 @@ export const Register = (props) => {
                   <label htmlFor="inputEmail"> Email address </label>
                   <input ref={email} type="email" name="email" className="form-control" placeholder="Email Address" required />
               </fieldset>
-              <fieldset>
+              <fieldset onChange={
+                    (e) => {
+                      setUserTypeIdState(parseInt(e.target.value))
+                    }
+                  }>
                 <div className="form-group">
                   <label htmlFor="userTypeId">Renter:</label>
-                  <input ref={userTypeId} type="radio" id="userTypeId" className="form-control" 
-                  onChange={
-                    (e) => {
-                      userTypeId = !userTypeId
-                    }
-                  }
-                  checked={parseInt(userTypeId) === 1 ? true : false} value="1"  />
+                  <input ref={userTypeId} name="userType" type="radio" id="userTypeId" className="form-control" 
+                  // onChange={
+                  //   (e) => {
+                  //     userTypeId = !userTypeId
+                  //   }
+                  // }
+                  // checked={parseInt(userTypeId) === 1 ? true : false} 
+                  value="1"  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="userTypeId">Buyer:</label>
-                  <input ref={userTypeId} type="radio" id="userTypeId" className="form-control" 
-                  onChange={
-                    (e) => {
-                      userTypeId = !userTypeId
-                    }
-                  }
-                  checked={parseInt(userTypeId) === 2 ? true : false } value="2"  />
+                  <input ref={userTypeId} name="userType" type="radio" id="userTypeId" className="form-control" 
+                  // onChange={
+                  //   (e) => {
+                  //     userTypeId = !userTypeId
+                  //   }
+                  // }
+                  // checked={parseInt(userTypeId) === 2 ? true : false } 
+                  value="2"  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="userTypeId">Agent:</label>
-                  <input ref={userTypeId} type="radio" id="userTypeId" className="form-control" 
-                  onChange={
-                    (e) => {
-                      userTypeId = !userTypeId
-                    }
-                  }
-                  checked={parseInt(userTypeId) === 3 ? true : false} value="3"  />
+                  <input ref={userTypeId} name="userType" type="radio" id="userTypeId" className="form-control" 
+                  // onChange={
+                  //   (e) => {
+                  //     userTypeId = !userTypeId
+                  //   }
+                  // }
+                  // checked={parseInt(userTypeId) === 3 ? true : false} 
+                  value="3"  />
                 </div>
               </fieldset>
               <fieldset>
