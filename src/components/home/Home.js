@@ -10,17 +10,18 @@ import Button from '@material-ui/core/Button';
 
 export const Home = () => {
   
-  const { user, users, getUsers, getUserById, setUser } = useContext(UserContext)
-  const currentUser = user
+  const { users, getUsers, getUserById } = useContext(UserContext)
   const history = useHistory()
 
-  
+  const [user, setUser] = useState({})
   useEffect(() => {
     getUserById(parseInt(localStorage.getItem("swipeHome_user")))
+      .then(user => setUser(user))
      
   }, [])
 
-  // debugger
+  const currentUser = user
+  debugger
   return (
     <>
       <section className="userCard__container">
