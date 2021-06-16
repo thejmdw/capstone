@@ -5,10 +5,11 @@ export const FaveContext = createContext()
 export const FaveProvider = (props) => {
   const [ fave, setFave ] = useState({})
   const [ faves, setFaves ] = useState([])
-  // const [houses, setHouses] = useState([])
+  const [ favesDetailList, setFavesDetailList] = useState([])
+
 
   const addFave = (faveObj) => {
-    debugger
+    // debugger
     return fetch(`http://localhost:8088/faves`, {
       method: "POST",
       headers: {
@@ -25,10 +26,32 @@ export const FaveProvider = (props) => {
       .then(data => setFaves(data))
   }
 
+  const removeFave = faveId => {
+    return fetch(`http://localhost:8088/faves/${faveId}`, {
+      method: "DELETE"
+    })
+    // .then(getEmployees)
+  }
+
+  // const getFaveDetails = (property_id) => {
+  //   fetch(`https://realty-in-us.p.rapidapi.com/properties/v2/detail?property_id=${property_id.replace(/"/g,"")}`, {
+	//     "method": "GET",
+	//     "headers": {
+	// 	    "x-rapidapi-key": "bc293e4707msh4961366c18bcffep125e04jsnfbdb172d68a0",
+	// 	    "x-rapidapi-host": "realty-in-us.p.rapidapi.com"
+	//     }
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => favesDetailList.push(data.properties))
+  //   .catch(err => {console.error(err)})
+  // }
+
+  
+
   return (
     <FaveContext.Provider value ={
       {
-        fave, faves, addFave, getFavesByUserId
+        fave, faves, addFave, getFavesByUserId, removeFave, favesDetailList
       }
     }>
       {props.children}

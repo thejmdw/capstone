@@ -18,6 +18,12 @@ export const SearchProvider = (props) => {
     .then(setSearch)
   }
 
+  const deleteSearch = (searchId)=> {
+    return fetch(`http://localhost:8088/searches/${searchId}`, {
+      method: "DELETE"
+    })
+  }
+
   const getSearchesByUserId = (userId) => {
       return fetch(`http://localhost:8088/searches?userId=${userId}`)
       .then(res => res.json())
@@ -25,12 +31,14 @@ export const SearchProvider = (props) => {
   }
 
   const getHouses = (search) => {
-    return fetch(`https://realtor.p.rapidapi.com/properties/v2/list-for-rent?city=${search.city.replace(/"/g,"")}&state_code=${search.state_code.replace(/"/g,"")}&limit=200&offset=0&sort=relevance&postal_code=${search.postal_code.replace(/"/g,"")}`, {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-key": "bc293e4707msh4961366c18bcffep125e04jsnfbdb172d68a0",
-        "x-rapidapi-host": "realtor.p.rapidapi.com"
-      }
+    debugger
+    
+    return fetch(`https://realtor.p.rapidapi.com/properties/v2/list-for-rent?city=${search.city.replace(/"/g,"")}&state_code=${search.state_code.replace(/"/g,"")}&limit=200&offset=0&sort=relevance${search.postal_code ? `&postal_code=${search.postal_code.replace(/"/g,"")}` : "" }${search.price_max ? `&price_max=${search.price_max.replace(/"/g,"")}` : "" }${search.beds_min ? `&beds_min=${search.beds_min.replace(/"/g,"")}` : "" }${search.baths_min ? `&baths_min=${search.baths_min.replace(/"/g,"")}` : "" }${search.allows_dogs === "true" ? `&allows_dogs=true` : "&allows_dogs=false" }${search.allows_cats === "true" ? `&allows_cats=true` : "&allows_cats=true" }`, {
+	    "method": "GET",
+    	"headers": {
+		    "x-rapidapi-key": "bc293e4707msh4961366c18bcffep125e04jsnfbdb172d68a0",
+		    "x-rapidapi-host": "realtor.p.rapidapi.com"
+	    }
     })
     .then(response => response.json())    
     .then(data => setHouses(data.properties))
@@ -40,7 +48,7 @@ export const SearchProvider = (props) => {
   return (
     <SearchContext.Provider value ={
       {
-        search, searches, addSearch, getSearchesByUserId, houses, getHouses, 
+        search, searches, addSearch, getSearchesByUserId, houses, getHouses, deleteSearch
       }
     }>
       {props.children}

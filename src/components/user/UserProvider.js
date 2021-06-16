@@ -8,25 +8,19 @@ export const UserProvider = (props) => {
   const [ user, setUser ] = useState({})
 
   const getUsers = () => {
-    return fetch(`https://realtor.p.rapidapi.com/properties/v2/list-for-rent?city=Nashville&state_code=TN&limit=20&offset=0&sort=relevance&postal_code=37207&beds_min=0&allows_dog=true&price_max=3000`, {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-key": "bc293e4707msh4961366c18bcffep125e04jsnfbdb172d68a0",
-        "x-rapidapi-host": "realtor.p.rapidapi.com"
-      }
-    })
+    return fetch(`http://localhost:8088/users?_embed=userType`)
     .then(response => 
       response.json()
     )    
     .then(data =>
-      setUsers(data.properties))
+      setUsers(data))
     .catch(err => {
       console.error(err);
     })
   }
 
   const getUserById = (userId) => {
-    return fetch(`http://localhost:8088/users?id=${userId}`, {
+    return fetch(`http://localhost:8088/users/${userId}`, {
       "method": "GET",
       "headers": {
         "Content-Type": "application/json"
@@ -34,18 +28,24 @@ export const UserProvider = (props) => {
     })
     .then(response => 
       response.json()
-    )    
-    .then(data =>
-      setUser(data[0]))
-    .catch(err => {
-      console.error(err);
+    )
+  }
+
+  const updateUser = userObj => {
+    return fetch(`http://localhost:8088/users/${userObj.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userObj)
     })
+    .then(getUsers)
   }
 
   return (
     <UserContext.Provider value ={
       {
-        user, users, getUsers, getUserById
+        user, users, getUsers, getUserById, updateUser
       }
     }>
       {props.children}

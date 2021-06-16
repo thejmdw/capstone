@@ -2,46 +2,84 @@
 import React from "react"
 import { useContext, useEffect, useState, useMemo } from "react"
 import { useHistory } from "react-router-dom"
-import { SearchContext } from "./SearchProvider"
-import { FaveContext } from "../fave/FaveProvider"
+import { UserContext } from "../user/UserProvider"
 import "./Search.css"
 import TinderCard from "react-tinder-card"
+import Button from '@material-ui/core/Button';
+import { SearchContext } from "../search/SearchProvider"
+import { FaveContext } from "../fave/FaveProvider"
+import { ExposurePlus } from "@material-ui/icons"
+
 
 export const SearchList = () => {
-  const { houses, getHouses } = useContext(SearchContext)
-  const { faves, getFaves } = useContext(FaveContext)
-
+  
+  const { users, getUsers, getUserById } = useContext(UserContext)
+  const { searches, getSearchesByUserId, deleteSearch, getHouses } = useContext(SearchContext)
+  const { faves, getFavesByUserId } = useContext(FaveContext)
+ 
   const [lastDirection, setLastDirection] = useState()
 
+  const [profile, setProfile] = useState({})
+
   useEffect(() => {
-    getFaves()
-  },[])
+    getUserById(parseInt(localStorage.getItem("swipeHome_user")))
+     .then(setProfile)
+     .then(getSearchesByUserId(localStorage.getItem("swipeHome_user")))
+     .then(getFavesByUserId(localStorage.getItem("swipeHome_user")))
+  }, [])
 
-  const swiped = (direction, nameToDelete) => {
+  const currentUser = profile
+  //cus = currentUserSearches...
+  const cus = searches.sort((s1, s2) => (s1.id < s2.id ? 1 : -1))
+  //-------
+  const history = useHistory()
+  const currentUserId = parseInt(localStorage.getItem("swipeHome_user"))
 
-    console.log('fetching: ' + nameToDelete)
-    setLastDirection(direction)
+  const logOut = () => {
+    localStorage.removeItem("swipeHome_user")
+    history.push("/")
   }
 
-  const outOfFrame = (name) => {
-    console.log(name + ' left the screen!')
+  const removeSearch = (searchId, currentUserId) => {
+    deleteSearch(searchId)
+      .then(getSearchesByUserId(currentUserId))
   }
+  
+  const handleClickSearch = searchObj=> {
+    // e.preventDefault() 
 
+      getHouses(searchObj)
+          .then(() => history.push("/searchList"))
+    
+  }
+  // debugger
   return (
     <>
       <section className="searchCard__container">
-        { houses.map((search) => {
-          return (
-            <TinderCard className='swipe search' preventSwipe={["up", "down"]} key={search.property_id} onSwipe={(dir) => swiped(dir, search.property_id)} onCardLeftScreen={() => outOfFrame(search.property_id)}>
-              <div style={{backgroundImage: `url(${search.photos[0].href})`}} className="searchCard">
-                <h3>{search.address.line}</h3>
-                <h5>{search.property_id}</h5>
+            <div className='searchProfile_container' key={currentUser.id}>
+              <div className="searchCard">
+                <div className="userFlexItem test">
+                  <div className="test">
+                    <img src={currentUser.avatarURL} alt="user_avatar" />
+                    <h3>{currentUser.name}</h3>
+                    <h5>{currentUser.email}</h5>
+                  </div>
+                </div>
+                <div className="test">
+                  <div>List Searches</div>
+                  {cus.length === 0 ? <div>You Haven't Searched Yet</div> :
+                    <div>{
+                      cus.map((s) => {
+                        return (
+                          <>  <Button onClick={() => {handleClickSearch(s)}}> {s.city},{s.state_code} {s.postal_code}</Button> <Button onClick={() => {removeSearch(s.id, currentUserId)}}>remove</Button></>
+                        )
+                      })}</div>}
+                </div>
+                
               </div>
-            </TinderCard>
-          )
-        })}
+            </div>
       </section>
-      {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
     </>
   )
 }
+

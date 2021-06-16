@@ -3,46 +3,46 @@ import React from "react"
 import { useContext, useEffect, useState, useMemo } from "react"
 import { useHistory } from "react-router-dom"
 import { HouseContext } from "./HouseProvider"
-import { FaveContext } from "../fave/FaveProvider"
 import "./House.css"
 import TinderCard from "react-tinder-card"
 import { SearchContext } from "../search/SearchProvider"
+import { FaveContext } from "../fave/FaveProvider"
 
 export const HouseList = () => {
   
-  // const { houses, getHousesTest } = useContext(HouseContext)
-  const { fave, faves, addFave, getFaves } = useContext(FaveContext)
+  const { houses } = useContext(SearchContext)
+  const { house, addFave, gethouses } = useContext(FaveContext)
   // const [ matches, setMatches ] = useState(houses)
   const [lastDirection, setLastDirection] = useState()
   // let housesState = houses
   
   // useEffect(() => {
-  //   getHousesTest()
+  //   getHouses()
   // }, [])
 
-  const houses = [
-    {
-      property_id: 1,
-      address: {
-        line: "main"
-      },
-      photos: ["https://brokenlinnk"]
-    },
-    {
-      property_id: 2,
-      address: {
-        line: "miching"
-      },
-      photos: ["https://brokenlinnk"]
-    },
-    {
-      property_id: 3,
-      address: {
-        line: "really"
-      },
-      photos: ["https://brokenlinnk"]
-    },
-  ]
+  // const houses = [
+  //   {
+  //     property_id: 1,
+  //     address: {
+  //       line: "main"
+  //     },
+  //     photos: ["https://brokenlinnk"]
+  //   },
+  //   {
+  //     property_id: 2,
+  //     address: {
+  //       line: "miching"
+  //     },
+  //     photos: ["https://brokenlinnk"]
+  //   },
+  //   {
+  //     property_id: 3,
+  //     address: {
+  //       line: "really"
+  //     },
+  //     photos: ["https://brokenlinnk"]
+  //   },
+  // ]
 
   // const history = useHistory()
 
@@ -73,15 +73,24 @@ export const HouseList = () => {
 
   //Simple Swipe Left and right...
   //
-  const swiped = (direction, property_id) => {
-    const newFave = {
+  const swiped = (direction, property_id, address, city, state_code, postal_code, photo, beds, baths, price) => {
+    const newhouse = {
       userId: parseInt(localStorage.getItem("swipeHome_user")),
       property_id,
+      address,
+      city,
+      state_code,
+      postal_code,
+      beds,
+      baths,
+      price,
+      photo,
       timeStamp: Date.now()
+
     }
-    console.log('added Fave: ' + property_id)
+    console.log('added house: ' + property_id)
     if (direction === "right") {
-      addFave(newFave)
+      addFave(newhouse)
     }
     setLastDirection(direction)
   }
@@ -99,10 +108,12 @@ export const HouseList = () => {
       <section className="houseCards__container">
         { houses.map((house) => {
           return (
-            <TinderCard className='swipe house' preventSwipe={["up", "down"]} key={house.property_id} onSwipe={(dir) => swiped(dir, house.property_id)} onCardLeftScreen={() => outOfFrame(house.property_id)}>
+            <TinderCard className='swipe house' preventSwipe={["up", "down"]} key={house.property_id} onSwipe={(dir) => swiped(dir, house.property_id, house.address.line, house.address.city, house.address.state_code, house.address.postal_code, house.photos[0].href, house.beds, house.baths_full, house.price )} onCardLeftScreen={() => outOfFrame(house.property_id)}>
               <div style={{backgroundImage: `url(${house.photos[0].href})`}} className="houseCard">
-                <h3>{house.address.line}</h3>
-                <h5>{house.property_id}</h5>
+                <h5>{house.address.line} {house.address.city}, {house.address.state_code} {house.address.postal_code}</h5>
+                <h5>Beds: {house.beds}</h5>
+                <h5>Baths: {house.baths_full}</h5>
+                <h2>Price: ${house.price}</h2>
               </div>
             </TinderCard>
           )
