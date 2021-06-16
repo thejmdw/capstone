@@ -13,7 +13,7 @@ export const SearchForm = () => {
 
   const [ search, setSearch ] = useState({
     userId: parseInt(localStorage.getItem("swipeHome_user")),
-    allows_dogs: "true"
+    allows_dogs: true
   })
 
   // useEffect(() => {
@@ -33,6 +33,24 @@ export const SearchForm = () => {
     setSearch(newSearch)
   }
 
+  const handleControlledInputChangeCheck = (event) => {
+    /* When changing a state object or array,
+    always create a copy, make changes, and then set state. */
+    const newSearch = { ...search }
+    /* search is an object with properties.
+    Set the property to the new value 
+    using Object Bracket Notation. */
+    if (newSearch.allows_dogs) {
+      newSearch.allows_dogs = false
+    } else if (!newSearch.allows_dogs){
+      newSearch.allows_dogs = true
+    } else {
+    newSearch[event.target.id] = event.target.value
+    }
+    //Update State
+    setSearch(newSearch)
+  }
+
   const handleClickSaveSearch = e => {
     // e.preventDefault() 
 
@@ -44,7 +62,7 @@ export const SearchForm = () => {
           .then(() => history.push("/houseList"))
     }
   }
-  
+  // debugger
   return (
     <div className="searchForm__Container">
       <form className="searchForm">
@@ -103,8 +121,8 @@ export const SearchForm = () => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="stateCode">Allows Dogs</label>
-          <input type="radio" id="allows_dogs" className="form-control" value={search.allows_dogs = "true"} onChange={handleControlledInputChange} />
+          <label htmlFor="allows_dogs">Allows Dogs</label>
+          <input type="checkbox" id="allows_dogs" className="form-control" checked={search.allows_dogs} onChange={handleControlledInputChangeCheck} />
         </div>
       </fieldset>
       <button className="btn btn-primary"

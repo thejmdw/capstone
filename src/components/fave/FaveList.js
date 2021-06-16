@@ -62,12 +62,12 @@ export const FaveList = () => {
                 {/* <h3>{fave.address.line}</h3> */}
                 <h5>{fave.address} {fave.city},{fave.state_code} {fave.postal_code}</h5>
                 <h5>Beds: {fave.beds}</h5>
-                <h5>Baths: {fave.baths_full}</h5>
+                <h5>Baths: {fave.baths}</h5>
                 <h2>Price: ${fave.price}</h2>
                 </div>
               </div>
             </TinderCard>
-            <Buttons />
+            {/* <Buttons /> */}
             </>
           )
         })}

@@ -57,7 +57,7 @@ export const SearchResultsList = () => {
                 <h2>Price: ${search.price}</h2>
               </div>
             </TinderCard>
-            <Buttons />
+            {/* <Buttons /> */}
             </>
           )
         })}
