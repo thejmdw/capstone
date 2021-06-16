@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { SearchContext } from "./SearchProvider"
+import { UserContext } from "../user/UserProvider"
 import { useState, createContext } from "react"
 import { stateCodes } from './stateCodes'
 import "./Search.css"
@@ -8,7 +9,8 @@ import { useHistory } from 'react-router'
 // export const SearchContext = createContext()
 
 export const SearchForm = () => {
-  const { getSearch, addSearch, getHouses } = useContext(SearchContext)
+  const { getSearch, addSearch, getHouses, getHousesForRent, getHousesForSale } = useContext(SearchContext)
+  const { getUserById } = useContext(UserContext)
   const history = useHistory()
 
   const [ search, setSearch ] = useState({
@@ -16,9 +18,15 @@ export const SearchForm = () => {
     allows_dogs: true
   })
 
-  // useEffect(() => {
-  //   setSearch()
-  // }, [])
+  const [ user, setUser ] = useState({})
+  const currentUser = user
+  console.log(currentUser)
+
+
+  useEffect(() => {
+      getUserById(parseInt(localStorage.getItem("swipeHome_user")))
+        .then(user => setUser(user))
+  }, [])
  
 
   const handleControlledInputChange = (event) => {
@@ -30,6 +38,7 @@ export const SearchForm = () => {
     using Object Bracket Notation. */
     newSearch[event.target.id] = event.target.value
     //Update State
+    console.log(newSearch)
     setSearch(newSearch)
   }
 
@@ -53,15 +62,19 @@ export const SearchForm = () => {
 
   const handleClickSaveSearch = e => {
     // e.preventDefault() 
-
-    if (search.city === "" || search.state_code === 0 ) {
+    console.log(search)
+    if (search.city === undefined || search.state_code === undefined ) {
       window.alert("Please select a city and state")
-    } else {
+      } else if (currentUser.userTypeId === 1) {
         addSearch(search)
-        getHouses(search)
+        getHousesForRent(search)
           .then(() => history.push("/houseList"))
+      } else if (currentUser.userTypeId === 2) {
+          addSearch(search)
+          getHousesForSale(search)
+            .then(() => history.push("/houseList"))
+      }
     }
-  }
   // debugger
   return (
     <div className="searchForm__Container">
@@ -69,13 +82,13 @@ export const SearchForm = () => {
       <h2 className="searchForm__title">Search</h2>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="city">City</label>
+          <label htmlFor="city">City: *required</label>
           <input type="text" id="city" required autoFocus className="form-control" placeholder="City" value={search.city} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="location">State:</label>
+          <label htmlFor="location">State: *required</label>
           <select name="state_mode" required id="state_code" className="form-control" value={search.state_code} onChange={handleControlledInputChange}>
             <option value="0">Select</option>
             {stateCodes.map(s => (

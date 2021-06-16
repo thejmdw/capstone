@@ -18,6 +18,7 @@ export const SearchList = () => {
   const { faves, getFavesByUserId } = useContext(FaveContext)
  
   const [lastDirection, setLastDirection] = useState()
+  const [searchesListItems, setSearchesListItems] = useState()
 
   const [profile, setProfile] = useState({})
 
@@ -27,6 +28,13 @@ export const SearchList = () => {
      .then(getSearchesByUserId(localStorage.getItem("swipeHome_user")))
      .then(getFavesByUserId(localStorage.getItem("swipeHome_user")))
   }, [])
+
+  useEffect(() => {
+    getUserById(parseInt(localStorage.getItem("swipeHome_user")))
+     .then(setProfile)
+     .then(getSearchesByUserId(localStorage.getItem("swipeHome_user")))
+     .then(getFavesByUserId(localStorage.getItem("swipeHome_user")))
+  },[searchesListItems])
 
   const currentUser = profile
   //cus = currentUserSearches...
@@ -40,9 +48,11 @@ export const SearchList = () => {
     history.push("/")
   }
 
+  
+
   const removeSearch = (searchId, currentUserId) => {
     deleteSearch(searchId)
-      .then(getSearchesByUserId(currentUserId))
+      .then(setSearchesListItems)
   }
   
   const handleClickSearch = searchObj=> {
