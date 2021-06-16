@@ -10,39 +10,39 @@ import { SearchContext } from "../search/SearchProvider"
 
 export const HouseList = () => {
   
-  // const { houses, getHousesTest } = useContext(HouseContext)
+  const { houses } = useContext(SearchContext)
   const { fave, faves, addFave, getFaves } = useContext(FaveContext)
   // const [ matches, setMatches ] = useState(houses)
   const [lastDirection, setLastDirection] = useState()
   // let housesState = houses
   
   // useEffect(() => {
-  //   getHousesTest()
+  //   getHouses()
   // }, [])
 
-  const houses = [
-    {
-      property_id: 1,
-      address: {
-        line: "main"
-      },
-      photos: ["https://brokenlinnk"]
-    },
-    {
-      property_id: 2,
-      address: {
-        line: "miching"
-      },
-      photos: ["https://brokenlinnk"]
-    },
-    {
-      property_id: 3,
-      address: {
-        line: "really"
-      },
-      photos: ["https://brokenlinnk"]
-    },
-  ]
+  // const houses = [
+  //   {
+  //     property_id: 1,
+  //     address: {
+  //       line: "main"
+  //     },
+  //     photos: ["https://brokenlinnk"]
+  //   },
+  //   {
+  //     property_id: 2,
+  //     address: {
+  //       line: "miching"
+  //     },
+  //     photos: ["https://brokenlinnk"]
+  //   },
+  //   {
+  //     property_id: 3,
+  //     address: {
+  //       line: "really"
+  //     },
+  //     photos: ["https://brokenlinnk"]
+  //   },
+  // ]
 
   // const history = useHistory()
 

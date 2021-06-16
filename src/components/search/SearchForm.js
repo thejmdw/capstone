@@ -41,7 +41,7 @@ export const SearchForm = () => {
     } else {
         addSearch(search)
         getHouses(search)
-          .then(() => history.push("/searchList"))
+          .then(() => history.push("/houseList"))
     }
   }
   

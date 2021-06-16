@@ -11,7 +11,7 @@ export const UserForm = () => {
   const { userId } = useParams()
   const history = useHistory()
   
-  const [user, setUser] =useState({
+  const [user, setUser] = useState({
     name: "",
     email: "",
     avatarURL: "",
@@ -96,6 +96,11 @@ export const UserForm = () => {
             handleUpdate()
           }}>
           Update user
+      </button>
+      <button className="btn btn-primary"
+          disabled={isLoading}
+          onClick={() => history.push(`/profile`)}>
+          Go Back
       </button>
     </form>
     </div>

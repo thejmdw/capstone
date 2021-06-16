@@ -31,12 +31,14 @@ export const SearchProvider = (props) => {
   }
 
   const getHouses = (search) => {
+    debugger
+    
     return fetch(`https://realtor.p.rapidapi.com/properties/v2/list-for-rent?city=${search.city.replace(/"/g,"")}&state_code=${search.state_code.replace(/"/g,"")}&limit=200&offset=0&sort=relevance&postal_code=${search.postal_code.replace(/"/g,"")}`, {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-key": "bc293e4707msh4961366c18bcffep125e04jsnfbdb172d68a0",
-        "x-rapidapi-host": "realtor.p.rapidapi.com"
-      }
+	    "method": "GET",
+    	"headers": {
+		    "x-rapidapi-key": "bc293e4707msh4961366c18bcffep125e04jsnfbdb172d68a0",
+		    "x-rapidapi-host": "realtor.p.rapidapi.com"
+	    }
     })
     .then(response => response.json())    
     .then(data => setHouses(data.properties))

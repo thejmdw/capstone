@@ -21,7 +21,7 @@ export const Home = () => {
   }, [])
 
   const currentUser = user
-  debugger
+  // debugger
   return (
     <>
       <section className="userCard__container">

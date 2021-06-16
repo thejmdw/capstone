@@ -14,12 +14,11 @@ export const SearchList = () => {
 
   const [lastDirection, setLastDirection] = useState()
 
-  useEffect(() => {
-    getFaves()
-  },[])
+  // useEffect(() => {
+  //   getHouses()
+  // },[])
 
   const swiped = (direction, nameToDelete) => {
-
     console.log('fetching: ' + nameToDelete)
     setLastDirection(direction)
   }
