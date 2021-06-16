@@ -33,25 +33,25 @@ export const FaveProvider = (props) => {
     // .then(getEmployees)
   }
 
-  const getFaveDetails = (property_id) => {
-    fetch(`https://realty-in-us.p.rapidapi.com/properties/v2/detail?property_id=${property_id.replace(/"/g,"")}`, {
-	    "method": "GET",
-	    "headers": {
-		    "x-rapidapi-key": "bc293e4707msh4961366c18bcffep125e04jsnfbdb172d68a0",
-		    "x-rapidapi-host": "realty-in-us.p.rapidapi.com"
-	    }
-    })
-    .then(response => response.json())
-    .then(data => favesDetailList.push(data.properties))
-    .catch(err => {console.error(err)})
-  }
+  // const getFaveDetails = (property_id) => {
+  //   fetch(`https://realty-in-us.p.rapidapi.com/properties/v2/detail?property_id=${property_id.replace(/"/g,"")}`, {
+	//     "method": "GET",
+	//     "headers": {
+	// 	    "x-rapidapi-key": "bc293e4707msh4961366c18bcffep125e04jsnfbdb172d68a0",
+	// 	    "x-rapidapi-host": "realty-in-us.p.rapidapi.com"
+	//     }
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => favesDetailList.push(data.properties))
+  //   .catch(err => {console.error(err)})
+  // }
 
   
 
   return (
     <FaveContext.Provider value ={
       {
-        fave, faves, addFave, getFavesByUserId, removeFave, getFaveDetails, favesDetailList
+        fave, faves, addFave, getFavesByUserId, removeFave, favesDetailList
       }
     }>
       {props.children}

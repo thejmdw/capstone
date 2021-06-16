@@ -7,7 +7,7 @@ export const Register = (props) => {
     const firstName = useRef()
     const lastName = useRef()
     const email = useRef()
-    
+    const avatarURL = useRef()
     let userTypeId = useRef()
     // const password = useRef()
     // const verifyPassword = useRef()
@@ -37,14 +37,15 @@ export const Register = (props) => {
                             email: email.current.value,
                             name: `${firstName.current.value} ${lastName.current.value}`,
                             avatarURL: `https://www.tinygraphs.com/squares/${firstName.current.value}%20${lastName.current.value}?theme=heatwave&numcolors=4&size=220&fmt=svg`,
-                            userTypeId: userTypeIdState
+                            userTypeId: userTypeIdState,
+                            firstTimeUser: true
                         })
                     })
                         .then(res => res.json())
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
                                 localStorage.setItem("swipeHome_user", createdUser.id)
-                                history.push("/")
+                                history.push("/new")
                             }
                         })
                 }
@@ -77,6 +78,10 @@ export const Register = (props) => {
                   <label htmlFor="inputEmail"> Email address </label>
                   <input ref={email} type="email" name="email" className="form-control" placeholder="Email Address" required />
               </fieldset>
+              <fieldset>
+                  <label htmlFor="inputAvatarUrl"> AvatarURL </label>
+                  <input ref={avatarURL} type="text" name="avatarURL" className="form-control" placeholder="Default: https://i.pravatar.cc/150?u=FirstNameLastName" />
+              </fieldset>
               <fieldset onChange={
                     (e) => {
                       setUserTypeIdState(parseInt(e.target.value))
@@ -84,36 +89,30 @@ export const Register = (props) => {
                   }>
                 <div className="form-group">
                   <label htmlFor="userTypeId">Renter:</label>
-                  <input ref={userTypeId} name="userType" type="radio" id="userTypeId" className="form-control" 
-                  // onChange={
-                  //   (e) => {
-                  //     userTypeId = !userTypeId
-                  //   }
-                  // }
-                  // checked={parseInt(userTypeId) === 1 ? true : false} 
-                  value="1"  />
+                  <input ref={userTypeId} 
+                        name="userType" 
+                        type="radio" 
+                        id="userTypeId" 
+                        className="form-control" 
+                        value="1"  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="userTypeId">Buyer:</label>
-                  <input ref={userTypeId} name="userType" type="radio" id="userTypeId" className="form-control" 
-                  // onChange={
-                  //   (e) => {
-                  //     userTypeId = !userTypeId
-                  //   }
-                  // }
-                  // checked={parseInt(userTypeId) === 2 ? true : false } 
-                  value="2"  />
+                  <input ref={userTypeId} 
+                        name="userType" 
+                        type="radio" 
+                        id="userTypeId" 
+                        className="form-control" 
+                        value="2"  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="userTypeId">Agent:</label>
-                  <input ref={userTypeId} name="userType" type="radio" id="userTypeId" className="form-control" 
-                  // onChange={
-                  //   (e) => {
-                  //     userTypeId = !userTypeId
-                  //   }
-                  // }
-                  // checked={parseInt(userTypeId) === 3 ? true : false} 
-                  value="3"  />
+                  <input ref={userTypeId} 
+                        name="userType" 
+                        type="radio" 
+                        id="userTypeId" 
+                        className="form-control" 
+                        value="3"  />
                 </div>
               </fieldset>
               <fieldset>

@@ -29,23 +29,41 @@ export const FaveList = () => {
     console.log(name + ' left the screen!')
   }
 
-  debugger
-  faves.forEach((fave) => {
-      getFaveDetails(fave.property_Id, faveDetails)
-  } )
+  const shuffle = array => {
+    var currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
+
+  const shuffledFaves = shuffle(faves)
 
   return (
     <>
       <section className="faveCards__container">
-        {faveDetails.length === 0 ? <div>Please select some faves to display your list of Faves!</div> : 
-         faveDetails.map((fave) => {
+        {shuffledFaves.length === 0 ? <div>Please select some faves to display your list of Faves!</div> : 
+         shuffledFaves.map((fave) => {
           return (
             <>
             <TinderCard className='swipe fave' preventSwipe={["up", "down"]} key={fave.id} onSwipe={(dir) => swiped(dir, fave.id)} onCardLeftScreen={() => outOfFrame(fave.property_id)}>
-              <div className="faveCard" >
+            <div style={{backgroundImage: `url(${fave.photo})`}} className="faveCard">
                 <div onClick={() => history.push(`/faves/detail/${fave.id}`)}>
                 {/* <h3>{fave.address.line}</h3> */}
-                <h5>{fave.property_id}</h5>
+                <h5>{fave.address} {fave.city},{fave.state_code} {fave.postal_code}</h5>
+                <h5>Beds: {fave.beds}</h5>
+                <h5>Baths: {fave.baths_full}</h5>
+                <h2>Price: ${fave.price}</h2>
                 </div>
               </div>
             </TinderCard>
