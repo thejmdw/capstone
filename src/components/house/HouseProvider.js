@@ -8,11 +8,11 @@ export const HouseProvider = (props) => {
   const [ houses, setHouses ] = useState([])
 
   const getHousesTest = () => {
-    return fetch(`https://realtor.p.rapidapi.com/properties/v2/list-for-rent?city=Nashville&state_code=TN&limit=20&offset=0&sort=relevance&postal_code=37207&beds_min=0&allows_dog=true&price_max=3000`, {
+    return fetch(`https://realty-in-us.p.rapidapi.com/properties/v2/list-for-rent?city=Nashville&state_code=TN&limit=20&offset=0&sort=relevance&postal_code=37207&beds_min=0&allows_dog=true&price_max=3000`, {
       "method": "GET",
       "headers": {
         "x-rapidapi-key": "bc293e4707msh4961366c18bcffep125e04jsnfbdb172d68a0",
-        "x-rapidapi-host": "realtor.p.rapidapi.com"
+        "x-rapidapi-host": "realty-in-us.p.rapidapi.com"
       }
     })
     .then(response => 

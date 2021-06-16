@@ -49,7 +49,7 @@ export const User = () => {
     // e.preventDefault() 
 
       getHouses(searchObj)
-          .then(() => history.push("/searchList"))
+          .then(() => history.push("/searchResultsList"))
     
   }
   // debugger

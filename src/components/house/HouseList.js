@@ -112,7 +112,7 @@ export const HouseList = () => {
               <div style={{backgroundImage: `url(${house.photos[0].href})`}} className="houseCard">
                 <h5>{house.address.line} {house.address.city}, {house.address.state_code} {house.address.postal_code}</h5>
                 <h5>Beds: {house.beds}</h5>
-                <h5>Baths: {house.baths_full}</h5>
+                <h5>Baths: {house.baths}</h5>
                 <h2>Price: ${house.price}</h2>
               </div>
             </TinderCard>
