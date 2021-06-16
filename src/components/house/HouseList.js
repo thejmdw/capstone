@@ -11,70 +11,18 @@ import { FaveContext } from "../fave/FaveProvider"
 export const HouseList = () => {
   
   const { houses } = useContext(SearchContext)
-  const { house, addFave, gethouses } = useContext(FaveContext)
+  const { faves, house, addFave, gethouses, getFavesByUserId } = useContext(FaveContext)
   // const [ matches, setMatches ] = useState(houses)
   const [lastDirection, setLastDirection] = useState()
   // let housesState = houses
+
+  useEffect(() => {
+    getFavesByUserId(localStorage.getItem("swipeHome_user"))
+  }, [])
   
-  // useEffect(() => {
-  //   getHouses()
-  // }, [])
 
-  // const houses = [
-  //   {
-  //     property_id: 1,
-  //     address: {
-  //       line: "main"
-  //     },
-  //     photos: ["https://brokenlinnk"]
-  //   },
-  //   {
-  //     property_id: 2,
-  //     address: {
-  //       line: "miching"
-  //     },
-  //     photos: ["https://brokenlinnk"]
-  //   },
-  //   {
-  //     property_id: 3,
-  //     address: {
-  //       line: "really"
-  //     },
-  //     photos: ["https://brokenlinnk"]
-  //   },
-  // ]
-
-  // const history = useHistory()
-
-  //Advanced Swipe Left & Right
-  // const childRefs = useMemo(() => Array(houses.length).fill(0).map(i => React.createRef()), [])
-
-  // const swiped = (direction, nameToDelete) => {
-  //   console.log('removing: ' + nameToDelete)
-  //   setLastDirection(direction)
-  //   alreadyRemoved.push(nameToDelete)
-  // }
-
-  // const outOfFrame = (property_id) => {
-  //   console.log(property_id + ' left the screen!')
-  //   housesState.filter(house => house.property_id !== property_id)
-  //   setMatches(housesState)
-  // }
-
-  // const swipe = (dir) => {
-  //   const cardsLeft = matches.filter(match => !alreadyRemoved.includes(match.property_id))
-  //   if (cardsLeft.length) {
-  //     const toBeRemoved = cardsLeft[cardsLeft.length - 1].propery_id // Find the card object to be removed
-  //     const index = houses.map(match => match.property_id).indexOf(toBeRemoved) // Find the index of which to make the reference to
-  //     alreadyRemoved.push(toBeRemoved) // Make sure the next card gets removed next time if this card do not have time to exit the screen
-  //     childRefs[index].current.swipe(dir) // Swipe the card!
-  //   }
-  // }
-
-  //Simple Swipe Left and right...
-  //
   const swiped = (direction, property_id, address, city, state_code, postal_code, photo, beds, baths, price) => {
-    const newhouse = {
+    const newHouse = {
       userId: parseInt(localStorage.getItem("swipeHome_user")),
       property_id,
       address,
@@ -88,11 +36,14 @@ export const HouseList = () => {
       timeStamp: Date.now()
 
     }
-    console.log('added house: ' + property_id)
+    // console.log('added house: ' + property_id)
     if (direction === "right") {
-      addFave(newhouse)
+      if (faves.filter(f => f.property_id === property_id).length === 0) {
+        /* faves doesn't contain the a fave with the same property_id */
+        addFave(newHouse)
+      }
+      setLastDirection(direction)
     }
-    setLastDirection(direction)
   }
 
   const outOfFrame = (name) => {

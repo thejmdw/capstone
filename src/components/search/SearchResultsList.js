@@ -32,8 +32,8 @@ export const SearchResultsList = () => {
       photo,
       timeStamp: Date.now()
     }
-    console.log('added Fave: ' + property_id)
-    debugger
+    // console.log('added Fave: ' + property_id)
+    // debugger
     if (direction === "right") {
       if (faves.filter(f => f.property_id === property_id).length === 0) {
         /* faves doesn't contain the a fave with the same property_id */
@@ -66,7 +66,7 @@ export const SearchResultsList = () => {
           )
         })}
       </section>
-      {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
+      {/* {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />} */}
     </>
   )
 }
