@@ -24,11 +24,11 @@ export const SwipeHome = () => (
     />
 
     <Route path="/login">
-      <NavBar />
+      {/* <NavBar /> */}
       <Login />
     </Route>
     <Route path="/register">
-      <NavBar />
+      {/* <NavBar /> */}
       <Register />
     </Route>
   </>
