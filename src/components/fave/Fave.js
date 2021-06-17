@@ -1,14 +1,14 @@
 import React from "react"
-import { useContext, useEffect, useState, useMemo } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { FaveContext } from "./FaveProvider"
 import "./Fave.css"
 import TinderCard from "react-tinder-card"
 
 export const Fave = () => {
-  const { faves, getFaves, getFavesByUserId, getFaveById } = useContext(FaveContext)
-  const [fave, setFave] = useState({})
-  const [lastDirection, setLastDirection] = useState()
+  const { faves, getFaveById } = useContext(FaveContext)
+  const [ setFave]  = useState({})
+  const [ lastDirection, setLastDirection] = useState()
   const history = useHistory()
   const faveId = useParams()
 
@@ -41,7 +41,7 @@ export const Fave = () => {
           )
         })}
       </section>
-      {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
+      {/* {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />} */}
     </>
   )
 }

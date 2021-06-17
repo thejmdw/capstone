@@ -7,11 +7,9 @@ import TinderCard from "react-tinder-card"
 import { Buttons } from "../buttons/Buttons"
 
 export const FaveList = () => {
-  const { faves, favesDetail, getFaves, getFavesByUserId, removeFave, getFaveDetails } = useContext(FaveContext)
+  const { faves, getFavesByUserId, removeFave } = useContext(FaveContext)
   const [lastDirection, setLastDirection] = useState()
   const history = useHistory()
-
-  const [faveDetails, setFaveDetails] = useState([])
 
   useEffect(() => {
     getFavesByUserId(localStorage.getItem("swipeHome_user"))
@@ -59,7 +57,6 @@ export const FaveList = () => {
             <TinderCard className='swipe fave' preventSwipe={["up", "down"]} key={fave.id} onSwipe={(dir) => swiped(dir, fave.id)} onCardLeftScreen={() => outOfFrame(fave.property_id)}>
             <div style={{backgroundImage: `url(${fave.photo})`}} className="faveCard">
                 <div onClick={() => history.push(`/faves/detail/${fave.id}`)}>
-                {/* <h3>{fave.address.line}</h3> */}
                 <h5>{fave.address} {fave.city},{fave.state_code} {fave.postal_code}</h5>
                 <h5>Beds: {fave.beds}</h5>
                 <h5>Baths: {fave.baths}</h5>

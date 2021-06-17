@@ -1,8 +1,6 @@
 
 import React from "react"
-import { useContext, useEffect, useState, useMemo } from "react"
-import { useHistory } from "react-router-dom"
-import { HouseContext } from "./HouseProvider"
+import { useContext, useEffect, useState } from "react"
 import "./House.css"
 import TinderCard from "react-tinder-card"
 import { SearchContext } from "../search/SearchProvider"
@@ -65,12 +63,8 @@ export const HouseList = () => {
         })}
         {/* <button>Click Here</button> */}
       </section>
-      {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
-      <div>{houses.length}</div>
+      {/* {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
+      <div>{houses.length}</div> */}
       </>
   )
 }
-            // <>
-            // <img className="house_profilePic"src={house.photos[0].href}></img>
-            // <div key={house.listing_id}>{house.listing_id}</div>
-            // </>
