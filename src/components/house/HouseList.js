@@ -11,10 +11,9 @@ import { FaveContext } from "../fave/FaveProvider"
 export const HouseList = () => {
   
   const { houses } = useContext(SearchContext)
-  const { faves, house, addFave, gethouses, getFavesByUserId } = useContext(FaveContext)
-  // const [ matches, setMatches ] = useState(houses)
+  const { faves, addFave, getFavesByUserId } = useContext(FaveContext)
   const [lastDirection, setLastDirection] = useState()
-  // let housesState = houses
+
 
   useEffect(() => {
     getFavesByUserId(localStorage.getItem("swipeHome_user"))
@@ -36,7 +35,6 @@ export const HouseList = () => {
       timeStamp: Date.now()
 
     }
-    // console.log('added house: ' + property_id)
     if (direction === "right") {
       if (faves.filter(f => f.property_id === property_id).length === 0) {
         /* faves doesn't contain the a fave with the same property_id */
@@ -49,11 +47,7 @@ export const HouseList = () => {
   const outOfFrame = (name) => {
     console.log(name + ' left the screen!')
   }
-  
-  // onSwipe={(dir) => swiped(dir, house.property_id)}
-  // onCardLeftScreen={() => outOfFrame(house.property_id)} 
-  
-
+ 
   return (
     <>
       <section className="houseCards__container">
@@ -73,12 +67,7 @@ export const HouseList = () => {
       </section>
       {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
       <div>{houses.length}</div>
-      {/* <div className='buttons'>
-        <button onClick={() => swipe('left')}>Swipe left!</button>
-        <button onClick={() => swipe('right')}>Swipe right!</button>
-      </div>
-      {lastDirection ? <h2 key={lastDirection} className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText'>Swipe a card or press a button to get started!</h2>} */}
-    </>
+      </>
   )
 }
             // <>
