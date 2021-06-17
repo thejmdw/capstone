@@ -36,7 +36,7 @@ export const Register = (props) => {
                         body: JSON.stringify({
                             email: email.current.value,
                             name: `${firstName.current.value} ${lastName.current.value}`,
-                            avatarURL: `https://www.tinygraphs.com/squares/${firstName.current.value}%20${lastName.current.value}?theme=heatwave&numcolors=4&size=220&fmt=svg`,
+                            avatarURL: `https://i.pravatar.cc/150?u=${firstName.current.value}${lastName.current.value}`,
                             userTypeId: userTypeIdState,
                             firstTimeUser: true
                         })
@@ -94,7 +94,8 @@ export const Register = (props) => {
                         type="radio" 
                         id="userTypeId" 
                         className="form-control" 
-                        value="1"  />
+                        value="1"
+                        required />
                 </div>
                 <div className="form-group">
                   <label htmlFor="userTypeId">Buyer:</label>
@@ -103,7 +104,8 @@ export const Register = (props) => {
                         type="radio" 
                         id="userTypeId" 
                         className="form-control" 
-                        value="2"  />
+                        value="2"
+                        required  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="userTypeId">Agent:</label>
@@ -112,7 +114,8 @@ export const Register = (props) => {
                         type="radio" 
                         id="userTypeId" 
                         className="form-control" 
-                        value="3"  />
+                        value="3"
+                        required  />
                 </div>
               </fieldset>
               <fieldset>

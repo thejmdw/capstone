@@ -19,6 +19,8 @@ export const User = () => {
  
   const [lastDirection, setLastDirection] = useState()
 
+  const [searchesListItems, setSearchesListItems] = useState()
+
   const [profile, setProfile] = useState({})
 
   useEffect(() => {
@@ -28,8 +30,15 @@ export const User = () => {
      .then(getFavesByUserId(localStorage.getItem("swipeHome_user")))
   }, [])
 
+  useEffect(() => {
+    getUserById(parseInt(localStorage.getItem("swipeHome_user")))
+     .then(setProfile)
+     .then(getSearchesByUserId(localStorage.getItem("swipeHome_user")))
+     .then(getFavesByUserId(localStorage.getItem("swipeHome_user")))
+  },[searchesListItems])
+
   const currentUser = profile
-  //cus = currentUserSeearches...
+  //    cus = currentUserSearches...
   const cus = searches.sort((s1, s2) => (s1.id < s2.id ? 1 : -1))
   //-------
   const history = useHistory()
@@ -42,7 +51,8 @@ export const User = () => {
 
   const removeSearch = (searchId, currentUserId) => {
     deleteSearch(searchId)
-      .then(getSearchesByUserId(currentUserId))
+      .then(setSearchesListItems)
+      // .then(getSearchesByUserId(currentUserId))
   }
   
   const handleClickSearch = searchObj=> {
