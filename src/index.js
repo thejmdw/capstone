@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import GoogleMapReact from 'google-map-react'
 import { SwipeHome } from "./components/SwipeHome"
 import { BrowserRouter as Router } from "react-router-dom"
 import './index.css';

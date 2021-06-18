@@ -7,10 +7,10 @@
   box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
   border-radius: 20px;
   height: 100%;
-  /* max-width: 85vh; */
+  max-width: 85vh;
   padding: 20px;
   position: relative;
-  width: 100%;
+  width: 40vh;
 }
 
 /* .test {
@@ -20,10 +20,20 @@
 .userFlexItem {
   display: flex;
 }
+.userCard__statButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 .userCard > h3 {
   position: aboslute;
   bottom: 10px;
   /* color: white; */
+}
+.userCard__searchList {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2vh;
 }
 
 .buttons {

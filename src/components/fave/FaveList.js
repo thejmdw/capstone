@@ -56,14 +56,18 @@ export const FaveList = () => {
   return (
     <>
       <section className="faveCards__container">
-        {shuffledFaves.length === 0 ? <div>Please select some faves to display your list of Faves!</div> : 
+        {shuffledFaves.length === 0 ? <div>You don't have any faves selected!</div> : 
          shuffledFaves.map((fave) => {
           return (
             <>
             <TinderCard className='swipe fave' preventSwipe={["up", "down"]} key={fave.id} onSwipe={(dir) => swiped(dir, fave.id)} onCardLeftScreen={() => outOfFrame(fave.property_id)}>
-            <div style={{backgroundImage: `url(${fave.photo})`}} className="faveCard" >
+            <div className="faveCard" >
                 <div onClick={() => {handleFaveClick(fave.id, fave.property_id)}}>
-                <h5>{fave.address} {fave.city},{fave.state_code} {fave.postal_code}</h5>
+                <img src={fave.photo} alt="house" className="faveList_housePic"/>
+                <div className="faveCard_address">
+                  <h5>{fave.address} {fave.city}</h5>
+                  <h5>{fave.state_code} {fave.postal_code}</h5>
+                </div>
                 <h5>Beds: {fave.beds}</h5>
                 <h5>Baths: {fave.baths}</h5>
                 <h2>Price: ${fave.price}</h2>
@@ -76,7 +80,7 @@ export const FaveList = () => {
         })}
         
       </section>
-      {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
+      {/* {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />} */}
     </>
   )
 }

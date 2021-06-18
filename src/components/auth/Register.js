@@ -57,15 +57,16 @@ export const Register = (props) => {
     }
 
     return (
-        <main style={{ textAlign: "center" }}>
+        <main style={{ textAlign: "center" }} className="LoginCard__container">
 
             <dialog className="dialog dialog--password" ref={conflictDialog}>
                 <div>Account with that email address already exists</div>
                 <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
             </dialog>
 
+            <div className="LoginCard">
             <form className="form--login" onSubmit={handleRegister}>
-              <h1 className="h3 mb-3 font-weight-normal">Please Register for Swipe Home</h1>
+              <h1 className="h3 mb-3 font-weight-normal">Register</h1>
               <fieldset>
                   <label htmlFor="userName"> First Name </label>
                   <input ref={firstName} type="text" name="firstName" className="form-control" placeholder="First Name" required autoFocus />
@@ -80,14 +81,14 @@ export const Register = (props) => {
               </fieldset>
               <fieldset>
                   <label htmlFor="inputAvatarUrl"> AvatarURL </label>
-                  <input ref={avatarURL} type="text" name="avatarURL" className="form-control" placeholder="Default: https://i.pravatar.cc/150?u=FirstNameLastName" />
+                  <input ref={avatarURL} type="text" name="avatarURL" className="form-control" placeholder="https://i.pravatar.cc/150?u=FirstNameLastName" />
               </fieldset>
               <fieldset onChange={
                     (e) => {
                       setUserTypeIdState(parseInt(e.target.value))
                     }
                   }>
-                <div className="form-group">
+                <div className="form-group radios">
                   <label htmlFor="userTypeId">Renter:</label>
                   <input ref={userTypeId} 
                         name="userType" 
@@ -97,7 +98,7 @@ export const Register = (props) => {
                         value="1"
                         required />
                 </div>
-                <div className="form-group">
+                <div className="form-group radios">
                   <label htmlFor="userTypeId">Buyer:</label>
                   <input ref={userTypeId} 
                         name="userType" 
@@ -107,7 +108,7 @@ export const Register = (props) => {
                         value="2"
                         required  />
                 </div>
-                <div className="form-group">
+                <div className="form-group radios">
                   <label htmlFor="userTypeId">Agent:</label>
                   <input ref={userTypeId} 
                         name="userType" 
@@ -118,10 +119,16 @@ export const Register = (props) => {
                         required  />
                 </div>
               </fieldset>
-              <fieldset>
-                <button type="submit"> Sign in </button>
-              </fieldset>
+              <div className="register_buttons">
+                <fieldset className="register_button">
+                    <button type="submit"> Sign in </button>
+                </fieldset>
+                <fieldset className="register_button">
+                    <button onClick={() => history.push("/login")}> Go Back </button>
+                </fieldset>
+              </div>
             </form>
+            </div>
         </main>
     )
 }
