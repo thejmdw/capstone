@@ -4,18 +4,22 @@ import { useHistory, useParams } from "react-router-dom"
 import { FaveContext } from "./FaveProvider"
 import "./Fave.css"
 import TinderCard from "react-tinder-card"
+import Carousel from 'nuka-carousel';
 
 export const Fave = () => {
-  const { faves, getFaveById } = useContext(FaveContext)
-  const [ setFave]  = useState({})
+  const { getFaveById, getFaveDetail } = useContext(FaveContext)
   const [ lastDirection, setLastDirection] = useState()
   const history = useHistory()
-  const faveId = useParams()
+  const { faveId } = useParams()
 
-  useEffect(() => {
-    getFaveById(parseInt(faveId))
-      .then(setFave)
-  }, [])
+  // const [ faveDetail, setFaveDetail ] = useState({})
+  const faveDetail = JSON.parse(localStorage.getItem("fave"))
+
+  // useEffect(() => {
+  //   getFaveDetail(propertyId)
+  //   // .then(data => {setFaveDetail(data.properties[0])})
+  // }, [])
+
 
   const swiped = (direction, nameToDelete) => {
     console.log('removing: ' + nameToDelete)
@@ -27,21 +31,28 @@ export const Fave = () => {
   }
 
   return (
-    <>
-      <section className="faveCards__container">
-        {faves.length === 0 ? <div>Please select some faves to display your list of Faves!</div> : 
-         faves.map((fave) => {
-          return (
-            <TinderCard className='swipe fave' preventSwipe={["up", "down","left", "right"]} key={fave.property_id} onSwipe={(dir) => swiped(dir, fave.property_id)} onCardLeftScreen={() => outOfFrame(fave.property_id)}>
-              <div className="faveCard" onClick={() => history.push(`/faves/detail/${fave.id}`)}>
-                {/* <h3>{fave.address.line}</h3> */}
-                <h5>{fave.property_id}</h5>
+    
+      <section className="faveDetailCard__container">
+        
+            
+              <div className="faveDetailCard">
+                <Carousel className="faveCarousel">
+                  {faveDetail.photos.map(p => <img src={p.href} alt="housing"></img>)}
+                </Carousel>
+                <h3>{faveDetail.address.line} {faveDetail.address.city},{faveDetail.address.state_code} {faveDetail.address.postal_code}</h3>
+                <h3>{faveDetail.address.neighborhood_name}</h3>
+                <h3>{faveDetail.prop_type}</h3>
+                <h3>Beds: {faveDetail.beds}</h3>
+
+                <h3>Baths: {faveDetail.baths}</h3>
               </div>
-            </TinderCard>
-          )
-        })}
+            
+          
+       
       </section>
-      {/* {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />} */}
-    </>
-  )
-}
+      
+      
+      )
+    }
+    
+    {/* onClick={() => history.push(`/favesList`)} */}

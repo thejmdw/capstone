@@ -61,9 +61,9 @@ export const ApplicationViews = () => {
             <Route exact path="/faves">
               <FaveList />
             </Route>
-            {/* <Route exact path="/faves/detail/:faveId(\d+)">
+            <Route exact path="/faves/detail/:faveId(\d+)">
               <Fave />
-            </Route> */}
+            </Route>
 
           </FaveProvider>
         </UserProvider>
