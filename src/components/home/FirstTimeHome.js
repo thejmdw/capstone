@@ -3,14 +3,14 @@ import React from "react"
 import { useContext, useEffect, useState, useMemo } from "react"
 import { useHistory } from "react-router-dom"
 import { UserContext } from "../user/UserProvider"
-// import "./User.css"
+import "./Home.css"
 import TinderCard from "react-tinder-card"
 import Button from '@material-ui/core/Button';
 
 
 export const FirstTimeHome = () => {
   
-  const { users, getUsers, getUserById } = useContext(UserContext)
+  const { getUserById } = useContext(UserContext)
   const history = useHistory()
 
   const [user, setUser] = useState({})
@@ -21,7 +21,7 @@ export const FirstTimeHome = () => {
   }, [])
 
   const currentUser = user
-  // debugger
+
   return (
     <>
       

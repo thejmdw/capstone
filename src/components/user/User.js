@@ -1,23 +1,21 @@
 
 import React from "react"
-import { useContext, useEffect, useState, useMemo } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { UserContext } from "./UserProvider"
 import "./User.css"
-import TinderCard from "react-tinder-card"
 import Button from '@material-ui/core/Button';
 import { SearchContext } from "../search/SearchProvider"
 import { FaveContext } from "../fave/FaveProvider"
-import { ExposurePlus } from "@material-ui/icons"
+
 
 
 export const User = () => {
   
-  const { users, getUsers, getUserById } = useContext(UserContext)
+  const { getUserById } = useContext(UserContext)
   const { searches, getSearchesByUserId, deleteSearch, getHouses } = useContext(SearchContext)
   const { faves, getFavesByUserId } = useContext(FaveContext)
  
-  const [lastDirection, setLastDirection] = useState()
 
   const [searchesListItems, setSearchesListItems] = useState()
 
@@ -52,17 +50,13 @@ export const User = () => {
   const removeSearch = (searchId, currentUserId) => {
     deleteSearch(searchId)
       .then(setSearchesListItems)
-      // .then(getSearchesByUserId(currentUserId))
   }
   
   const handleClickSearch = searchObj=> {
-    // e.preventDefault() 
-
       getHouses(searchObj)
           .then(() => history.push("/searchResultsList"))
     
   }
-  // debugger
   return (
     <>
       <section className="userCard__container">
@@ -75,7 +69,6 @@ export const User = () => {
                     <h5>{currentUser.email}</h5>
                   </div>
                   <div className="test">
-                    {/* <div>{`Total Faves: ${faves.length}`}</div> */}
                     <Button onClick={() => {history.push("/faves")}}>Faves: {`${faves.length}`}</Button>
                     <Button onClick={() => {history.push("/searches")}}>Searches: {`${cus.length}`}</Button>
                   </div>

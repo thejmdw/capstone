@@ -7,11 +7,9 @@ import TinderCard from "react-tinder-card"
 import { Buttons } from "../buttons/Buttons"
 
 export const FaveList = () => {
-  const { faves, favesDetail, getFaves, getFavesByUserId, removeFave, getFaveDetails } = useContext(FaveContext)
+  const { faves, getFavesByUserId, removeFave, getFaveDetail } = useContext(FaveContext)
   const [lastDirection, setLastDirection] = useState()
   const history = useHistory()
-
-  const [faveDetails, setFaveDetails] = useState([])
 
   useEffect(() => {
     getFavesByUserId(localStorage.getItem("swipeHome_user"))
@@ -49,6 +47,12 @@ export const FaveList = () => {
 
   const shuffledFaves = shuffle(faves)
 
+  const handleFaveClick = (id, property_id) => {
+    getFaveDetail(property_id)
+    .then(() => history.push(`/faves/detail/${id}`))
+    
+
+  }
   return (
     <>
       <section className="faveCards__container">
@@ -57,9 +61,8 @@ export const FaveList = () => {
           return (
             <>
             <TinderCard className='swipe fave' preventSwipe={["up", "down"]} key={fave.id} onSwipe={(dir) => swiped(dir, fave.id)} onCardLeftScreen={() => outOfFrame(fave.property_id)}>
-            <div style={{backgroundImage: `url(${fave.photo})`}} className="faveCard">
-                <div onClick={() => history.push(`/faves/detail/${fave.id}`)}>
-                {/* <h3>{fave.address.line}</h3> */}
+            <div style={{backgroundImage: `url(${fave.photo})`}} className="faveCard" >
+                <div onClick={() => {handleFaveClick(fave.id, fave.property_id)}}>
                 <h5>{fave.address} {fave.city},{fave.state_code} {fave.postal_code}</h5>
                 <h5>Beds: {fave.beds}</h5>
                 <h5>Baths: {fave.baths}</h5>
@@ -77,3 +80,5 @@ export const FaveList = () => {
     </>
   )
 }
+
+

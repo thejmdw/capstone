@@ -1,15 +1,13 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
+import { useState, useContext, useEffect } from "react"
 import { SearchContext } from "./SearchProvider"
 import { UserContext } from "../user/UserProvider"
-import { useState, createContext } from "react"
 import { stateCodes } from './stateCodes'
 import "./Search.css"
 import { useHistory } from 'react-router'
 
-// export const SearchContext = createContext()
-
 export const SearchForm = () => {
-  const { getSearch, addSearch, getHouses, getHousesForRent, getHousesForSale } = useContext(SearchContext)
+  const { addSearch, getHousesForRent, getHousesForSale } = useContext(SearchContext)
   const { getUserById } = useContext(UserContext)
   const history = useHistory()
 

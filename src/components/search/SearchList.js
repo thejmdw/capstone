@@ -1,6 +1,6 @@
 
 import React from "react"
-import { useContext, useEffect, useState, useMemo } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { UserContext } from "../user/UserProvider"
 import "./Search.css"
@@ -8,16 +8,16 @@ import TinderCard from "react-tinder-card"
 import Button from '@material-ui/core/Button';
 import { SearchContext } from "../search/SearchProvider"
 import { FaveContext } from "../fave/FaveProvider"
-import { ExposurePlus } from "@material-ui/icons"
+
 
 
 export const SearchList = () => {
   
-  const { users, getUsers, getUserById } = useContext(UserContext)
+  const { getUserById } = useContext(UserContext)
   const { searches, getSearchesByUserId, deleteSearch, getHouses } = useContext(SearchContext)
-  const { faves, getFavesByUserId } = useContext(FaveContext)
+  const { getFavesByUserId } = useContext(FaveContext)
  
-  const [lastDirection, setLastDirection] = useState()
+
   const [searchesListItems, setSearchesListItems] = useState()
 
   const [profile, setProfile] = useState({})
@@ -43,26 +43,19 @@ export const SearchList = () => {
   const history = useHistory()
   const currentUserId = parseInt(localStorage.getItem("swipeHome_user"))
 
-  const logOut = () => {
-    localStorage.removeItem("swipeHome_user")
-    history.push("/")
-  }
-
-  
-
   const removeSearch = (searchId, currentUserId) => {
     deleteSearch(searchId)
       .then(setSearchesListItems)
   }
   
   const handleClickSearch = searchObj=> {
-    // e.preventDefault() 
+   
 
       getHouses(searchObj)
           .then(() => history.push("/searchList"))
     
   }
-  // debugger
+
   return (
     <>
       <section className="searchCard__container">
