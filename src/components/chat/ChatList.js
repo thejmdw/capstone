@@ -26,12 +26,26 @@ export const ChatList = () => {
     <>
       <section className="chatCards__container">
       
-          
-            <div className="chatCard" >
-              
+          {receivedMessages.map(message => {
+            return (
+              <div className="chatCard" >
+              <div>
+                <div className="chatFlex">
+                  <img className="chatCard__img" src={message.user.avatarURL} alt="profile"/>
+                  <div>
+                    <h3>{message.user.name}</h3>
+                    {message.text}
+                  </div>
+                </div>
+                {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(message.timestamp)
+}
+              </div>
                 
                   
-            </div>            
+            </div> 
+            )
+          })}
+                       
              
       </section>
       {/* {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />} */}
