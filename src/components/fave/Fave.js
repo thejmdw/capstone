@@ -45,7 +45,7 @@ export const Fave = () => {
                   height="250"
                   frameborder="0"
                   style={{border:0}}
-                  src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBDNm_nEXINx2bsVUSflyt633t7rVecQgA&q=${faveDetail.address?.line}${faveDetail.address?.city}${faveDetail.address?.state_code}&center=${faveDetail.address?.lat},${faveDetail.address?.lon}&zoom=12
+                  src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBDNm_nEXINx2bsVUSflyt633t7rVecQgA&q=${faveDetail.address?.line}${faveDetail.address?.city}${faveDetail.address?.state_codeone}&center=${faveDetail.address?.lat},${faveDetail.address?.lon}&zoom=12
                   &maptype=roadmap`} />
                  
               
