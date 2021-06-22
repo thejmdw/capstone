@@ -5,11 +5,13 @@ import { HouseProvider } from "./house/HouseProvider"
 import { SearchProvider } from "./search/SearchProvider"
 import { UserProvider } from "./user/UserProvider"
 import { FaveProvider } from "./fave/FaveProvider"
+import { MessageProvider } from "./chat/MessageProvider"
 //lists
 import { HouseList } from "./house/HouseList"
 import { SearchList } from "./search/SearchList"
 import { SearchResultsList } from "./search/SearchResultsList"
 import { FaveList } from "./fave/FaveList"
+import { ChatList } from "./chat/ChatList"
 //forms
 import { SearchForm } from "./search/SearchForm"
 import { UserForm } from "./user/UserForm"
@@ -18,6 +20,7 @@ import { User } from "./user/User"
 import { Home } from "./home/Home"
 import { FirstTimeHome } from "./home/FirstTimeHome"
 import { Fave } from "./fave/Fave"
+import { Chat } from "./chat/Chat"
 
 
 export const ApplicationViews = () => {
@@ -27,9 +30,17 @@ export const ApplicationViews = () => {
       <HouseProvider>
         <UserProvider>
           <FaveProvider>
+            <MessageProvider>
 
             <Route exact path="/houseList">
               <HouseList />
+            </Route>
+
+            <Route exact path="/messages">
+              <ChatList />
+            </Route>
+            <Route exact path="/chat">
+              <Chat />
             </Route>
 
           
@@ -65,6 +76,7 @@ export const ApplicationViews = () => {
               <Fave />
             </Route>
 
+            </MessageProvider>
           </FaveProvider>
         </UserProvider>
       </HouseProvider>

@@ -26,16 +26,43 @@
   position: absolute;
 }
 
+/* .searchForm_inputs {
+  display: flex;
+  flex-wrap: wrap;
+  
+} */
+
 .searchForm {
   background-position: center;
   background-size: cover;
   box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
   border-radius: 20px;
-  height: 72vh;
+  height: 100%;
   max-width: 85vh;
   padding: 20px;
   position: relative;
-  width: 600px
+  width: 40vh;
+}
+
+.SearchForm-control {
+  display: block;
+  width: 40%;
+  /* height: calc(1em + .75rem + 2px); */
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.SearchFormDropDown-control {
+ width: 25% 
 }
 
 .searchForm > h3 {

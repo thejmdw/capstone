@@ -4,7 +4,6 @@ import { useContext, useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { UserContext } from "../user/UserProvider"
 import "./Home.css"
-import TinderCard from "react-tinder-card"
 import Button from '@material-ui/core/Button';
 
 
@@ -23,18 +22,22 @@ export const Home = () => {
   const currentUser = user
   // debugger
   return (
-    <>
-      
-      
-      <section className="userCard__container">
-            <div className='userProfile_container' key={currentUser.id}>
-              <div className="userCard">
-                <h3>{currentUser.name}</h3>
-                <h5>{currentUser.email}</h5>
-              <div>
-                <Button onClick={() => history.push("/search")}>New Search</Button>
-                <Button onClick={() => history.push("/faves")}>Faves</Button>
-              </div>
+    <> 
+      <section className="homeCard__container">
+            <div className='homeProfile_container' key={currentUser.id}>
+              <div className="homeCard">
+                <div className="homeCard__greeting">
+                  <img className="homeCard__userAvatar" src={currentUser.avatarURL} alt="user_avatar" />
+                  <div>
+                    <h2>Welcome Back</h2>
+                    <h3>{currentUser.name}!</h3>
+                  </div>
+                </div>
+                <div>
+                  <Button onClick={() => history.push("/search")}>New Search</Button>
+                  <Button onClick={() => history.push("/searches")}>Past Searches</Button>
+                  <Button onClick={() => history.push("/faves")}>Faves</Button>
+                </div>
               </div>
             </div>
       </section>

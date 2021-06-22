@@ -5,16 +5,20 @@ import "./House.css"
 import TinderCard from "react-tinder-card"
 import { SearchContext } from "../search/SearchProvider"
 import { FaveContext } from "../fave/FaveProvider"
+import { UserContext } from "../user/UserProvider"
 
 export const HouseList = () => {
   
   const { houses } = useContext(SearchContext)
   const { faves, addFave, getFavesByUserId } = useContext(FaveContext)
   const [lastDirection, setLastDirection] = useState()
+  const { getUserById } = useContext(UserContext)
 
-
+  const [ user, setUser] = useState({})
   useEffect(() => {
-    getFavesByUserId(localStorage.getItem("swipeHome_user"))
+    getUserById(localStorage.getItem("swipeHome_user"))
+    .then((data) => {setUser(data)})
+    .then(() => {getFavesByUserId(localStorage.getItem("swipeHome_user"))})
   }, [])
   
 
@@ -47,24 +51,67 @@ export const HouseList = () => {
   }
  
   return (
-    <>
-      <section className="houseCards__container">
-        { houses.map((house) => {
+    user.userTypeId === 1 ? <>
+      <section className="searchCard__container">
+        { houses.map((search) => {
           return (
-            <TinderCard className='swipe house' preventSwipe={["up", "down"]} key={house.property_id} onSwipe={(dir) => swiped(dir, house.property_id, house.address.line, house.address.city, house.address.state_code, house.address.postal_code, house.photos[0].href, house.beds, house.baths_full, house.price )} onCardLeftScreen={() => outOfFrame(house.property_id)}>
-              <div style={{backgroundImage: `url(${house.photos[0].href})`}} className="houseCard">
-                <h5>{house.address.line} {house.address.city}, {house.address.state_code} {house.address.postal_code}</h5>
-                <h5>Beds: {house.beds}</h5>
-                <h5>Baths: {house.baths}</h5>
-                <h2>Price: ${house.price}</h2>
+            <>
+            <TinderCard className='swipe search' preventSwipe={["up", "down"]} key={search.property_id} onSwipe={(dir) => swiped(dir, search.property_id, search.address.line, search.address.city, search.address.state_code, search.address.postal_code, search.photos[0].href, search.beds, search.baths_full, search.price)} onCardLeftScreen={() => outOfFrame(search.property_id)}>
+              <div style={{backgroundImage: `url(${search?.photos[0]?.href})`}} className="searchCard">
+                <h5>{search.address.line} {search.address.city},{search.address.state_code} {search.address.postal_code}</h5>
+                <h5>Beds: {search.beds}</h5>
+                <h5>Baths: {search.baths_full}</h5>
+                <h2>Price: ${search.price}</h2>
               </div>
             </TinderCard>
+            {/* <Buttons /> */}
+            </>
           )
         })}
-        {/* <button>Click Here</button> */}
       </section>
-      {/* {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
-      <div>{houses.length}</div> */}
-      </>
+    </> :
+    <>
+      <section className="searchCard__container">
+        { houses.map((search) => {
+          return (
+            <>
+            <TinderCard className='swipe search' preventSwipe={["up", "down"]} key={search.property_id} onSwipe={(dir) => swiped(dir, search.property_id, search.address.line, search.address.city, search.address.state_code, search.address.postal_code, search.thumbnail, search.beds, search.baths_full, search.price)} onCardLeftScreen={() => outOfFrame(search.property_id)}>
+              <div style={{backgroundImage: `url(${search.thumbnail})`}} className="searchCard">
+                <h5>{search.address.line} {search.address.city},{search.address.state_code} {search.address.postal_code}</h5>
+                <h5>Beds: {search.beds}</h5>
+                <h5>Baths: {search.baths_full}</h5>
+                <h2>Price: ${search.price}</h2>
+              </div>
+            </TinderCard>
+            {/* <Buttons /> */}
+            </>
+          )
+        })}
+      </section>
+    </>
+    
+    
+    
+    
+    
+    // <>
+    //   <section className="houseCards__container">
+    //     { houses.map((house) => {
+    //       return (
+    //         <TinderCard className='swipe house' preventSwipe={["up", "down"]} key={house.property_id} onSwipe={(dir) => swiped(dir, house.property_id, house.address.line, house.address.city, house.address.state_code, house.address.postal_code, house.photos[0].href, house.beds, house.baths_full, house.price )} onCardLeftScreen={() => outOfFrame(house.property_id)}>
+    //           <div style={{backgroundImage: `url(${house.photos[0].href})`}} className="houseCard">
+    //             <h5>{house.address.line} {house.address.city}, {house.address.state_code} {house.address.postal_code}</h5>
+    //             <h5>Beds: {house.beds}</h5>
+    //             <h5>Baths: {house.baths}</h5>
+    //             <h2>Price: ${house.price}</h2>
+    //           </div>
+    //         </TinderCard>
+    //       )
+    //     })}
+    //     {/* <button>Click Here</button> */}
+    //   </section>
+    //   {/* {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
+    //   <div>{houses.length}</div> */}
+    //   </>
   )
 }

@@ -26,16 +26,20 @@ export const FirstTimeHome = () => {
     <>
       
       
-      <section className="userCard__container">
-            <div className='userProfile_container' key={currentUser.id}>
-              <div className="userCard">
-                <h2>Welcome To SwipeHome!</h2>
-                <h3>{currentUser.name}</h3>
-                <h5>{currentUser.email}</h5>
-                <p>Something something about the app.</p>
+      <section className="homeCard__container">
+            <div className='homeProfile_container' key={currentUser.id}>
+              <div className="homeCard">
+                <div className="homeCard__greeting">
+                  <img className="homeCard__userAvatar" src={currentUser.avatarURL} alt="user_avatar" />
+                  <div>
+                    <h2>Welcome To SwipeHome!</h2>
+                    <h3>{currentUser.name}</h3>
+                    <p>Get started by searching first.</p>
+                  </div>
+                </div>
+                
               <div>
                 <Button onClick={() => history.push("/search")}>New Search</Button>
-                <Button onClick={() => history.push("/faves")}>Faves</Button>
               </div>
               </div>
             </div>

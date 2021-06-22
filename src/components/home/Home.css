@@ -1,27 +1,36 @@
-.userCard {
+.homeCard {
   background-position: center;
   background-size: cover;
   box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
   border-radius: 20px;
-  height: 50vh;
+  height: 100%;
   max-width: 85vh;
   padding: 20px;
   position: relative;
-  width: 600px
+  width: 100%h3;
 }
 
-.userCard > h3 {
+.homeCard > h3 {
   position: aboslute;
   bottom: 10px;
   /* color: white; */
 }
 
-.userCard__container {
+.homeCard__container {
   display: flex;
   justify-content: center;
   margin-top: 5vh;
 }
 
-.userProfile_container {
+.homeProfile_container {
   position: absolute;
+}
+
+.homeCard__greeting {
+  display: flex;
+  flex-direction: column;
+}
+
+.homeCard__userAvatar {
+  width: 15.5vh;
 }

@@ -46,7 +46,8 @@ export const FaveProvider = (props) => {
 	    }
     })
     .then(response => response.json())
-    .then(data => localStorage.setItem("fave", JSON.stringify(data.properties[0])))
+    .then(data => data.properties[0])
+    // .then(data => localStorage.setItem("fave", JSON.stringify(data.properties[0])))
     .catch(err => {console.error(err)})
   }
 

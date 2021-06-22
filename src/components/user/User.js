@@ -13,9 +13,9 @@ import { FaveContext } from "../fave/FaveProvider"
 export const User = () => {
   
   const { getUserById } = useContext(UserContext)
-  const { searches, getSearchesByUserId, deleteSearch, getHouses } = useContext(SearchContext)
+  const { searches, getSearchesByUserId, deleteSearch, getHouses, getHousesForRent, getHousesForSale } = useContext(SearchContext)
   const { faves, getFavesByUserId } = useContext(FaveContext)
- 
+  
 
   const [searchesListItems, setSearchesListItems] = useState()
 
@@ -53,14 +53,19 @@ export const User = () => {
   }
   
   const handleClickSearch = searchObj=> {
-      getHouses(searchObj)
-          .then(() => history.push("/searchResultsList"))
+      if (searchObj.userTypeId === 1) {
+        getHousesForRent(searchObj)
+        .then(() => history.push("/searchResultsList"))
+      } else if (searchObj.userTypeId === 2 ) {
+        getHousesForSale(searchObj)
+        .then(() => history.push("/searchResultsList"))
+      }
     
   }
   return (
     <>
-      <section className="userCard__container">
-            <div className='userProfile_container' key={currentUser.id}>
+      <section className="userCard__container" key={currentUser.id}>
+            
               <div className="userCard">
                 <div className="userFlexItem test">
                   <div className="test">
@@ -68,13 +73,13 @@ export const User = () => {
                     <h3>{currentUser.name}</h3>
                     <h5>{currentUser.email}</h5>
                   </div>
-                  <div className="test">
+                  <div className="userCard__statButtons">
                     <Button onClick={() => {history.push("/faves")}}>Faves: {`${faves.length}`}</Button>
                     <Button onClick={() => {history.push("/searches")}}>Searches: {`${cus.length}`}</Button>
                   </div>
                 </div>
-                <div className="test">
-                  <div>Last 5 Searches</div>
+                <div className="userCard__searchList">
+                  <h4>Last 5 Searches</h4>
                   {cus.length === 0 ? <div>You Haven't Searched Yet</div> :
                   <div>
                   <div>{<> 1. <Button onClick={() => {handleClickSearch(cus[0])}}> {cus[0].city},{cus[0].state_code} {cus[0].postal_code}</Button> <Button onClick={() => {removeSearch(cus[0].id, currentUserId)}}>remove</Button></>}</div>
@@ -89,7 +94,7 @@ export const User = () => {
                   <Button onClick={logOut}>Log Out</Button>
                 </div>
               </div>
-            </div>
+           
       </section>
     </>
   )
