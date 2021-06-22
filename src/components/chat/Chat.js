@@ -53,6 +53,7 @@ export const Chat = () => {
   const handleSendMessage = () => {
     // getMessageDetail(property_id)
     message.timestamp = Date.now()
+    message.unread = false
     // message.recipientId = senderId
     addMessage(message)
     .then(setMessageSent)

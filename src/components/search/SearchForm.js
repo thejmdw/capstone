@@ -58,7 +58,8 @@ export const SearchForm = () => {
   }
 
   const handleClickSaveSearch = e => {
-    // e.preventDefault() 
+    // e.preventDefault()
+    search.userTypeId = currentUser.userTypeId
     console.log(search)
     if (search.city === undefined || search.state_code === undefined ) {
       window.alert("Please select a city and state")

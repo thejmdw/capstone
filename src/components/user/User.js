@@ -13,9 +13,9 @@ import { FaveContext } from "../fave/FaveProvider"
 export const User = () => {
   
   const { getUserById } = useContext(UserContext)
-  const { searches, getSearchesByUserId, deleteSearch, getHouses } = useContext(SearchContext)
+  const { searches, getSearchesByUserId, deleteSearch, getHouses, getHousesForRent, getHousesForSale } = useContext(SearchContext)
   const { faves, getFavesByUserId } = useContext(FaveContext)
- 
+  
 
   const [searchesListItems, setSearchesListItems] = useState()
 
@@ -53,8 +53,13 @@ export const User = () => {
   }
   
   const handleClickSearch = searchObj=> {
-      getHouses(searchObj)
-          .then(() => history.push("/searchResultsList"))
+      if (searchObj.userTypeId === 1) {
+        getHousesForRent(searchObj)
+        .then(() => history.push("/searchResultsList"))
+      } else if (searchObj.userTypeId === 2 ) {
+        getHousesForSale(searchObj)
+        .then(() => history.push("/searchResultsList"))
+      }
     
   }
   return (

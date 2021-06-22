@@ -9,6 +9,8 @@ export const UserProvider = (props) => {
   const [ recipient, setRecipient] = useState({})
   const [ sender, setSender ] = useState({})
 
+  
+
   const getUsers = () => {
     return fetch(`http://localhost:8088/users?_embed=userType`)
     .then(response => 

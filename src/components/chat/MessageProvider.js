@@ -19,6 +19,16 @@ export const MessageProvider = (props) => {
     })
     .then(setSentMessages(messageObj))
   }
+  const markMessageUnread = (messageObj) => {
+    return fetch(`http://localhost:8088/messages`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(messageObj)
+    })
+    // .then(setSentMessages(messageObj))
+  }
 
   const getMessagesByUserIdAndSenderId= (userId, senderId) => {
       return fetch(`http://localhost:8088/messages?_sort=userId,recipientId&_order=${senderId},${userId}&_expand=user`)
