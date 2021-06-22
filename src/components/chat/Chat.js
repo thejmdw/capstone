@@ -13,7 +13,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 
 export const Chat = () => {
-  const { sentMessages, receivedMessages, addMessage, getMessagesByUserIdAndSenderId, removeMessage} = useContext(MessageContext)
+  const { sentMessages, receivedMessages, markUserMessagesUnread, addMessage, getMessagesByUserIdAndSenderId, removeMessage} = useContext(MessageContext)
   const { recipient, getUserById, getRecipientById, getSenderById } = useContext(UserContext)
   
   const currentUserId = parseInt(localStorage.getItem("swipeHome_user"))
@@ -28,7 +28,6 @@ export const Chat = () => {
   const [ message, setMessage ] = useState({
     userId: parseInt(localStorage.getItem("swipeHome_user")),
     recipientId: senderId
-    
   })
 
 
@@ -37,7 +36,12 @@ export const Chat = () => {
     .then((data) => {setMessages(data)})
     .then(() => {getUserById(senderId)})
     .then((data) => {setSender(data)})
+    // .then(() => {
+      
+    // })
   }, [])
+
+
 
   // useEffect(() => {
   //   getMessagesByUserIdAndRecipientId(currentUserId, senderId)
@@ -53,7 +57,7 @@ export const Chat = () => {
   const handleSendMessage = () => {
     // getMessageDetail(property_id)
     message.timestamp = Date.now()
-    message.unread = false
+    message.unread = true
     // message.recipientId = senderId
     addMessage(message)
     .then(setMessageSent)
@@ -89,6 +93,7 @@ export const Chat = () => {
   console.log(sender)
   const filteredMessages = messages?.filter(message => (message.userId === senderId && message.recipientId === currentUserId) || (message.userId === currentUserId && message.recipientId === senderId) )
     filteredMessages?.sort((s1, s2) => (s1.id > s2.id ? 1 : -1))
+    // markUserMessagesUnread(filteredMessages)
   return (
     <>
       <section className="chatCards__container">
