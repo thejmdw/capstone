@@ -5,10 +5,11 @@ import { MessageContext } from "./MessageProvider"
 import "./Chat.css"
 import TinderCard from "react-tinder-card"
 import { Buttons } from "../buttons/Buttons"
+import { UserContext } from "../user/UserProvider"
 
 export const ChatList = () => {
   const { getMessagesByRecipientId, receivedMessages, getMessagesByUserIdAndRecipientId, getMessagesByRecipientIdAndUserId } = useContext(MessageContext)
-  
+  const { getRecipientById, getSenderById } = useContext(UserContext)
   const history = useHistory()
   // const [ messagesBySender, setMessagesBySender ] = useState([])
 
@@ -21,6 +22,8 @@ export const ChatList = () => {
     // debugger
     getMessagesByUserIdAndRecipientId(userId, recipientId)
     .then(() => {getMessagesByRecipientIdAndUserId(userId, recipientId)})
+    .then(() => {getRecipientById(recipientId)})
+    .then(() => {getSenderById(userId)})
     .then(() => {history.push(`/chat`)})
   }
 
