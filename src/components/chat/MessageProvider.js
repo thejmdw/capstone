@@ -16,7 +16,7 @@ export const MessageProvider = (props) => {
       },
       body: JSON.stringify(messageObj)
     })
-    .then(setMessage(messageObj))
+    // .then(setSentMessages(messageObj))
   }
 
   const getMessagesByUserId = (userId) => {
@@ -57,6 +57,7 @@ export const MessageProvider = (props) => {
         getMessagesByRecipientId, 
         getMessagesByUserIdAndRecipientId, 
         getMessagesByRecipientIdAndUserId,
+        setSentMessages,
         removeMessage
       }
     }>

@@ -10,25 +10,31 @@ import { Buttons } from "../buttons/Buttons"
 import { UserContext } from "../user/UserProvider"
 
 export const Chat = () => {
-  const { sentMessages, receivedMessages } = useContext(MessageContext)
+  const { sentMessages, receivedMessages, addMessage } = useContext(MessageContext)
   const { recipient, sender } = useContext(UserContext)
   
   const history = useHistory()
   // const [ messagesBySender, setMessagesBySender ] = useState([])
 
-  // useEffect(() => {
-  //   getMessagesByRecipientId(localStorage.getItem("swipeHome_user"))
+  useEffect(() => {
       
-  // }, [])
+  }, [sentMessages])
   const [ message, setMessage ] = useState({
     userId: parseInt(localStorage.getItem("swipeHome_user")),
+    recipientId: sender.id,
     
   })
 
-  const handleMessageClick = (id, property_id) => {
+  const handleSendMessage = () => {
     // getMessageDetail(property_id)
-    history.push(`/chat`)
+    message.timestamp = Date.now()
+    message.recipientId = sender.id
+    addMessage(message)
+    .then(() => {history.push('/chat')})
+    // history.push(`/chat`)
   }
+
+
 
   const handleControlledInputChange = (event) => {
     /* When changing a state object or array,
@@ -52,7 +58,7 @@ export const Chat = () => {
           <h3>Your conversation with {sender.name}</h3>
           {messages.map(message => {
             return (
-              <div className="chatCard" key={message.timestamp} onClick={handleMessageClick}>
+              <div className="chatCard" key={message.timestamp} >
               <div>
                 
                   {message.userId === parseInt(localStorage.getItem("swipeHome_user")) ? 
@@ -92,7 +98,7 @@ export const Chat = () => {
             {/* <fieldset> */}
               <div>
                 {/* <label htmlFor="message">Message</label> */}
-                <input type="text" id="message" required className="messageForm-control" placeholder="message" value={message.text} onChange={handleControlledInputChange} />
+                <input type="text" id="text" required className="messageForm-control" placeholder="message" value={message.text} onChange={handleControlledInputChange} />
               </div>
             {/* </fieldset> */}
           </div>
@@ -101,7 +107,7 @@ export const Chat = () => {
               // disabled={isLoading}
               onClick={event => {
                 event.preventDefault() // Prevent browser from submitting the form and refreshing the page
-                // handleClickSendMessage()
+                handleSendMessage()
                 
               }}>
                 <SendIcon />
