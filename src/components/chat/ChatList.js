@@ -24,6 +24,7 @@ export const ChatList = () => {
     .then(() => {getMessagesByRecipientIdAndUserId(userId, recipientId)})
     .then(() => {getRecipientById(recipientId)})
     .then(() => {getSenderById(userId)})
+    .then(() => {localStorage.setItem("sender_id", userId)})
     .then(() => {history.push(`/chat`)})
   }
 

@@ -10,15 +10,14 @@ import { Buttons } from "../buttons/Buttons"
 import { UserContext } from "../user/UserProvider"
 
 export const Chat = () => {
-  const { sentMessages, receivedMessages, addMessage } = useContext(MessageContext)
-  const { recipient, sender } = useContext(UserContext)
+  const { sentMessages, receivedMessages, addMessage, getMessagesByUserIdAndRecipientId, getMessagesByRecipientIdAndUserId } = useContext(MessageContext)
+  const { recipient, sender, getRecipientById, getSenderById } = useContext(UserContext)
   
+  const currentUserId = parseInt(localStorage.getItem("swipeHome_user"))
+  const senderId = parseInt(localStorage.getItem("sender_id"))
   const history = useHistory()
   // const [ messagesBySender, setMessagesBySender ] = useState([])
-
-  useEffect(() => {
-      
-  }, [sentMessages])
+  const [ messageSent, setMessageSent ] = useState({})
   const [ message, setMessage ] = useState({
     userId: parseInt(localStorage.getItem("swipeHome_user")),
     recipientId: sender.id,
@@ -30,7 +29,11 @@ export const Chat = () => {
     message.timestamp = Date.now()
     message.recipientId = sender.id
     addMessage(message)
-    .then(() => {history.push('/chat')})
+    .then(() => {getMessagesByUserIdAndRecipientId(currentUserId, senderId)})
+    .then(() => {getMessagesByRecipientIdAndUserId(currentUserId, senderId)})
+    // .then(() => {getRecipientById(sender.id)})
+    // .then(() => {getSenderById(currentUserId)})
+    .then(() => {history.push(`/chat`)})
     // history.push(`/chat`)
   }
 
