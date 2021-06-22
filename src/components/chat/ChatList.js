@@ -20,12 +20,14 @@ export const ChatList = () => {
 
   const handleMessageClick = (userId, recipientId) => {
     // debugger
-    getMessagesByUserIdAndRecipientId(userId, recipientId)
-    .then(() => {getMessagesByRecipientIdAndUserId(userId, recipientId)})
-    .then(() => {getRecipientById(recipientId)})
-    .then(() => {getSenderById(userId)})
-    .then(() => {localStorage.setItem("sender_id", userId)})
-    .then(() => {history.push(`/chat`)})
+      // getMessagesByUserIdAndRecipientId(userId, recipientId)
+      // .then(() => {getMessagesByRecipientIdAndUserId(userId, recipientId)})
+      // .then(() => {getRecipientById(recipientId)})
+      // .then(() => {getSenderById(userId)})
+      // .then(() => {localStorage.setItem("sender_id", userId)})
+      // .then(() => {history.push(`/chat`)})
+      localStorage.setItem("sender_id", userId)
+      history.push(`/chat`)
   }
 
   // console.log(receivedMessages)
@@ -48,8 +50,7 @@ export const ChatList = () => {
       }
     })
   
-console.log(senders)
-  console.log(messagesBySender)
+
   return (
     <>
       <section className="chatCards__container">

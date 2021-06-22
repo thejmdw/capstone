@@ -7,6 +7,7 @@ export const MessageProvider = (props) => {
   const [ messages, setMessages ] =useState([])
   const [ sentMessages, setSentMessages ] = useState([])
   const [ receivedMessages, setReceivedMessages ] = useState([])
+  const [ unreadMessages, setUnreadMessages ] = useState([])
 
   const addMessage = (messageObj) => {
     return fetch(`http://localhost:8088/messages`, {
@@ -16,13 +17,13 @@ export const MessageProvider = (props) => {
       },
       body: JSON.stringify(messageObj)
     })
-    // .then(setSentMessages(messageObj))
+    .then(setSentMessages(messageObj))
   }
 
-  const getMessagesByUserId = (userId) => {
-      return fetch(`http://localhost:8088/messages?userId=${userId}&_expand=user`)
+  const getMessagesByUserIdAndSenderId= (userId, senderId) => {
+      return fetch(`http://localhost:8088/messages?_sort=userId,recipientId&_order=${senderId},${userId}&_expand=user`)
       .then(res => res.json())
-      .then(data => setSentMessages(data))
+      // .then(data => setSentMessages(data))
   }
   const getMessagesByRecipientId = (recipientId) => {
     return fetch(`http://localhost:8088/messages?recipientId=${recipientId}&_expand=user`)
@@ -38,9 +39,14 @@ export const MessageProvider = (props) => {
   const getMessagesByRecipientIdAndUserId = (userId, recipientId) => {
       return fetch(`http://localhost:8088/messages?recipientId=${userId}&userId=${recipientId}&_expand=user`)
       .then(res => res.json())
-      .then(data => setSentMessages(data))
+      .then(data => setMessages(data))
   }
 
+  const getUnreadMessagesByUserId = (userId) => {
+    return fetch(`http://localhost:8088/messages?recipientId=${userId}&unread=false`)
+    .then(res => res.json())
+    // .then(data => setUnreadMessages(data))
+  }
   
   const removeMessage = messageId => {
     return fetch(`http://localhost:8088/messages/${messageId}`, {
@@ -53,12 +59,14 @@ export const MessageProvider = (props) => {
       {
         message, messages, 
         sentMessages, receivedMessages, 
-        addMessage, getMessagesByUserId, 
+        addMessage, getMessagesByUserIdAndSenderId, 
         getMessagesByRecipientId, 
         getMessagesByUserIdAndRecipientId, 
         getMessagesByRecipientIdAndUserId,
         setSentMessages,
-        removeMessage
+        removeMessage,
+        unreadMessages,
+        getUnreadMessagesByUserId
       }
     }>
       {props.children}

@@ -8,33 +8,65 @@ import "./Chat.css"
 import TinderCard from "react-tinder-card"
 import { Buttons } from "../buttons/Buttons"
 import { UserContext } from "../user/UserProvider"
+import IconButton from "@material-ui/core/IconButton"
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 export const Chat = () => {
-  const { sentMessages, receivedMessages, addMessage, getMessagesByUserIdAndRecipientId, getMessagesByRecipientIdAndUserId } = useContext(MessageContext)
-  const { recipient, sender, getRecipientById, getSenderById } = useContext(UserContext)
+  const { sentMessages, receivedMessages, addMessage, getMessagesByUserIdAndSenderId, removeMessage} = useContext(MessageContext)
+  const { recipient, getUserById, getRecipientById, getSenderById } = useContext(UserContext)
   
   const currentUserId = parseInt(localStorage.getItem("swipeHome_user"))
   const senderId = parseInt(localStorage.getItem("sender_id"))
   const history = useHistory()
+  const [ sender, setSender ] = useState({})
   // const [ messagesBySender, setMessagesBySender ] = useState([])
-  const [ messageSent, setMessageSent ] = useState({})
+  // const [ sender, setSender ] = useState({})
+  // const [ currentUser, setCurrentUser ] = useState({})
+  const [ messageSent, setMessageSent ] = useState()
+  const [ messages, setMessages ] = useState([])
   const [ message, setMessage ] = useState({
     userId: parseInt(localStorage.getItem("swipeHome_user")),
-    recipientId: sender.id,
+    recipientId: senderId
     
   })
+
+
+  useEffect(() => {
+    getMessagesByUserIdAndSenderId(currentUserId, senderId)
+    .then((data) => {setMessages(data)})
+    .then(() => {getUserById(senderId)})
+    .then((data) => {setSender(data)})
+  }, [])
+
+  // useEffect(() => {
+  //   getMessagesByUserIdAndRecipientId(currentUserId, senderId)
+  //     .then(() => {getMessagesByRecipientIdAndUserId(currentUserId, senderId)})
+  //     .then(() => {getRecipientById(senderId)})
+  //     .then(() => {getSenderById(currentUserId)})
+  // }, [])
+  useEffect(() => {
+    getMessagesByUserIdAndSenderId(currentUserId, senderId)
+      .then(data => {setMessages(data)})
+  }, [messageSent])
 
   const handleSendMessage = () => {
     // getMessageDetail(property_id)
     message.timestamp = Date.now()
-    message.recipientId = sender.id
+    // message.recipientId = senderId
     addMessage(message)
-    .then(() => {getMessagesByUserIdAndRecipientId(currentUserId, senderId)})
-    .then(() => {getMessagesByRecipientIdAndUserId(currentUserId, senderId)})
+    .then(setMessageSent)
+    // .then(() => {getMessagesByUserIdAndRecipientId(currentUserId, senderId)})
+    // .then(() => {getMessagesByRecipientIdAndUserId(currentUserId, senderId)})
     // .then(() => {getRecipientById(sender.id)})
     // .then(() => {getSenderById(currentUserId)})
-    .then(() => {history.push(`/chat`)})
+    // .then(() => {history.push(`/chat`)})
     // history.push(`/chat`)
+  }
+
+  const handleDeleteMessage = (messageId) => {
+      removeMessage(messageId)
+      .then(setMessageSent)
   }
 
 
@@ -52,14 +84,15 @@ export const Chat = () => {
     setMessage(newMessage)
   }
 
-  const messages = sentMessages.concat(receivedMessages)
-  console.log(messages)
-    messages.sort((s1, s2) => (s1.id > s2.id ? 1 : -1))
+  // debugger
+  console.log(sender)
+  const filteredMessages = messages?.filter(message => (message.userId === senderId && message.recipientId === currentUserId) || (message.userId === currentUserId && message.recipientId === senderId) )
+    filteredMessages?.sort((s1, s2) => (s1.id > s2.id ? 1 : -1))
   return (
     <>
       <section className="chatCards__container">
-          <h3>Your conversation with {sender.name}</h3>
-          {messages.map(message => {
+          <h3>Your conversation with {sender?.name}</h3>
+          {filteredMessages?.map(message => {
             return (
               <div className="chatCard" key={message.timestamp} >
               <div>
@@ -71,10 +104,14 @@ export const Chat = () => {
                       <h5>{message.text}</h5>
                       <img className="chatCard__img" src={message.user.avatarURL} alt="profile"/>
                     </div>
-                  
-                  <h6 className=" chatFlex end endPadding">
-                    {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(message.timestamp)
-    }             </h6>
+                    <div className="chatFlex end">
+                      <IconButton onClick={() => {handleDeleteMessage(message.id)}}>
+                        <DeleteIcon fontSize="small" />
+                      </IconButton>
+                      <h6 className=" chatFlex end endPadding">
+                        {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(message.timestamp)}
+                      </h6>
+                   </div>
                   </div></> : 
                   <>
                   <div className="chatFlexStart">
@@ -82,9 +119,14 @@ export const Chat = () => {
                       <img className="chatCard__img" src={message.user.avatarURL} alt="profile"/>
                       <h5>{message.text}</h5>
                     </div>
-                    <h6 className="startPadding">
-                      {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(message.timestamp)
-      }             </h6>
+                    <div className="chatFlex">
+                      <h6 className="startPadding">
+                        {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(message.timestamp)}
+                      </h6>
+                      <IconButton onClick={() => {handleDeleteMessage(message.id)}}>
+                        <DeleteIcon fontSize="small" />
+                      </IconButton>
+                    </div>
                   </div></>
                   } 
                 </div>
