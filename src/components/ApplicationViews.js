@@ -20,6 +20,7 @@ import { User } from "./user/User"
 import { Home } from "./home/Home"
 import { FirstTimeHome } from "./home/FirstTimeHome"
 import { Fave } from "./fave/Fave"
+import { Chat } from "./chat/Chat"
 
 
 export const ApplicationViews = () => {
@@ -37,6 +38,9 @@ export const ApplicationViews = () => {
 
             <Route exact path="/messages">
               <ChatList />
+            </Route>
+            <Route exact path="/chat">
+              <Chat />
             </Route>
 
           

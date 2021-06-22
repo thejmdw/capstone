@@ -7,33 +7,57 @@ import TinderCard from "react-tinder-card"
 import { Buttons } from "../buttons/Buttons"
 
 export const ChatList = () => {
-  const { sentMessages, getMessagesByUserId, removeMessage, getMessagesByRecipientId, receivedMessages } = useContext(MessageContext)
+  const { getMessagesByRecipientId, receivedMessages, getMessagesByUserIdAndRecipientId, getMessagesByRecipientIdAndUserId } = useContext(MessageContext)
   
   const history = useHistory()
+  // const [ messagesBySender, setMessagesBySender ] = useState([])
 
   useEffect(() => {
-    getMessagesByUserId(localStorage.getItem("swipeHome_user"))
-      .then(() => {getMessagesByRecipientId(localStorage.getItem("swipeHome_user"))})
+    getMessagesByRecipientId(localStorage.getItem("swipeHome_user"))
+      
   }, [])
 
-  const handleMessageClick = (id, property_id) => {
-    // getMessageDetail(property_id)
-    // .then(() => history.push(`/messages/detail/${id}`))
+  const handleMessageClick = (userId, recipientId) => {
+    // debugger
+    getMessagesByUserIdAndRecipientId(userId, recipientId)
+    .then(() => {getMessagesByRecipientIdAndUserId(userId, recipientId)})
+    .then(() => {history.push(`/chat`)})
   }
 
-  console.log(receivedMessages)
+  // console.log(receivedMessages)
+
+  const senders = []
+  const messagesBySender = []
+  receivedMessages.sort((s1, s2) => (s1.id < s2.id ? 1 : -1))
+    receivedMessages.forEach((message) => {
+      // debugger
+      if (!senders.includes(message.user.id)) {
+        senders.push(message.user.id)
+        messagesBySender.push({
+          userId: message.user.id,
+          recipientId: message.recipientId,
+          avatarURL: message.user.avatarURL,
+          name: message.user.name,
+          text: message.text,
+          timestamp: message.timestamp
+        })
+      }
+    })
+  
+console.log(senders)
+  console.log(messagesBySender)
   return (
     <>
       <section className="chatCards__container">
       
-          {receivedMessages.map(message => {
+          {messagesBySender.map(message => {
             return (
-              <div className="chatCard" >
+              <div className="chatCard" key={message.timestamp} onClick={() => {handleMessageClick(message.userId, message.recipientId)}}>
               <div>
                 <div className="chatFlex">
-                  <img className="chatCard__img" src={message.user.avatarURL} alt="profile"/>
+                  <img className="chatCard__img" src={message.avatarURL} alt="profile"/>
                   <div>
-                    <h3>{message.user.name}</h3>
+                    <h3>{message.name}</h3>
                     {message.text}
                   </div>
                 </div>
