@@ -10,10 +10,11 @@ import { Buttons } from "../buttons/Buttons"
 import { UserContext } from "../user/UserProvider"
 import IconButton from "@material-ui/core/IconButton"
 import DeleteIcon from '@material-ui/icons/Delete';
+import { Avatar } from "@material-ui/core";
 
 
 export const Chat = () => {
-  const { sentMessages, receivedMessages, markUserMessagesUnread, addMessage, getMessagesByUserIdAndSenderId, removeMessage} = useContext(MessageContext)
+  const { addMessage, markUserMessagesRead, getMessagesByUserIdAndSenderId, removeMessage,sentMessages, receivedMessages, markUserMessagesUnread } = useContext(MessageContext)
   const { recipient, getUserById, getRecipientById, getSenderById } = useContext(UserContext)
   
   const currentUserId = parseInt(localStorage.getItem("swipeHome_user"))
@@ -23,8 +24,10 @@ export const Chat = () => {
   // const [ messagesBySender, setMessagesBySender ] = useState([])
   // const [ sender, setSender ] = useState({})
   // const [ currentUser, setCurrentUser ] = useState({})
+
   const [ messageSent, setMessageSent ] = useState()
   const [ messages, setMessages ] = useState([])
+  const [ filteredMessages, setFilteredMessages ] = useState([])
   const [ message, setMessage ] = useState({
     userId: parseInt(localStorage.getItem("swipeHome_user")),
     recipientId: senderId
@@ -36,11 +39,15 @@ export const Chat = () => {
     .then((data) => {setMessages(data)})
     .then(() => {getUserById(senderId)})
     .then((data) => {setSender(data)})
-    // .then(() => {
-      
-    // })
+    
   }, [])
 
+  useEffect(() => {
+    const filtered = messages?.filter(message => (message.userId === senderId && message.recipientId === currentUserId) || (message.userId === currentUserId && message.recipientId === senderId) )
+    filtered?.sort((s1, s2) => (s1.id > s2.id ? 1 : -1))
+    setFilteredMessages(filtered)
+    markUserMessagesRead(filtered)
+  }, [sender])
 
 
   // useEffect(() => {
@@ -91,8 +98,8 @@ export const Chat = () => {
 
   // debugger
   console.log(sender)
-  const filteredMessages = messages?.filter(message => (message.userId === senderId && message.recipientId === currentUserId) || (message.userId === currentUserId && message.recipientId === senderId) )
-    filteredMessages?.sort((s1, s2) => (s1.id > s2.id ? 1 : -1))
+  // const filteredMessages = messages?.filter(message => (message.userId === senderId && message.recipientId === currentUserId) || (message.userId === currentUserId && message.recipientId === senderId) )
+  //   filteredMessages?.sort((s1, s2) => (s1.id > s2.id ? 1 : -1))
     // markUserMessagesUnread(filteredMessages)
   return (
     <>
@@ -108,7 +115,8 @@ export const Chat = () => {
                   <div className="chatFlexEnd">
                     <div className="chatFlex end">
                       <h5>{message.text}</h5>
-                      <img className="chatCard__img" src={message.user.avatarURL} alt="profile"/>
+                      <Avatar alt="user profile" src={message.user.avatarURL} />
+                      {/* <img className="chatCard__img" src={message.user.avatarURL} alt="profile"/> */}
                     </div>
                     <div className="chatFlex end">
                       <IconButton onClick={() => {handleDeleteMessage(message.id)}}>
@@ -122,7 +130,8 @@ export const Chat = () => {
                   <>
                   <div className="chatFlexStart">
                     <div className="chatFlex">
-                      <img className="chatCard__img" src={message.user.avatarURL} alt="profile"/>
+                    <Avatar alt="user profile" src={message.user.avatarURL} />
+                      {/* <img className="chatCard__img" src={message.user.avatarURL} alt="profile"/> */}
                       <h5>{message.text}</h5>
                     </div>
                     <div className="chatFlex">

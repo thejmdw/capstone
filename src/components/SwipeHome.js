@@ -17,9 +17,9 @@ export const SwipeHome = () => (
             
               <MessageProvider>
                 <NavBar />
-              </MessageProvider>
               
-              <ApplicationViews />
+                <ApplicationViews />
+              </MessageProvider>
             </>
           );
         } else {

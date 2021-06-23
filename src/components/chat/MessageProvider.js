@@ -8,6 +8,8 @@ export const MessageProvider = (props) => {
   const [ sentMessages, setSentMessages ] = useState([])
   const [ receivedMessages, setReceivedMessages ] = useState([])
   const [ readUserMessages, setReadUserMessages ] = useState([])
+  const [ unreadMessages, setUnreadMessages ] = useState([])
+  const currentUser = localStorage.getItem("swipeHome_user")
 
   const addMessage = (messageObj) => {
     return fetch(`http://localhost:8088/messages`, {
@@ -54,16 +56,20 @@ export const MessageProvider = (props) => {
     })
   }
   
-  const markUserMessagesUnread = (messageArray) => {
+  const markUserMessagesRead = (messageArray) => {
+    debugger
     messageArray.forEach((messageObj) => {
-    return fetch(`http://localhost:8088/messages`, {
-      method: "POST",
+    const messObjCopy = {...messageObj}
+    messObjCopy.unread = 
+    return fetch(`http://localhost:8088/messages/${messageObj.id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(messageObj)
+      body: JSON.stringify(messObjCopy)
     })
-    .then(setReadUserMessages(messageObj))
+    .then(getUnreadMessagesByUserId(currentUser))
+    .then((data) => { setUnreadMessages(data) })
   })
 }
   
@@ -80,7 +86,9 @@ export const MessageProvider = (props) => {
         removeMessage,
         readUserMessages,
         getUnreadMessagesByUserId,
-        markUserMessagesUnread
+        markUserMessagesRead,
+        unreadMessages,
+        setUnreadMessages
       }
     }>
       {props.children}
