@@ -30,7 +30,7 @@ export const ApplicationViews = () => {
       <HouseProvider>
         <UserProvider>
           <FaveProvider>
-            <MessageProvider>
+            {/* <MessageProvider> */}
 
             <Route exact path="/houseList">
               <HouseList />
@@ -76,7 +76,7 @@ export const ApplicationViews = () => {
               <Fave />
             </Route>
 
-            </MessageProvider>
+            {/* </MessageProvider> */}
           </FaveProvider>
         </UserProvider>
       </HouseProvider>

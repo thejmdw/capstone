@@ -6,6 +6,7 @@ import "./Chat.css"
 import TinderCard from "react-tinder-card"
 import { Buttons } from "../buttons/Buttons"
 import { UserContext } from "../user/UserProvider"
+import Avatar from '@material-ui/core/Avatar';
 
 export const ChatList = () => {
   const { getMessagesByRecipientId, receivedMessages, getMessagesByUserIdAndRecipientId, getMessagesByRecipientIdAndUserId } = useContext(MessageContext)
@@ -60,7 +61,8 @@ export const ChatList = () => {
               <div className="chatCard" key={message.timestamp} onClick={() => {handleMessageClick(message.userId, message.recipientId)}}>
               <div>
                 <div className="chatFlex">
-                  <img className="chatCard__img" src={message.avatarURL} alt="profile"/>
+                <Avatar alt="user profile" src={message.avatarURL} />
+                  {/* // <img className="chatCard__img" src={message.avatarURL} alt="profile"/> */}
                   <div>
                     <h3>{message.name}</h3>
                     {message.text}

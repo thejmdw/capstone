@@ -49,7 +49,7 @@ export const SearchResultsList = () => {
     console.log(name + ' left the screen!')
   }
   console.log(user)
-  debugger
+  // debugger
   return (
     user.userTypeId === 1 ? <>
       <section className="searchCard__container">
@@ -57,7 +57,7 @@ export const SearchResultsList = () => {
           return (
             <>
             <TinderCard className='swipe search' preventSwipe={["up", "down"]} key={search.property_id} onSwipe={(dir) => swiped(dir, search.property_id, search.address.line, search.address.city, search.address.state_code, search.address.postal_code, search.photos[0].href, search.beds, search.baths_full, search.price)} onCardLeftScreen={() => outOfFrame(search.property_id)}>
-              <div style={{backgroundImage: `url(${search.photos[0].href})`}} className="searchCard">
+              <div style={{backgroundImage: `url(${search?.photos[0]?.href})`}} className="searchCard">
                 <h5>{search.address.line} {search.address.city},{search.address.state_code} {search.address.postal_code}</h5>
                 <h5>Beds: {search.beds}</h5>
                 <h5>Baths: {search.baths_full}</h5>

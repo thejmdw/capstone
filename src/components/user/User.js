@@ -52,6 +52,7 @@ export const User = () => {
       .then(setSearchesListItems)
   }
   
+  debugger
   const handleClickSearch = searchObj=> {
       if (searchObj.userTypeId === 1) {
         getHousesForRent(searchObj)
