@@ -43,8 +43,8 @@ export const Chat = () => {
   }, [])
 
   useEffect(() => {
-    const filtered = messages?.filter(message => (message.userId === senderId && message.recipientId === currentUserId) || (message.userId === currentUserId && message.recipientId === senderId) )
-    filtered?.sort((s1, s2) => (s1.id > s2.id ? 1 : -1))
+    const filtered = messages.filter(message => (message.userId === senderId && message.recipientId === currentUserId) || (message.userId === currentUserId && message.recipientId === senderId) )
+    filtered.sort((s1, s2) => (s1.id > s2.id ? 1 : -1))
     setFilteredMessages(filtered)
     markUserMessagesRead(filtered)
   }, [sender])
