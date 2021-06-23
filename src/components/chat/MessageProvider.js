@@ -60,7 +60,7 @@ export const MessageProvider = (props) => {
     debugger
     messageArray.forEach((messageObj) => {
     const messObjCopy = {...messageObj}
-    messObjCopy.unread = true
+    messObjCopy.unread = 
     return fetch(`http://localhost:8088/messages/${messageObj.id}`, {
       method: "PUT",
       headers: {
