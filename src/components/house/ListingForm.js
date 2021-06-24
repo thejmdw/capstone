@@ -11,7 +11,7 @@ export const ListingForm = () => {
   const { updateUser, getUserById } = useContext(UserContext)
   const { addListing } = useContext(HouseContext)
   const [ isLoading, setIsLoading ] = useState(true)
-  const userId = localStorage.getItem("swipeHome-user")
+  const userId = localStorage.getItem("swipeHome_user")
   const history = useHistory()
   const [user, setUser] = useState({})
   const [house, setHouse] = useState({
@@ -24,21 +24,14 @@ export const ListingForm = () => {
     price: 0,
     beds: 0,
     baths_full: 0,
-
+    userTypeId: 0,
+    userId: userId
   })
 
-  useEffect(() => {
-    if (userId) {
-      getUserById(parseInt(userId))
-      .then(user => {
-        setUser(user)
-        setIsLoading(false)
-      })
-      } else {
-      setIsLoading(false)
-    }}, [])
+  
 
   const handleControlledInputChange = e => {
+    setIsLoading(false)
     const newHouse = { ...house }
 
     newHouse[e.target.id] = e.target.value
@@ -49,13 +42,22 @@ export const ListingForm = () => {
   const handleAdd = (e) => {
 
     setIsLoading(true)
-
       const newHouse = {
-        address: house.address,
-        price: house.price,
-        photo: house.avatarURL,
-        userTypeId: parseInt(house.userTypeId)
+        address: {
+          line: house.address,
+          city: house.city,
+          state_code: house.state_code,
+          postal_code: house.postal_code
+        },
+        price: parseInt(house.price),
+        beds: parseInt(house.beds),
+        baths_full: parseInt(house.baths_full),
+        thumbnail: house.avatarURL,
+        userTypeId: house.userTypeId,
+        userId: parseInt(userId)
+
       }
+      
       addListing(newHouse)
         .then(() => history.push(`/profile`))
     
@@ -79,7 +81,7 @@ export const ListingForm = () => {
       </fieldset>
       <fieldset>
           <div className="form-group">
-            <label htmlFor="location">State: *required</label>
+            <label htmlFor="location">State:</label>
             <select name="state_mode" required id="state_code" className="SearchForm-control SearchFormDropDown-control" value={house.address.state_code} onChange={handleControlledInputChange}>
               <option value="0">Select</option>
               {stateCodes.map(s => (
@@ -129,11 +131,11 @@ export const ListingForm = () => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="userTypeId">For Rent:</label>
-          <input type="radio" id="userTypeId" className="form-control" checked={parseInt(user.userTypeId) === 1 ? true : false} value="1" onChange={handleControlledInputChange} />
+          <input type="radio" id="userTypeId" className="form-control" checked={parseInt(house.userTypeId) === 1 ? true : false} value="1" onChange={handleControlledInputChange} />
         </div>
         <div className="form-group">
           <label htmlFor="userTypeId">For Sale:</label>
-          <input type="radio" id="userTypeId" className="form-control" checked={parseInt(user.userTypeId) === 2 ? true : false } value="2" onChange={handleControlledInputChange} />
+          <input type="radio" id="userTypeId" className="form-control" checked={parseInt(house.userTypeId) === 2 ? true : false } value="2" onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <button className="btn btn-primary"
@@ -142,7 +144,7 @@ export const ListingForm = () => {
             event.preventDefault() // Prevent browser from submitting the form and refreshing the page
             handleAdd()
           }}>
-          Update user
+          Add Listing
       </button>
       <button className="btn btn-primary"
           disabled={isLoading}
