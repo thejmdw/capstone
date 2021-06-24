@@ -12,6 +12,7 @@ export const MessageProvider = (props) => {
   const currentUser = localStorage.getItem("swipeHome_user")
 
   const addMessage = (messageObj) => {
+    // debugger
     return fetch(`http://localhost:8088/messages`, {
       method: "POST",
       headers: {
@@ -57,10 +58,10 @@ export const MessageProvider = (props) => {
   }
   
   const markUserMessagesRead = (messageArray) => {
-    debugger
+    // debugger
     messageArray.forEach((messageObj) => {
     const messObjCopy = {...messageObj}
-    messObjCopy.unread = 
+    messObjCopy.unread = false
     return fetch(`http://localhost:8088/messages/${messageObj.id}`, {
       method: "PUT",
       headers: {

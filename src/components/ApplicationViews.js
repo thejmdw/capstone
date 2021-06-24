@@ -15,6 +15,8 @@ import { ChatList } from "./chat/ChatList"
 //forms
 import { SearchForm } from "./search/SearchForm"
 import { UserForm } from "./user/UserForm"
+import { ListingForm } from "./house/ListingForm"
+
 //items
 import { User } from "./user/User"
 import { Home } from "./home/Home"
@@ -43,6 +45,9 @@ export const ApplicationViews = () => {
               <Chat />
             </Route>
 
+            <Route exact path="/listing">
+              <ListingForm />
+            </Route>
           
             <Route exact path="/profile">
               <User />

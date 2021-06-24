@@ -46,8 +46,14 @@ export const Chat = () => {
     const filtered = messages?.filter(message => (message.userId === senderId && message.recipientId === currentUserId) || (message.userId === currentUserId && message.recipientId === senderId) )
     filtered?.sort((s1, s2) => (s1.id > s2.id ? 1 : -1))
     setFilteredMessages(filtered)
-    markUserMessagesRead(filtered)
-  }, [sender])
+    const messagesToUser = []
+    for (const message of filtered) {
+      if (message.recipientId === currentUserId) {
+        messagesToUser.push(message)
+      }
+    }
+    markUserMessagesRead(messagesToUser)
+  }, [sender, messages])
 
 
   // useEffect(() => {
@@ -57,6 +63,7 @@ export const Chat = () => {
   //     .then(() => {getSenderById(currentUserId)})
   // }, [])
   useEffect(() => {
+    // debugger
     getMessagesByUserIdAndSenderId(currentUserId, senderId)
       .then(data => {setMessages(data)})
   }, [messageSent])

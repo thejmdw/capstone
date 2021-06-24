@@ -16,10 +16,10 @@ export const NavBar = () => {
   const history = useHistory()
   // const [ unreadMessages, setUnreadMessages ] = useState({})
 
-  // useEffect(() => {
-  //   getUnreadMessagesByUserId(currentUser)
-  //   .then((data) => { setUnreadMessages(data) })
-  // }, [])
+  useEffect(() => {
+    getUnreadMessagesByUserId(currentUser)
+    .then((data) => { setUnreadMessages(data) })
+  }, [])
   
 
   return (
