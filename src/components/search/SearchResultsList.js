@@ -9,7 +9,7 @@ import { Buttons } from "../buttons/Buttons"
 import { UserContext } from "../user/UserProvider"
 
 export const SearchResultsList = () => {
-  const { houses } = useContext(SearchContext)
+  const { houses, localHouses } = useContext(SearchContext)
   const { faves, addFave } = useContext(FaveContext)
   const { getUserById } = useContext(UserContext)
 
@@ -49,11 +49,12 @@ export const SearchResultsList = () => {
     console.log(name + ' left the screen!')
   }
   console.log(user)
+  const allHouses = houses.concat(localHouses)
   // debugger
   return (
     user.userTypeId === 1 ? <>
       <section className="searchCard__container">
-        { houses.map((search) => {
+        { allHouses.map((search) => {
           return (
             <>
             <TinderCard className='swipe search' preventSwipe={["up", "down"]} key={search.property_id} onSwipe={(dir) => swiped(dir, search.property_id, search.address.line, search.address.city, search.address.state_code, search.address.postal_code, search.photos[0].href, search.beds, search.baths_full, search.price)} onCardLeftScreen={() => outOfFrame(search.property_id)}>

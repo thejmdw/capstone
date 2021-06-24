@@ -25,6 +25,16 @@ export const HouseProvider = (props) => {
     })
   }
 
+  const addListing = (listingObj) => {
+    return fetch(`http://localhost:8088/houses`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(listingObj)
+    })
+    
+  }
 
   // const options = {
   //   method: 'GET',
@@ -52,7 +62,7 @@ export const HouseProvider = (props) => {
   return (
     <HouseContext.Provider value ={
       {
-        houses, getHousesTest
+        houses, getHousesTest, addListing
       }
     }>
       {props.children}

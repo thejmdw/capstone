@@ -7,7 +7,7 @@ import "./Search.css"
 import { useHistory } from 'react-router'
 
 export const SearchForm = () => {
-  const { addSearch, getHousesForRent, getHousesForSale } = useContext(SearchContext)
+  const { addSearch, getHousesForRent, getHousesForSale, getLocalHousesRent, getLocalHousesSale } = useContext(SearchContext)
   const { getUserById } = useContext(UserContext)
   const history = useHistory()
 
@@ -66,10 +66,12 @@ export const SearchForm = () => {
       } else if (currentUser.userTypeId === 1) {
         addSearch(search)
         getHousesForRent(search)
+        .then(() => {getLocalHousesRent(search)})
           .then(() => history.push("/houseList"))
       } else if (currentUser.userTypeId === 2) {
           addSearch(search)
           getHousesForSale(search)
+          .then(() => {getLocalHousesSale(search)})
             .then(() => history.push("/houseList"))
       }
     }
