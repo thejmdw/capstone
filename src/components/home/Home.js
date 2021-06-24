@@ -35,7 +35,7 @@ export const Home = () => {
                 </div>
                 <div>
                   <Button onClick={() => history.push("/search")}>New Search</Button>
-                  <Button onClick={() => history.push("/searches")}>Past Searches</Button>
+                  {currentUser.userTypeId === 3 ? <Button onClick={() => history.push("/listing")}>Add Listing</Button> : ""}
                   <Button onClick={() => history.push("/faves")}>Faves</Button>
                 </div>
               </div>
