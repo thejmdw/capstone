@@ -58,8 +58,9 @@
   margin-top: 5vh;
 }
 .userProfile_avatar {
-  width: 150px;
-  heeight: 150px;
+  width: 200px;
+  height: 200px;
+  border-radius: 75px;
 }
 
 .userForm {

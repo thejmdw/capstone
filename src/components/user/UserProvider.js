@@ -79,20 +79,18 @@ export const UserProvider = (props) => {
       },
       body: JSON.stringify(userObj)
       })
-      // .then(resp => resp.json())
       .then(getUsers)
       .catch(err => console.log(err))
       }
 
 
-  const uploadUserAvatar = (dataObj, id) => {
+  const uploadUserAvatar = (dataObj, data, id) => {
     return fetch("https://api.cloudinary.com/v1_1/thejmdw/image/upload",{
       method:"POST",
-      body: dataObj
+      body: data
       })
       .then(resp => resp.json())
-      .then(data => {putAvatarURL(data.url, id)}) //-----PATCH USER avatarURL 
-      // .catch(err => console.log(err))
+      .then(data => {putAvatarURL(dataObj, data.secure_url, id)}) //-----PATCH USER avatarURL 
       }
   
 

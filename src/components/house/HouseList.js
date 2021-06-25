@@ -13,8 +13,8 @@ export const HouseList = () => {
   const { faves, addFave, getFavesByUserId } = useContext(FaveContext)
   const [lastDirection, setLastDirection] = useState()
   const { getUserById } = useContext(UserContext)
-
   const [ user, setUser] = useState({})
+
   useEffect(() => {
     getUserById(localStorage.getItem("swipeHome_user"))
     .then((data) => {setUser(data)})
@@ -23,7 +23,7 @@ export const HouseList = () => {
   
 
   const swiped = (direction, property_id, address, city, state_code, postal_code, photo, beds, baths, price) => {
-    const newHouse = {
+    const newFave = {
       userId: parseInt(localStorage.getItem("swipeHome_user")),
       property_id,
       address,
@@ -35,24 +35,25 @@ export const HouseList = () => {
       price,
       photo,
       timeStamp: Date.now()
-
     }
+   
     if (direction === "right") {
       if (faves.filter(f => f.property_id === property_id).length === 0) {
         /* faves doesn't contain the a fave with the same property_id */
-        addFave(newHouse)
+        addFave(newFave)
       }
       setLastDirection(direction)
     }
   }
 
+  
+  const allHouses = houses.concat(localHouses)
+  
   const outOfFrame = (name) => {
     console.log(name + ' left the screen!')
   }
-  
-  const allHouses = houses.concat(localHouses)
-  debugger
-  console.log(allHouses)
+  // debugger
+  // console.log(allHouses)
   return (
     user.userTypeId === 1 ? <>
       <section className="searchCard__container">
@@ -60,7 +61,7 @@ export const HouseList = () => {
           return (
             <>
             <TinderCard className='swipe search' preventSwipe={["up", "down"]} key={search.property_id} onSwipe={(dir) => swiped(dir, search.property_id, search.address.line, search.address.city, search.address.state_code, search.address.postal_code, search.photos[0].href, search.beds, search.baths_full, search.price)} onCardLeftScreen={() => outOfFrame(search.property_id)}>
-              <div style={{backgroundImage: `url(${search?.photos[0]?.href})`}} className="searchCard">
+              <div style={{backgroundImage: `url(${search.photos[0].href})`}} className="searchCard">
                 <h5>{search.address.line} {search.address.city},{search.address.state_code} {search.address.postal_code}</h5>
                 <h5>Beds: {search.beds}</h5>
                 <h5>Baths: {search.baths_full}</h5>

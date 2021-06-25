@@ -2,6 +2,8 @@ import React from "react"
 import { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { FaveContext } from "./FaveProvider"
+import { HouseContext } from "../house/HouseProvider"
+import { Button } from "@material-ui/core"
 import "./Fave.css"
 import TinderCard from "react-tinder-card"
 import Carousel from 'nuka-carousel';
@@ -9,17 +11,29 @@ import Carousel from 'nuka-carousel';
 
 export const Fave = () => {
   const { getFaveById, getFaveDetail } = useContext(FaveContext)
+  const { getHouseById } = useContext(HouseContext)
   const history = useHistory()
   const { faveId } = useParams()
 
   const [ faveDetail, setFaveDetail ] = useState({})
 
   useEffect(() => {
-    getFaveById(faveId)
-    .then(f => getFaveDetail(f.property_id))
+    getFaveById(parseInt(faveId))
+    .then(f => f.property_id ? getFaveDetail(f.property_id) : getHouseById(f.houseId))
     .then((data) => setFaveDetail(data))
   }, [])
 
+  const handleContactAgent = (userId) => {
+    // debugger
+      // getMessagesByUserIdAndRecipientId(userId, recipientId)
+      // .then(() => {getMessagesByRecipientIdAndUserId(userId, recipientId)})
+      // .then(() => {getRecipientById(recipientId)})
+      // .then(() => {getSenderById(userId)})
+      // .then(() => {localStorage.setItem("sender_id", userId)})
+      // .then(() => {history.push(`/chat`)})
+      localStorage.setItem("sender_id", userId)
+      history.push(`/chat`)
+  }
   // const AnyReactComponent = ({ text }) => <div>{text}</div>
 
   return (
@@ -47,8 +61,10 @@ export const Fave = () => {
                   style={{border:0}}
                   src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBDNm_nEXINx2bsVUSflyt633t7rVecQgA&q=${faveDetail.address?.line}${faveDetail.address?.city}${faveDetail.address?.state_codeone}&center=${faveDetail.address?.lat},${faveDetail.address?.lon}&zoom=12
                   &maptype=roadmap`} />
-                 
-              
+                <div>
+                  <div>Contact Agent</div>
+                  <Button onClick={() => {handleContactAgent(faveDetail.user.id)}}>{faveDetail.user?.name}</Button>
+                </div>
                 <button onClick={() => history.push(`/faves`)}>Back to Faves</button>
               </div>
             

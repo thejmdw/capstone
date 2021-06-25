@@ -12,20 +12,20 @@ import { useHistory } from 'react-router'
 export const SearchResultsList = () => {
   const { houses, localHouses } = useContext(SearchContext)
   const { faves, addFave } = useContext(FaveContext)
-  const { getUserById } = useContext(UserContext)
-
   const [lastDirection, setLastDirection] = useState()
+  const { getUserById } = useContext(UserContext)
   const [user, setUser ] = useState({})
-
   const history = useHistory()
+
   useEffect(() => {
     getUserById(localStorage.getItem("swipeHome_user"))
     .then(setUser)
   }, [])
 
-  const swiped = (direction, property_id, address, city, state_code, postal_code, photo, beds, baths, price) => {
+  const swiped = (direction, houseId, property_id, address, city, state_code, postal_code, photo, beds, baths, price) => {
     const newFave = {
       userId: parseInt(localStorage.getItem("swipeHome_user")),
+      houseId,
       property_id,
       address,
       city,
@@ -53,7 +53,7 @@ export const SearchResultsList = () => {
   const outOfFrame = (name) => {
     console.log(name + ' left the screen!')
   }
-  console.log(user)
+  // console.log(user)
   // debugger
   return (
     user.userTypeId === 1 ? <>
@@ -61,7 +61,7 @@ export const SearchResultsList = () => {
         { allHouses.map((search) => {
           return (
             <>
-            <TinderCard className='swipe search' preventSwipe={["up", "down"]} key={search.property_id} onSwipe={(dir) => swiped(dir, search.property_id, search.address.line, search.address.city, search.address.state_code, search.address.postal_code, search.photos[0].href, search.beds, search.baths_full, search.price)} onCardLeftScreen={() => outOfFrame(search.property_id)}>
+            <TinderCard className='swipe search' preventSwipe={["up", "down"]} key={search.property_id} onSwipe={(dir) => swiped(dir, search.id, search.property_id, search.address.line, search.address.city, search.address.state_code, search.address.postal_code, search.photos[0].href, search.beds, search.baths_full, search.price)} onCardLeftScreen={() => outOfFrame(search.property_id)}>
               <div style={{backgroundImage: `url(${search?.photos[0]?.href})`}} className="searchCard">
                 <h5>{search.address.line} {search.address.city},{search.address.state_code} {search.address.postal_code}</h5>
                 <h5>Beds: {search.beds}</h5>
@@ -81,7 +81,7 @@ export const SearchResultsList = () => {
         { houses.map((search) => {
           return (
             <>
-            <TinderCard className='swipe search' preventSwipe={["up", "down"]} key={search.property_id} onSwipe={(dir) => swiped(dir, search.property_id, search.address.line, search.address.city, search.address.state_code, search.address.postal_code, search.thumbnail, search.beds, search.baths_full, search.price)} onCardLeftScreen={() => outOfFrame(search.property_id)}>
+            <TinderCard className='swipe search' preventSwipe={["up", "down"]} key={search.property_id} onSwipe={(dir) => swiped(dir, search.id, search.property_id, search.address.line, search.address.city, search.address.state_code, search.address.postal_code, search.thumbnail, search.beds, search.baths_full, search.price)} onCardLeftScreen={() => outOfFrame(search.property_id)}>
               <div style={{backgroundImage: `url(${search.thumbnail})`}} className="searchCard">
                 <h5>{search.address.line} {search.address.city},{search.address.state_code} {search.address.postal_code}</h5>
                 <h5>Beds: {search.beds}</h5>

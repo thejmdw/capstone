@@ -67,12 +67,12 @@ export const SearchForm = () => {
         addSearch(search)
         getHousesForRent(search)
         .then(() => {getLocalHousesRent(search)})
-          .then(() => history.push("/houseList"))
+          .then(() => history.push("/searchResultsList"))
       } else if (currentUser.userTypeId === 2) {
           addSearch(search)
           getHousesForSale(search)
           .then(() => {getLocalHousesSale(search)})
-            .then(() => history.push("/houseList"))
+            .then(() => history.push("/searchResultsList"))
       }
     }
   // debugger

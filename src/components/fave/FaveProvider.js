@@ -32,7 +32,7 @@ export const FaveProvider = (props) => {
   }
 
   const getFaveById = faveId => {
-    return fetch(`http://localhost:8088/faves/${faveId}`)
+    return fetch(`http://localhost:8088/faves/${faveId}?_expand=user`)
     .then(res => res.json())
     // .then(setFave)
   }

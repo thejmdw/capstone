@@ -27,6 +27,7 @@ export const HouseProvider = (props) => {
   }
 
   const addListing = (listingObj) => {
+    debugger
     return fetch(`http://localhost:8088/houses`, {
       method: "POST",
       headers: {
@@ -36,33 +37,16 @@ export const HouseProvider = (props) => {
     })
   }
 
-  // const options = {
-  //   method: 'GET',
-  //   url: 'https://realtor.p.rapidapi.com/properties/v2/list-for-rent',
-  //   params: {
-  //     city: 'St Elmo',
-  //     state_code: 'TN',
-  //     limit: '200',
-  //     offset: '0',
-  //     sort: 'relevance'
-  //   },
-  //   headers: {
-  //     'x-rapidapi-key': 'bc293e4707msh4961366c18bcffep125e04jsnfbdb172d68a0',
-  //     'x-rapidapi-host': 'realtor.p.rapidapi.com'
-  //   }
-  // };
+  const getHouseById = houseId => {
+    return fetch(`http://localhost:8088/houses/${houseId}?_expand=user`)
+    .then(res => res.json())
+  }
 
-  // axios.request(options)
-  //   .then(function (response) {
-  //   console.log(response.data);
-  // }).catch(function (error) {
-  //   console.error(error);
-  // });
 
   return (
     <HouseContext.Provider value ={
       {
-        houses, getHousesTest, addListing
+        houses, getHousesTest, addListing, getHouseById
       }
     }>
       {props.children}

@@ -34,23 +34,18 @@ export const UserForm = () => {
 
   const handleControlledInputChange = e => {
     const newUser = { ...user }
-
     newUser[e.target.id] = e.target.value
-
     setUser(newUser)
   }
   const handleControlledPicChange = e => {
     const newPic = { ...pic }
-
     newPic[e.target.id] = e.target.files
     console.log(newPic.file)
     setPic(newPic)
   }
 
   const handleUpdate = (e) => {
-
     setIsLoading(true)
-
       const editedUser = {
         id: user.id,
         name: user.name,
@@ -59,8 +54,7 @@ export const UserForm = () => {
         userTypeId: parseInt(user.userTypeId)
       }
       updateUser(editedUser)
-
-        .then(() => history.push(`/profile`))
+      .then(() => history.push(`/profile`))
     
   }
 
@@ -68,15 +62,9 @@ export const UserForm = () => {
     const data = new FormData()
     data.append("file", pic.file[0])
     data.append("upload_preset", "swipeHome")
-    return fetch("https://api.cloudinary.com/v1_1/thejmdw/image/upload",
-    {
-        method: "POST",
-        body: data
-    })
 
-    .then(response =>response.json())
-    .then(data => putAvatarURL({...user}, data.secure_url, parseInt(userId)))
-    .then(() => history.push("/profile"))
+    uploadUserAvatar({...user}, data, parseInt(userId))
+      .then(() => history.push("/profile"))
 }
 
 
@@ -87,7 +75,7 @@ export const UserForm = () => {
       <form>
       <fieldset>
         <div className="form-group">
-          <img src={user.avatarURL} alt="user"></img>
+          <img src={user.avatarURL} alt="user" className="userProfile_avatar"></img>
           <input type="file" id="file" required autoFocus className="form-control" placeholder="file" onChange={handleControlledPicChange} />
         </div>
         <button className="btn btn-primary"
