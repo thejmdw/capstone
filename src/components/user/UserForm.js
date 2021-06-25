@@ -6,7 +6,7 @@ import { UserContext } from "../user/UserProvider"
 import "./User.css"
 
 export const UserForm = () => {
-  const { updateUser, getUserById } = useContext(UserContext)
+  const { updateUser, getUserById, uploadUserAvatar, putAvatarURL } = useContext(UserContext)
   const [ isLoading, setIsLoading ] = useState(true)
   const { userId } = useParams()
   const history = useHistory()
@@ -16,6 +16,9 @@ export const UserForm = () => {
     email: "",
     avatarURL: "",
     userTypeId: 0
+  })
+  const [pic, setPic] =useState({
+    file: "",
   })
 
   useEffect(() => {
@@ -36,6 +39,13 @@ export const UserForm = () => {
 
     setUser(newUser)
   }
+  const handleControlledPicChange = e => {
+    const newPic = { ...pic }
+
+    newPic[e.target.id] = e.target.files
+    console.log(newPic.file)
+    setPic(newPic)
+  }
 
   const handleUpdate = (e) => {
 
@@ -49,14 +59,48 @@ export const UserForm = () => {
         userTypeId: parseInt(user.userTypeId)
       }
       updateUser(editedUser)
+
         .then(() => history.push(`/profile`))
     
   }
 
+  const uploadImage = event => {
+    const data = new FormData()
+    data.append("file", pic.file[0])
+    data.append("upload_preset", "swipeHome")
+    return fetch("https://api.cloudinary.com/v1_1/thejmdw/image/upload",
+    {
+        method: "POST",
+        body: data
+    })
+
+    .then(response =>response.json())
+    .then(data => putAvatarURL({...user}, data.secure_url, parseInt(userId)))
+    .then(() => history.push("/profile"))
+}
+
+
   return (
+    <>
+    <div className="userForm__container">
+    <h2 className="userForm__title">Edit Profile</h2>
+      <form>
+      <fieldset>
+        <div className="form-group">
+          <img src={user.avatarURL} alt="user"></img>
+          <input type="file" id="file" required autoFocus className="form-control" placeholder="file" onChange={handleControlledPicChange} />
+        </div>
+        <button className="btn btn-primary"
+          // disabled={isLoading}
+          onClick={event => {
+            event.preventDefault() // Prevent browser from submitting the form and refreshing the page
+            uploadImage()
+          }}>Upload image</button>
+      </fieldset>
+      </form>
+    </div>
     <div className="userForm__container">
     <form className="userForm">
-      <h2 className="userForm__title">Edit Profile</h2>
       <fieldset>
         <div className="form-group">
           <label htmlFor="name">Name:</label>
@@ -75,6 +119,7 @@ export const UserForm = () => {
           <input type="text" id="avatarURL" required autoFocus className="form-control" placeholder="Avatar URL" value={user.avatarURL} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
+      
       <fieldset>
         <div className="form-group">
           <label htmlFor="userTypeId">Renter:</label>
@@ -104,5 +149,6 @@ export const UserForm = () => {
       </button>
     </form>
     </div>
+    </>
   )
 }

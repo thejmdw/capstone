@@ -13,7 +13,7 @@ import { FaveContext } from "../fave/FaveProvider"
 export const User = () => {
   
   const { getUserById } = useContext(UserContext)
-  const { searches, getSearchesByUserId, deleteSearch, getHouses, getHousesForRent, getHousesForSale } = useContext(SearchContext)
+  const { searches, getSearchesByUserId, deleteSearch, getHouses, getHousesForRent, getHousesForSale, getLocalHousesRent, getLocalHousesSale } = useContext(SearchContext)
   const { faves, getFavesByUserId } = useContext(FaveContext)
   
 
@@ -56,9 +56,11 @@ export const User = () => {
   const handleClickSearch = searchObj=> {
       if (searchObj.userTypeId === 1) {
         getHousesForRent(searchObj)
+        .then(() => {getLocalHousesRent(searchObj)})
         .then(() => history.push("/searchResultsList"))
       } else if (searchObj.userTypeId === 2 ) {
         getHousesForSale(searchObj)
+        .then(() => {getLocalHousesSale(searchObj)})
         .then(() => history.push("/searchResultsList"))
       }
     
@@ -70,7 +72,7 @@ export const User = () => {
               <div className="userCard">
                 <div className="userFlexItem test">
                   <div className="test">
-                    <img src={currentUser.avatarURL} alt="user_avatar" />
+                    <img src={currentUser.avatarURL} alt="user_avatar" className="userProfile_avatar" />
                     <h3>{currentUser.name}</h3>
                     <h5>{currentUser.email}</h5>
                   </div>

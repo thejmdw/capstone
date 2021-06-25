@@ -70,10 +70,36 @@ export const UserProvider = (props) => {
     .then(getUsers)
   }
 
+  const putAvatarURL = (userObj, avatarURL, id) => {
+    userObj.avatarURL = avatarURL
+    return fetch(`http://localhost:8088/users/${id}`,{
+      method:"PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userObj)
+      })
+      // .then(resp => resp.json())
+      .then(getUsers)
+      .catch(err => console.log(err))
+      }
+
+
+  const uploadUserAvatar = (dataObj, id) => {
+    return fetch("https://api.cloudinary.com/v1_1/thejmdw/image/upload",{
+      method:"POST",
+      body: dataObj
+      })
+      .then(resp => resp.json())
+      .then(data => {putAvatarURL(data.url, id)}) //-----PATCH USER avatarURL 
+      // .catch(err => console.log(err))
+      }
+  
+
   return (
     <UserContext.Provider value ={
       {
-        user, users, getUsers, getUserById, updateUser, recipient, sender, getRecipientById, getSenderById
+        user, users, getUsers, getUserById, updateUser, recipient, sender, getRecipientById, getSenderById, uploadUserAvatar, putAvatarURL
       }
     }>
       {props.children}

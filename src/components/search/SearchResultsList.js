@@ -5,8 +5,9 @@ import { SearchContext } from "./SearchProvider"
 import { FaveContext } from "../fave/FaveProvider"
 import "./Search.css"
 import TinderCard from "react-tinder-card"
-import { Buttons } from "../buttons/Buttons"
+import { Button } from "@material-ui/core"
 import { UserContext } from "../user/UserProvider"
+import { useHistory } from 'react-router'
 
 export const SearchResultsList = () => {
   const { houses, localHouses } = useContext(SearchContext)
@@ -16,6 +17,7 @@ export const SearchResultsList = () => {
   const [lastDirection, setLastDirection] = useState()
   const [user, setUser ] = useState({})
 
+  const history = useHistory()
   useEffect(() => {
     getUserById(localStorage.getItem("swipeHome_user"))
     .then(setUser)
@@ -45,11 +47,13 @@ export const SearchResultsList = () => {
     }
   }
 
+
+  const allHouses = houses.concat(localHouses)
+
   const outOfFrame = (name) => {
     console.log(name + ' left the screen!')
   }
   console.log(user)
-  const allHouses = houses.concat(localHouses)
   // debugger
   return (
     user.userTypeId === 1 ? <>
@@ -69,6 +73,7 @@ export const SearchResultsList = () => {
             </>
           )
         })}
+        <button onClick={() => {history.push("/search")}}>Search Again</button>
       </section>
     </> :
     <>
@@ -88,6 +93,7 @@ export const SearchResultsList = () => {
             </>
           )
         })}
+
       </section>
     </>
   )
