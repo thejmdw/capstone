@@ -27,7 +27,7 @@ export const HouseProvider = (props) => {
   }
 
   const addListing = (listingObj) => {
-    debugger
+    // debugger
     return fetch(`http://localhost:8088/houses`, {
       method: "POST",
       headers: {
@@ -42,11 +42,33 @@ export const HouseProvider = (props) => {
     .then(res => res.json())
   }
 
+  // const putListingPicURL = (userObj, avatarURL, id) => {
+  //   userObj.avatarURL = avatarURL
+  //   return fetch(`http://localhost:8088/users/${id}`,{
+  //     method:"PUT",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify(userObj)
+  //     })
+  //     // .then(getUsers)
+  //     .catch(err => console.log(err))
+  //     }
+  
+  const uploadListingPic = (data) => {
+    return fetch("https://api.cloudinary.com/v1_1/thejmdw/image/upload",{
+      method:"POST",
+      body: data
+      })
+      .then(resp => resp.json())
+      // .then(data => data.secure_url) //-----PATCH USER avatarURL 
+      }
+
 
   return (
     <HouseContext.Provider value ={
       {
-        houses, getHousesTest, addListing, getHouseById
+        houses, getHousesTest, addListing, getHouseById, uploadListingPic, putListingPicURL
       }
     }>
       {props.children}

@@ -9,7 +9,7 @@ import "../user/User.css"
 
 export const ListingForm = () => {
   const { updateUser, getUserById } = useContext(UserContext)
-  const { addListing } = useContext(HouseContext)
+  const { addListing, uploadListingPic } = useContext(HouseContext)
   const [ isLoading, setIsLoading ] = useState(true)
   const userId = localStorage.getItem("swipeHome_user")
   const history = useHistory()
@@ -23,6 +23,7 @@ export const ListingForm = () => {
     },
     price: 0,
     beds: 0,
+    photos: [],
     baths_full: 0,
     userTypeId: 0,
     userId: userId
@@ -41,36 +42,36 @@ export const ListingForm = () => {
   const handleControlledPicChange = e => {
     const newPic = { ...pic }
     newPic[e.target.id] = e.target.files
-    console.log(newPic.file)
+    console.log(newPic.file[0])
     setPic(newPic)
   }
 
   const handleAdd = (e) => {
     setIsLoading(true)
-    // debugger
+    debugger
     let newHouse = {
       address: {
-        line: house.address.line,
-        city: house.address.city,
-        state_code: house.address.state_code,
-        postal_code: house.address.postal_code
+        line: house.address,
+        city: house.city,
+        state_code: house.state_code,
+        postal_code: house.postal_code
       },
+      photos: [],
       price: parseInt(house.price),
       beds: parseInt(house.beds),
       baths_full: parseInt(house.baths_full),
-      userTypeId: house.userTypeId,
+      userTypeId: parseInt(house.userTypeId),
       userId: parseInt(userId)
     }
-    if (parseInt(newHouse.userTypeId === 1 )) {
-      newHouse.photos[0].href = pic.file[0]
-    } else if (parseInt(house.userTypeId === 2 )) {
-
-      newHouse.thumbnail = pic.file[0]
-    }
-      
-      addListing(newHouse)
-        .then(() => history.push(`/profile`))
+    const data = new FormData()
+    data.append("file", pic.file[0])
+    data.append("upload_preset", "swipeHome")
     
+    uploadListingPic(data)
+    .then((data) => newHouse.photos.push({href: data.secure_url}))
+
+    .then(() => addListing(newHouse))
+        .then(() => history.push(`/profile`))    
   }
 
   return (

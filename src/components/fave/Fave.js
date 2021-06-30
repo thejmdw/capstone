@@ -15,7 +15,7 @@ export const Fave = () => {
   const history = useHistory()
   const { faveId } = useParams()
 
-  const [ faveDetail, setFaveDetail ] = useState({})
+  const [ faveDetail, setFaveDetail ] = useState({address: {}, photos: []})
 
   useEffect(() => {
     getFaveById(parseInt(faveId))
@@ -46,10 +46,10 @@ export const Fave = () => {
                   {faveDetail.photos?.map(p => <img src={p.href} alt="housing"></img>)}
                 </Carousel>
                 <div className="faveCard_address">
-                  <h3>{faveDetail.address?.line} </h3>
-                  <h3>{faveDetail.address?.city},{faveDetail.address?.state_code} {faveDetail.address?.postal_code}</h3>
+                  <h3>{faveDetail.address.line} </h3>
+                  <h3>{faveDetail.address.city},{faveDetail.address.state_code} {faveDetail.address.postal_code}</h3>
                 </div>
-                <h3>{faveDetail.address?.neighborhood_name}</h3>
+                <h3>{faveDetail.address.neighborhood_name}</h3>
                 <h3>{faveDetail.prop_type}</h3>
                 <h3>Beds: {faveDetail.beds}</h3>
                 <h3>Baths: {faveDetail.baths}</h3>
@@ -59,7 +59,7 @@ export const Fave = () => {
                   height="250"
                   frameborder="0"
                   style={{border:0}}
-                  src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBDNm_nEXINx2bsVUSflyt633t7rVecQgA&q=${faveDetail.address?.line}${faveDetail.address?.city}${faveDetail.address?.state_codeone}&center=${faveDetail.address?.lat},${faveDetail.address?.lon}&zoom=12
+                  src={`https://www.google.com/maps/embed/v1/place?q=${faveDetail.address.line}${faveDetail.address.city}${faveDetail.address.state_codeone}&center=${faveDetail.address.lat},${faveDetail.address.lon}&zoom=17&key=AIzaSyBDNm_nEXINx2bsVUSflyt633t7rVecQgA
                   &maptype=roadmap`} />
                 <div>
                   <div>Contact Agent</div>
