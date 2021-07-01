@@ -68,7 +68,7 @@ export const HouseProvider = (props) => {
   return (
     <HouseContext.Provider value ={
       {
-        houses, getHousesTest, addListing, getHouseById, uploadListingPic, putListingPicURL
+        houses, getHousesTest, addListing, getHouseById, uploadListingPic
       }
     }>
       {props.children}
