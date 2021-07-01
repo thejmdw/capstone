@@ -23,11 +23,14 @@ import { Home } from "./home/Home"
 import { FirstTimeHome } from "./home/FirstTimeHome"
 import { Fave } from "./fave/Fave"
 import { Chat } from "./chat/Chat"
+import { theme } from "./theme"
+import { ThemeProvider } from "@material-ui/core"
 
 
 export const ApplicationViews = () => {
   return (
     <>
+    <ThemeProvider theme={theme} >
     <SearchProvider>
       <HouseProvider>
         <UserProvider>
@@ -86,6 +89,7 @@ export const ApplicationViews = () => {
         </UserProvider>
       </HouseProvider>
       </SearchProvider>
+      </ThemeProvider>
     </>
   )
 }

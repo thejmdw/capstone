@@ -5,6 +5,7 @@ import { UserContext } from "../user/UserProvider"
 import { stateCodes } from './stateCodes'
 import "./Search.css"
 import { useHistory } from 'react-router'
+import { Button, Input, Select, FormControl, MenuItem, InputLabel } from '@material-ui/core'
 
 export const SearchForm = () => {
   const { addSearch, getHousesForRent, getHousesForSale, getLocalHousesRent, getLocalHousesSale } = useContext(SearchContext)
@@ -13,7 +14,7 @@ export const SearchForm = () => {
 
   const [ search, setSearch ] = useState({
     userId: parseInt(localStorage.getItem("swipeHome_user")),
-    allows_dogs: true
+    
   })
 
   const [ user, setUser ] = useState({})
@@ -34,6 +35,18 @@ export const SearchForm = () => {
     Set the property to the new value 
     using Object Bracket Notation. */
     newSearch[event.target.id] = event.target.value
+    //Update State
+    console.log(newSearch)
+    setSearch(newSearch)
+  }
+  const handleControlledStateChange = (event) => {
+    /* When changing a state object or array,
+    always create a copy, make changes, and then set state. */
+    const newSearch = { ...search }
+    /* search is an object with properties.
+    Set the property to the new value 
+    using Object Bracket Notation. */
+    newSearch.state_code = event.target.value
     //Update State
     console.log(newSearch)
     setSearch(newSearch)
@@ -83,71 +96,68 @@ export const SearchForm = () => {
       <div className="searchForm_inputs">
         <fieldset>
           <div className="form-group">
-            <label htmlFor="city">City: *required</label>
-            <input type="text" id="city" required autoFocus className="SearchForm-control" placeholder="City" value={search.city} onChange={handleControlledInputChange} />
+            <label htmlFor="city"></label>
+            <Input type="text" id="city" required autoFocus className="SearchForm-control" placeholder="City" value={search.city} onChange={handleControlledInputChange} />
           </div>
         </fieldset>
         <fieldset>
           <div className="form-group">
-            <label htmlFor="location">State: *required</label>
-            <select name="state_mode" required id="state_code" className="SearchForm-control SearchFormDropDown-control" value={search.state_code} onChange={handleControlledInputChange}>
-              <option value="0">Select</option>
+            <InputLabel htmlFor="location">State:</InputLabel>
+            <Select name="state_mode" required id="state_code" className="SearchForm-control SearchFormDropDown-control" value={search.state_code} onChange={handleControlledStateChange} required>
+              
               {stateCodes.map(s => (
-                <option key={s} value={s}>
+                <MenuItem key={s} value={s}>
                   {s}
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </Select>
+          </div>
+        </fieldset>
+        
+        
+
+        <fieldset>
+          <div className="form-group">
+            <label htmlFor="PostalCode"></label>
+            <Input type="num" id="postal_code" className="SearchForm-control" placeholder="Zip Code" value={search.postal_code} onChange={handleControlledInputChange} />
           </div>
         </fieldset>
         <fieldset>
           <div className="form-group">
-            <label htmlFor="PostalCode">Zip Code:</label>
-            <input type="num" id="postal_code" className="SearchForm-control" placeholder="5 Digit Postal Code" value={search.postal_code} onChange={handleControlledInputChange} />
+            <label htmlFor="priceMax"></label>
+            <Input type="num" id="price_max" className="SearchForm-control" placeholder="Max Price $" value={search.price_max} onChange={handleControlledInputChange} />
           </div>
         </fieldset>
         <fieldset>
           <div className="form-group">
-            <label htmlFor="priceMax">Max Price:</label>
-            <input type="num" id="price_max" className="SearchForm-control" placeholder="$" value={search.price_max} onChange={handleControlledInputChange} />
+            <InputLabel htmlFor="beds_min">Beds Min:</InputLabel>
+            <Select name="beds_min" id="beds_min" className="SearchForm-control SearchFormDropDown-control" value={search.beds_min} onChange={handleControlledInputChange}>
+              <MenuItem value="0">0</MenuItem>
+              <MenuItem value="1">1</MenuItem>
+              <MenuItem value="2">2</MenuItem>
+              <MenuItem value="3">3+</MenuItem>
+            </Select>
           </div>
         </fieldset>
         <fieldset>
           <div className="form-group">
-            <label htmlFor="beds_min">Beds Min:</label>
-            <select name="beds_min" id="beds_min" className="SearchForm-control SearchFormDropDown-control" value={search.beds_min} onChange={handleControlledInputChange}>
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3+</option>
-            </select>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div className="form-group">
-            <label htmlFor="baths_min">Baths Min:</label>
-            <select name="baths_min" id="baths_min" className="SearchForm-control SearchFormDropDown-control" value={search.baths_min} onChange={handleControlledInputChange}>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3+</option>
-            </select>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div className="form-group">
-            <label htmlFor="allows_dogs">Allows Dogs</label>
-            <input type="checkbox" id="allows_dogs" className="SearchForm-control" checked={search.allows_dogs} onChange={handleControlledInputChangeCheck} />
+            <InputLabel htmlFor="baths_min">Baths Min:</InputLabel>
+            <Select name="baths_min" id="baths_min" className="SearchForm-control SearchFormDropDown-control" value={search.baths_min} onChange={handleControlledInputChange}>
+              <MenuItem value="1">1</MenuItem>
+              <MenuItem value="2">2</MenuItem>
+              <MenuItem value="3">3+</MenuItem>
+            </Select>
           </div>
         </fieldset>
       </div>
-      <button className="btn btn-primary"
+      <Button color="primary" variant="contained" className="btn btn-primary"
           // disabled={isLoading}
           onClick={event => {
             event.preventDefault() // Prevent browser from submitting the form and refreshing the page
             handleClickSaveSearch()
             
           }}>
-          Submit Search</button>
+          Submit Search</Button>
     </form>
     </div>
   )

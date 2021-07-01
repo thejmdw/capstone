@@ -7,6 +7,8 @@ import "./Home.css"
 import Button from '@material-ui/core/Button';
 import { theme } from "../theme"
 import { ThemeProvider } from "@material-ui/styles"
+import { Avatar } from "@material-ui/core"
+
 
 
 export const Home = () => {
