@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 // import { AnimalProvider } from "../animal/AnimalProvider"
 import { UserContext } from "../user/UserProvider"
+import { Button, Input } from "@material-ui/core"
 import "./User.css"
 
 export const UserForm = () => {
@@ -70,72 +71,84 @@ export const UserForm = () => {
 
   return (
     <>
-    <div className="userForm__container">
-    <h2 className="userForm__title">Edit Profile</h2>
-      <form>
-      <fieldset>
-        <div className="form-group">
-          <img src={user.avatarURL} alt="user" className="userProfile_avatar"></img>
-          <input type="file" id="file" required autoFocus className="form-control" placeholder="file" onChange={handleControlledPicChange} />
-        </div>
-        <button className="btn btn-primary"
-          // disabled={isLoading}
-          onClick={event => {
-            event.preventDefault() // Prevent browser from submitting the form and refreshing the page
-            uploadImage()
-          }}>Upload image</button>
-      </fieldset>
-      </form>
-    </div>
-    <div className="userForm__container">
-    <form className="userForm">
-      <fieldset>
-        <div className="form-group">
-          <label htmlFor="name">Name:</label>
-          <input type="text" id="name" required autoFocus className="form-control" placeholder="Name" value={user.name} onChange={handleControlledInputChange} />
-        </div>
-      </fieldset>
-      <fieldset>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" required autoFocus className="form-control" placeholder="Email" value={user.email} onChange={handleControlledInputChange} />
-        </div>
-      </fieldset>
-      <fieldset>
-        <div className="form-group">
-          <label htmlFor="avatarURL">Avatar URL:</label>
-          <input type="text" id="avatarURL" required autoFocus className="form-control" placeholder="Avatar URL" value={user.avatarURL} onChange={handleControlledInputChange} />
-        </div>
-      </fieldset>
-      
-      <fieldset>
-        <div className="form-group">
-          <label htmlFor="userTypeId">Renter:</label>
-          <input type="radio" id="userTypeId" className="form-control" checked={parseInt(user.userTypeId) === 1 ? true : false} value="1" onChange={handleControlledInputChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="userTypeId">Buyer:</label>
-          <input type="radio" id="userTypeId" className="form-control" checked={parseInt(user.userTypeId) === 2 ? true : false } value="2" onChange={handleControlledInputChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="userTypeId">Agent:</label>
-          <input type="radio" id="userTypeId" className="form-control" checked={parseInt(user.userTypeId) === 3 ? true : false} value="3" onChange={handleControlledInputChange} />
-        </div>
-      </fieldset>
-      <button className="btn btn-primary"
-          disabled={isLoading}
-          onClick={event => {
-            event.preventDefault() // Prevent browser from submitting the form and refreshing the page
-            handleUpdate()
-          }}>
-          Update user
-      </button>
-      <button className="btn btn-primary"
-          disabled={isLoading}
-          onClick={() => history.push(`/profile`)}>
-          Go Back
-      </button>
-    </form>
+    <div className="userFormFlex userCard__container">
+      <div className="userCard ">
+      <div className="userUpload__container">
+        <h2 className="userForm__title">Edit Profile</h2>
+        <form>
+          <fieldset className="userForm-group">
+            <div>
+              <img src={user.avatarURL} alt="user" className="userProfile_avatar"></img>
+              <div className="uploadButton">
+                <Button  variant="contained" component="label">
+                  Choose File
+                  <input type="file" hidden/>
+                </Button>
+              </div>
+              <div className="uploadButton">
+                <Button className="uploadButton" variant="contained" color="secondary" className="btn btn-primary"
+                    // disabled={isLoading}
+                  onClick={event => {
+                  event.preventDefault() // Prevent browser from submitting the form and refreshing the page
+                  uploadImage()
+                  }}>Upload image
+                </Button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <div className="userForm__container">
+        <form >
+          <fieldset className="userForm-group2">
+            <div className="form-group">
+              <label htmlFor="name">Name:</label>
+              <Input type="text" id="name" required autoFocus className="form-control" placeholder="Name" value={user.name} onChange={handleControlledInputChange} />
+            </div>
+          </fieldset>
+          <fieldset className="userForm-group2">
+            <div className="form-group">
+              <label htmlFor="email">Email:</label>
+              <Input type="email" id="email" required autoFocus className="form-control" placeholder="Email" value={user.email} onChange={handleControlledInputChange} />
+            </div>
+          </fieldset>
+          <fieldset className="userForm-group2">
+            <div className="form-group">
+              <label htmlFor="avatarURL">Avatar URL:</label>
+              <Input type="text" id="avatarURL" required autoFocus className="form-control" placeholder="Avatar URL" value={user.avatarURL} onChange={handleControlledInputChange} />
+            </div>
+          </fieldset>
+          
+          <fieldset className="userForm-group2">
+            <div className="form-group">
+              <label htmlFor="userTypeId">Renter:</label>
+              <input type="radio" id="userTypeId" className="form-control" checked={parseInt(user.userTypeId) === 1 ? true : false} value="1" onChange={handleControlledInputChange} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="userTypeId">Buyer:</label>
+              <input type="radio" id="userTypeId" className="form-control" checked={parseInt(user.userTypeId) === 2 ? true : false } value="2" onChange={handleControlledInputChange} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="userTypeId">Agent:</label>
+              <input type="radio" id="userTypeId" className="form-control" checked={parseInt(user.userTypeId) === 3 ? true : false} value="3" onChange={handleControlledInputChange} />
+            </div>
+          </fieldset>
+          <Button variant="contained" color="secondary" className="btn btn-primary"
+              disabled={isLoading}
+              onClick={() => history.push(`/profile`)}>
+              Go Back
+          </Button>
+          <Button variant="contained" color="primary" className="btn btn-primary"
+              disabled={isLoading}
+              onClick={event => {
+                event.preventDefault() // Prevent browser from submitting the form and refreshing the page
+                handleUpdate()
+              }}>
+              Update user
+          </Button>
+        </form>
+      </div>
+      </div>
     </div>
     </>
   )

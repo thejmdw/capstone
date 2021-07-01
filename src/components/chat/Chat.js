@@ -8,9 +8,10 @@ import "./Chat.css"
 import TinderCard from "react-tinder-card"
 import { Buttons } from "../buttons/Buttons"
 import { UserContext } from "../user/UserProvider"
-import IconButton from "@material-ui/core/IconButton"
+import { IconButton, Input } from "@material-ui/core"
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Avatar } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 
 
 export const Chat = () => {
@@ -37,7 +38,11 @@ export const Chat = () => {
   useEffect(() => {
     getMessagesByUserIdAndSenderId(currentUserId, senderId)
     .then((data) => {setMessages(data)})
-    .then(() => {getUserById(senderId)})
+    
+  }, [])
+
+  useEffect(() => {
+    getUserById(senderId)
     .then((data) => {setSender(data)})
     
   }, [])
@@ -160,15 +165,15 @@ export const Chat = () => {
 
       <div className="messageForm__Container">
         <form className="messageForm">
-          <div >
+          
           {/* <div className="messageForm_inputs"> */}
             {/* <fieldset> */}
-              <div>
+             
                 {/* <label htmlFor="message">Message</label> */}
-                <input type="text" id="text" required className="messageForm-control" placeholder="message" value={message.text} onChange={handleControlledInputChange} />
-              </div>
+                <Input className="messageForm-control" type="text" id="text" required  placeholder="message" value={message.text} onChange={handleControlledInputChange} />
+              
             {/* </fieldset> */}
-          </div>
+          
           <Button className="sendBtn "
               
               // disabled={isLoading}

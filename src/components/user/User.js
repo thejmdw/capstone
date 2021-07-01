@@ -77,8 +77,8 @@ export const User = () => {
                     <h5>{currentUser.email}</h5>
                   </div>
                   <div className="userCard__statButtons">
-                    <Button onClick={() => {history.push("/faves")}}>Faves: {`${faves.length}`}</Button>
-                    <Button onClick={() => {history.push("/searches")}}>Searches: {`${cus.length}`}</Button>
+                    <Button variant="contained" color="secondary" onClick={() => {history.push("/faves")}}>Faves: {`${faves.length}`}</Button>
+                    <Button variant="contained" color="secondary" onClick={() => {history.push("/searches")}}>Searches: {`${cus.length}`}</Button>
                   </div>
                 </div>
                 <div className="userCard__searchList">
@@ -93,8 +93,8 @@ export const User = () => {
                   </div>}
                 </div>
                 <div className="buttons">
-                  <Button onClick={() => {history.push(`/profile/edit/${currentUser.id}`)}}>Edit Info</Button>
-                  <Button onClick={logOut}>Log Out</Button>
+                  <Button variant="contained" color="primary" onClick={() => {history.push(`/profile/edit/${currentUser.id}`)}}>Edit Info</Button>
+                  <Button variant="contained" color="primary" onClick={logOut}>Log Out</Button>
                 </div>
               </div>
            
