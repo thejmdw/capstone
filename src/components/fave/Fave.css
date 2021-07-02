@@ -28,6 +28,16 @@
 .swipe {
   position: absolute;
 }
+.faveDetailFlex {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2vh;
+}
+.faveDetailFlexColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 
 .faveDetailCard {
   background-position: center;
@@ -38,11 +48,12 @@
   max-width: 85vh;
   padding: 20px;
   position: relative;
-  width: 50vh;   
+  width: 40vh;   
 }
 
 .faveCard_address {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
@@ -56,6 +67,10 @@
   display: flex;
   justify-content: center;
   margin-top: 5vh;
+}
+.faveMaps {
+  width: 20vh;
+  height: 20vh;
 }
 
 .faveCarousel {
