@@ -2,6 +2,8 @@ import React, { useRef } from "react"
 import { useHistory } from "react-router-dom"
 import { useState } from "react"
 import "./Login.css"
+import { Input, Radio, FormControlLabel, Button, ThemeProvider } from "@material-ui/core"
+import { theme } from "../theme.js"
 
 export const Register = (props) => {
     const firstName = useRef()
@@ -21,6 +23,14 @@ export const Register = (props) => {
             .then(res => res.json())
             .then(user => !!user.length)
     }
+
+    const handleClick = event => {
+        if (parseInt(event.target.value) === userTypeIdState) {
+          setUserTypeIdState("");
+        } else {
+          setUserTypeIdState(event.target.value);
+        }
+      }
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -57,6 +67,7 @@ export const Register = (props) => {
     }
 
     return (
+        <ThemeProvider theme={theme}>
         <main style={{ textAlign: "center" }} className="LoginCard__container">
 
             <dialog className="dialog dialog--password" ref={conflictDialog}>
@@ -68,22 +79,23 @@ export const Register = (props) => {
             <form className="form--login" onSubmit={handleRegister}>
               <h1 className="h3 mb-3 font-weight-normal">Register</h1>
               <fieldset>
-                  <label htmlFor="userName"> First Name </label>
-                  <input ref={firstName} type="text" name="firstName" className="form-control" placeholder="First Name" required autoFocus />
+                  <label htmlFor="userName"></label>
+                  <Input inputRef={firstName} type="text" name="firstName" className="form-control" placeholder="First Name" required autoFocus />
               </fieldset>
               <fieldset>
-                  <label htmlFor="lastName"> Last Name </label>
-                  <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last Name" required />
+                  <label htmlFor="lastName"></label>
+                  <Input inputRef={lastName} type="text" name="lastName" className="form-control" placeholder="Last Name" required />
               </fieldset>
               <fieldset>
-                  <label htmlFor="inputEmail"> Email address </label>
-                  <input ref={email} type="email" name="email" className="form-control" placeholder="Email Address" required />
+                  <label htmlFor="inputEmail"></label>
+                  <Input inputRef={email} type="email" name="email" className="form-control" placeholder="your@email.com" required />
               </fieldset>
-              <fieldset>
+              
+              {/* <fieldset>
                   <label htmlFor="inputAvatarUrl"> AvatarURL </label>
                   <input ref={avatarURL} type="text" name="avatarURL" className="form-control" placeholder="https://i.pravatar.cc/150?u=FirstNameLastName" />
-              </fieldset>
-              <fieldset onChange={
+              </fieldset> */}
+              {/* <fieldset onChange={
                     (e) => {
                       setUserTypeIdState(parseInt(e.target.value))
                     }
@@ -118,18 +130,60 @@ export const Register = (props) => {
                         value="3"
                         required  />
                 </div>
+              </fieldset> */}
+              <fieldset  onChange={
+                    (e) => {
+                      setUserTypeIdState(parseInt(e.target.value))
+                    }
+                  }>
+                {/* <div className="form-group radios">
+                  <label htmlFor="userTypeId">Renter:</label>
+                  <input ref={userTypeId} 
+                        name="userType" 
+                        type="radio" 
+                        id="userTypeId" 
+                        className="form-control" 
+                        value="1"
+                        required />
+                </div>
+                <div className="form-group radios">
+                  <label htmlFor="userTypeId">Buyer:</label>
+                  <input ref={userTypeId} 
+                        name="userType" 
+                        type="radio" 
+                        id="userTypeId" 
+                        className="form-control" 
+                        value="2"
+                        required  />
+                </div>
+                <div className="form-group radios">
+                  <label htmlFor="userTypeId">Agent:</label>
+                  <input ref={userTypeId} 
+                        name="userType" 
+                        type="radio" 
+                        id="userTypeId" 
+                        className="form-control" 
+                        value="3"
+                        required  />
+                </div> */}
+                <div className="radios">
+                <FormControlLabel className="radio" inputRef={userTypeId} id="userTypeId"  value="1" control={<Radio />} label="Renter" onClick={handleClick} />
+                <FormControlLabel className="radio" inputRef={userTypeId} id="userTypeId"  value="2" control={<Radio />} label="Buyer" onClick={handleClick} />
+                <FormControlLabel className="radio" inputRef={userTypeId} id="userTypeId"  value="3" control={<Radio />} label="Agent" onClick={handleClick} />
+                </div>
               </fieldset>
               <div className="register_buttons">
                 <fieldset className="register_button">
-                    <button type="submit"> Sign in </button>
+                    <Button variant="contained" color="primary" type="submit"> Sign in </Button>
                 </fieldset>
                 <fieldset className="register_button">
-                    <button onClick={() => history.push("/login")}> Go Back </button>
+                    <Button variant="contained" color="secondary" onClick={() => history.push("/login")}> Go Back </Button>
                 </fieldset>
               </div>
             </form>
             </div>
         </main>
+        </ThemeProvider>
     )
 }
 

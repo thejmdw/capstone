@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import "./Login.css";
+import { Input, Button, ThemeProvider } from "@material-ui/core"
+import { theme } from "../theme.js"
 
 export const Login = (props) => {
 	const email = useRef();
@@ -29,6 +31,7 @@ export const Login = (props) => {
 	};
 
 	return (
+		<ThemeProvider theme={theme}>
 		<main className="container--login LoginCard__container">
 			<dialog className="dialog dialog--auth" ref={existDialog}>
 				<div>User does not exist</div>
@@ -46,9 +49,9 @@ export const Login = (props) => {
 						<h1>Swipe Home</h1>
 						<h2>Please sign in</h2>
 						<fieldset>
-							<label htmlFor="inputEmail"> Email address </label>
-							<input
-								ref={email}
+							<label htmlFor="inputEmail"></label>
+							<Input
+								inputRef={email}
 								type="email"
 								id="email"
 								className="form-control"
@@ -58,7 +61,7 @@ export const Login = (props) => {
 							/>
 						</fieldset>
 						<fieldset>
-							<button type="submit">Sign in</button>
+							<Button type="submit" color="primary" variant="contained">Sign in</Button>
 						</fieldset>
 						<section className="link--register">
 							<Link to="/register">Not a member yet?</Link>
@@ -67,5 +70,6 @@ export const Login = (props) => {
 				</section>
 			</div>
 		</main>
+		</ThemeProvider>
 	);
 };

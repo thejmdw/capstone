@@ -9,7 +9,7 @@ import "../user/User.css"
 
 export const ListingForm = () => {
   const { updateUser, getUserById } = useContext(UserContext)
-  const { addListing } = useContext(HouseContext)
+  const { addListing, uploadListingPic } = useContext(HouseContext)
   const [ isLoading, setIsLoading ] = useState(true)
   const userId = localStorage.getItem("swipeHome_user")
   const history = useHistory()
@@ -23,44 +23,55 @@ export const ListingForm = () => {
     },
     price: 0,
     beds: 0,
+    photos: [],
     baths_full: 0,
     userTypeId: 0,
     userId: userId
   })
-
+  const [pic, setPic] =useState({
+    file: "",
+  })
   
 
   const handleControlledInputChange = e => {
     setIsLoading(false)
     const newHouse = { ...house }
-
     newHouse[e.target.id] = e.target.value
-
     setHouse(newHouse)
+  }
+  const handleControlledPicChange = e => {
+    const newPic = { ...pic }
+    newPic[e.target.id] = e.target.files
+    console.log(newPic.file[0])
+    setPic(newPic)
   }
 
   const handleAdd = (e) => {
-
     setIsLoading(true)
-      const newHouse = {
-        address: {
-          line: house.address,
-          city: house.city,
-          state_code: house.state_code,
-          postal_code: house.postal_code
-        },
-        price: parseInt(house.price),
-        beds: parseInt(house.beds),
-        baths_full: parseInt(house.baths_full),
-        thumbnail: house.avatarURL,
-        userTypeId: house.userTypeId,
-        userId: parseInt(userId)
-
-      }
-      
-      addListing(newHouse)
-        .then(() => history.push(`/profile`))
+    debugger
+    let newHouse = {
+      address: {
+        line: house.address,
+        city: house.city,
+        state_code: house.state_code,
+        postal_code: house.postal_code
+      },
+      photos: [],
+      price: parseInt(house.price),
+      beds: parseInt(house.beds),
+      baths_full: parseInt(house.baths_full),
+      userTypeId: parseInt(house.userTypeId),
+      userId: parseInt(userId)
+    }
+    const data = new FormData()
+    data.append("file", pic.file[0])
+    data.append("upload_preset", "swipeHome")
     
+    uploadListingPic(data)
+    .then((data) => newHouse.photos.push({href: data.secure_url}))
+
+    .then(() => addListing(newHouse))
+        .then(() => history.push(`/profile`))    
   }
 
   return (
@@ -92,12 +103,6 @@ export const ListingForm = () => {
             </select>
           </div>
         </fieldset>
-      {/* <fieldset>
-        <div className="form-group">
-          <label htmlFor="State">State:</label>
-          <input type="text" id="state_code" required autoFocus className="form-control" placeholder="State" value={house.address.state_code} onChange={handleControlledInputChange} />
-        </div>
-      </fieldset> */}
       <fieldset>
           <div className="form-group">
             <label htmlFor="PostalCode">Zip Code:</label>
@@ -124,10 +129,22 @@ export const ListingForm = () => {
       </fieldset>
       <fieldset>
         <div className="form-group">
+          <label htmlFor="avatarUrl">Upload Picture:</label>
+          <input type="file" id="file" required autoFocus className="form-control" placeholder="file" onChange={handleControlledPicChange} />
+        </div>
+        {/* <button className="btn btn-primary"
+          // disabled={isLoading}
+          onClick={event => {
+            event.preventDefault() // Prevent browser from submitting the form and refreshing the page
+            // uploadImage()
+          }}>Upload image</button> */}
+      </fieldset>
+      {/* <fieldset>
+        <div className="form-group">
           <label htmlFor="avatarURL">Picture URL:</label>
           <input type="text" id="avatarURL" required autoFocus className="form-control" placeholder="Picture URL" value={house.avatarURL} onChange={handleControlledInputChange} />
         </div>
-      </fieldset>
+      </fieldset> */}
       <fieldset>
         <div className="form-group">
           <label htmlFor="userTypeId">For Rent:</label>

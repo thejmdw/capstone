@@ -7,7 +7,7 @@ import TinderCard from "react-tinder-card"
 import { Buttons } from "../buttons/Buttons"
 
 export const FaveList = () => {
-  const { faves, getFavesByUserId, removeFave, getFaveDetail } = useContext(FaveContext)
+  const { faves, getFavesByUserId, removeFave, getFaveDetail, getFaveById } = useContext(FaveContext)
   const [lastDirection, setLastDirection] = useState()
   const history = useHistory()
 
@@ -48,11 +48,10 @@ export const FaveList = () => {
   const shuffledFaves = shuffle(faves)
 
   const handleFaveClick = (id, property_id) => {
-    getFaveDetail(property_id)
+    property_id ? getFaveDetail(property_id).then(() => history.push(`/faves/detail/${id}`)) : getFaveById(id)
     .then(() => history.push(`/faves/detail/${id}`))
-    
-
   }
+  
   return (
     <>
       <section className="faveCards__container">

@@ -1,6 +1,22 @@
 .userCard {
-  /* display: flex;
-  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  /* flex-direction: row;
+  flex-wrap: wrap; */
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  border-radius: 20px;
+  height: 100%;
+  max-width: 85vh;
+  padding: 20px;
+  position: relative;
+  width: 55vh;
+}
+.userCard2 {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* flex-direction: row;
   flex-wrap: wrap; */
   background-position: center;
   background-size: cover;
@@ -17,13 +33,19 @@
   border: 1px solid black;
 } */
 
+.border {
+  border: 2px solid black;
+}
+
 .userFlexItem {
   display: flex;
+  justify-content: space-around;
 }
 .userCard__statButtons {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: flex-start;
 }
 .userCard > h3 {
   position: aboslute;
@@ -36,10 +58,23 @@
   padding-top: 2vh;
 }
 
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .buttons {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+.buttons2 {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: center;
 }
 
 .userCard__container {
@@ -53,12 +88,26 @@
 }
 
 .userForm__container {
+  /* border: 2px solid black; */
   display: flex;
   justify-content: center;
-  margin-top: 5vh;
+  /* margin-top: 5vh; */
+}
+.userUpload__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* margin-top: 5vh; */
+}
+.userProfile_avatar {
+  width: 17vh;
+  height: 17vh;
+  border-radius: 75px;
+  padding-bottom: 1vh;
 }
 
 .userForm {
+  /* border: 2px solid black; */
   background-position: center;
   background-size: cover;
   box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
@@ -67,5 +116,30 @@
   max-width: 85vh;
   padding: 20px;
   position: relative;
-  width: 600px
+  width: 60vh
+}
+
+.userForm-group {
+  /* border: 2px solid black; */
+  display: flex;
+  flex-direction: column;
+  width: 20vh;
+  justify-content: center;
+}
+.userForm-group2 {
+  /* border: 2px solid black; */
+  display: flex;
+  flex-direction: column;
+  width: 30vh;
+  justify-content: center;
+}
+.uploadButton {
+  padding: 1vh;
+  width: 100%;
+  align-self: flex-start;
+}
+.userFormFlex {
+  /* border: 2px solid black; */
+  display: flex;
+  justify-content: center;
 }

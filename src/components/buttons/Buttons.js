@@ -10,21 +10,21 @@ import './Buttons.css'
 export const Buttons = () => {
   return (
     <div className="rowButtons">
-      {/* <IconButton className="buttons_repeat">
+      <IconButton className="buttons_repeat">
         <ReplayIcon fontSize="large" />
-      </IconButton> */}
+      </IconButton>
       <IconButton className="buttons_left">
         <CloseIcon fontSize="large" />
       </IconButton>
       <IconButton className="buttons_star">
         <StarRateIcon fontSize="large" />
       </IconButton>
-      {/* <IconButton className="buttons_right">
+      <IconButton className="buttons_right">
         <FavoriteIcon fontSize="large" />
-      </IconButton> */}
-      {/* <IconButton className="buttons_lightning">
+      </IconButton>
+      <IconButton className="buttons_lightning">
         <FlashOnIcon fontSize="large" />
-      </IconButton> */}
+      </IconButton>
     </div>
   )
 }

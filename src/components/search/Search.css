@@ -1,4 +1,6 @@
 .searchCard {
+  display: flex;
+  align-items: flex-end;
   background-position: center;
   background-size: cover;
   box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
@@ -7,7 +9,7 @@
   max-width: 85vh;
   padding: 20px;
   position: relative;
-  width: 600px
+  width: 50vh;
 }
 
 .searchCard > h3 {
@@ -20,6 +22,40 @@
   display: flex;
   justify-content: center;
   margin-top: 5vh;
+}
+.sear
+
+.bordersearch {
+  display:flex;
+  justify-content: space-around;
+  
+  /* border: 2px solid white; */
+}
+.bedsPrice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bedsBaths {
+  display:flex;
+  justify-content: space-around;
+  padding-bottom: .5vh;
+  align-items: center;
+  /* border: 2px solid white; */
+}
+.beds {
+  padding-right: 1vh;
+  /* border: 2px solid white; */
+}
+.searchCardTitle {
+  display:flex;
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.9374124649859944) 70%, rgba(255,255,255,0) 100%);
+  border-radius: 0 0 15px 15px ;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  /* border: 2px solid white; */
+  height: 7vh
 }
 
 .swipe {
@@ -46,9 +82,9 @@
 
 .SearchForm-control {
   display: block;
-  width: 40%;
+  width: 100%;
   /* height: calc(1em + .75rem + 2px); */
-  padding: .375rem .75rem;
+  /* padding: .375rem .75rem;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1;
@@ -58,7 +94,7 @@
   border: 1px solid #ced4da;
   border-radius: .25rem;
   -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
 }
 
 .SearchFormDropDown-control {
