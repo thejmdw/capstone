@@ -5,6 +5,7 @@ import { useHistory, useParams } from "react-router-dom"
 import { UserContext } from "../user/UserProvider"
 import { Button, Input } from "@material-ui/core"
 import "./User.css"
+import { FormControlLabel, Radio } from "@material-ui/core"
 
 export const UserForm = () => {
   const { updateUser, getUserById, uploadUserAvatar, putAvatarURL } = useContext(UserContext)
@@ -36,6 +37,11 @@ export const UserForm = () => {
   const handleControlledInputChange = e => {
     const newUser = { ...user }
     newUser[e.target.id] = e.target.value
+    setUser(newUser)
+  }
+  const handleControlledRadioChange = e => {
+    const newUser = { ...user }
+    newUser.userTypeId = e.target.value
     setUser(newUser)
   }
   const handleControlledPicChange = e => {
@@ -72,27 +78,29 @@ export const UserForm = () => {
   return (
     <>
     <div className="userFormFlex userCard__container">
-      <div className="userCard ">
+      <div className="userCard">
       <div className="userUpload__container">
         <h2 className="userForm__title">Edit Profile</h2>
         <form>
           <fieldset className="userForm-group">
-            <div>
+            <div className="center">
               <img src={user.avatarURL} alt="user" className="userProfile_avatar"></img>
-              <div className="uploadButton">
-                <Button  variant="contained" component="label">
+              <div className="buttons2">
+              <div className="uploadButton centerButton">
+                <Button  color="secondary" size="small" variant="contained" component="label">
                   Choose File
-                  <input type="file" hidden/>
+                  <input accept="image/*" type="file" hidden/>
                 </Button>
               </div>
               <div className="uploadButton">
-                <Button className="uploadButton" variant="contained" color="secondary" className="btn btn-primary"
+                <Button size="small" className="uploadButton centerButton" variant="contained" color="primary" className="btn btn-primary"
                     // disabled={isLoading}
                   onClick={event => {
                   event.preventDefault() // Prevent browser from submitting the form and refreshing the page
                   uploadImage()
                   }}>Upload image
                 </Button>
+              </div>
               </div>
             </div>
           </fieldset>
@@ -120,7 +128,7 @@ export const UserForm = () => {
           </fieldset>
           
           <fieldset className="userForm-group2">
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="userTypeId">Renter:</label>
               <input type="radio" id="userTypeId" className="form-control" checked={parseInt(user.userTypeId) === 1 ? true : false} value="1" onChange={handleControlledInputChange} />
             </div>
@@ -131,8 +139,14 @@ export const UserForm = () => {
             <div className="form-group">
               <label htmlFor="userTypeId">Agent:</label>
               <input type="radio" id="userTypeId" className="form-control" checked={parseInt(user.userTypeId) === 3 ? true : false} value="3" onChange={handleControlledInputChange} />
-            </div>
+            </div> */}
+            <div className="radios">
+                <FormControlLabel className="radio" id="userTypeId"  value="1" checked={parseInt(user.userTypeId) === 1 ? true : false} control={<Radio />} label="Renter" onChange={handleControlledRadioChange} />
+                <FormControlLabel className="radio" id="userTypeId"  value="2" checked={parseInt(user.userTypeId) === 2 ? true : false } control={<Radio />} label="Buyer" onChange={handleControlledRadioChange} />
+                <FormControlLabel className="radio" id="userTypeId"  value="3" checked={parseInt(user.userTypeId) === 3 ? true : false} control={<Radio />} label="Agent" onChange={handleControlledRadioChange} />
+                </div>
           </fieldset>
+          <div className="buttons" >
           <Button variant="contained" color="secondary" className="btn btn-primary"
               disabled={isLoading}
               onClick={() => history.push(`/profile`)}>
@@ -146,6 +160,7 @@ export const UserForm = () => {
               }}>
               Update user
           </Button>
+          </div>
         </form>
       </div>
       </div>

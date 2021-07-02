@@ -79,7 +79,7 @@ export const SearchForm = () => {
       } else if (currentUser.userTypeId === 1) {
         addSearch(search)
         getHousesForRent(search)
-        .then(() => {getLocalHousesRent(search)})
+        .then(getLocalHousesRent(search))
           .then(() => history.push("/searchResultsList"))
       } else if (currentUser.userTypeId === 2) {
           addSearch(search)

@@ -4,9 +4,10 @@ import { useContext, useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { UserContext } from "./UserProvider"
 import "./User.css"
-import Button from '@material-ui/core/Button';
+import { Button, IconButton } from '@material-ui/core';
 import { SearchContext } from "../search/SearchProvider"
 import { FaveContext } from "../fave/FaveProvider"
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 
 
@@ -69,7 +70,7 @@ export const User = () => {
     <>
       <section className="userCard__container" key={currentUser.id}>
             
-              <div className="userCard">
+              <div className="userCard2">
                 <div className="userFlexItem test">
                   <div className="test">
                     <img src={currentUser.avatarURL} alt="user_avatar" className="userProfile_avatar" />
@@ -77,19 +78,19 @@ export const User = () => {
                     <h5>{currentUser.email}</h5>
                   </div>
                   <div className="userCard__statButtons">
-                    <Button variant="contained" color="secondary" onClick={() => {history.push("/faves")}}>Faves: {`${faves.length}`}</Button>
-                    <Button variant="contained" color="secondary" onClick={() => {history.push("/searches")}}>Searches: {`${cus.length}`}</Button>
+                    <Button className="padding" variant="contained" color="secondary" onClick={() => {history.push("/faves")}}>Faves: {`${faves.length}`}</Button>
+                    <Button className="padding" variant="contained" color="secondary" onClick={() => {history.push("/searches")}}>Searches: {`${cus.length}`}</Button>
                   </div>
                 </div>
                 <div className="userCard__searchList">
-                  <h4>Last 5 Searches</h4>
+                  <h4>Past 5 Searches</h4>
                   {cus.length === 0 ? <div>You Haven't Searched Yet</div> :
                   <div>
-                  <div>{<> 1. <Button onClick={() => {handleClickSearch(cus[0])}}> {cus[0].city},{cus[0].state_code} {cus[0].postal_code}</Button> <Button onClick={() => {removeSearch(cus[0].id, currentUserId)}}>remove</Button></>}</div>
-                  <div>{cus[1] ? <> 2.<Button onClick={() => {handleClickSearch(cus[1])}}> {cus[1].city},{cus[1].state_code} {cus[1].postal_code}</Button> <Button onClick={() => {removeSearch(cus[1].id, currentUserId)}}>remove</Button> </> : `2.`}</div>
-                  <div>{cus[2] ? <> 3.<Button onClick={() => {handleClickSearch(cus[2])}}> {cus[2].city},{cus[2].state_code} {cus[2].postal_code}</Button> <Button onClick={() => {removeSearch(cus[2].id, currentUserId)}}>remove</Button> </> : `3.`}</div>
-                  <div>{cus[3] ? <> 4.<Button onClick={() => {handleClickSearch(cus[3])}}> {cus[3].city},{cus[3].state_code} {cus[3].postal_code}</Button> <Button onClick={() => {removeSearch(cus[3].id, currentUserId)}}>remove</Button> </> : `4.`}</div>
-                  <div>{cus[4] ? <> 5.<Button onClick={() => {handleClickSearch(cus[4])}}> {cus[4].city},{cus[4].state_code} {cus[4].postal_code}</Button> <Button onClick={() => {removeSearch(cus[4].id, currentUserId)}}>remove</Button> </> : `5.`}</div>
+                  <div>{<> <Button onClick={() => {handleClickSearch(cus[0])}}>1. {cus[0].city},{cus[0].state_code} {cus[0].postal_code}</Button> <IconButton onClick={() => {removeSearch(cus[0].id, currentUserId)}}><DeleteForeverIcon/></IconButton></>}</div>
+                  <div>{cus[1] ? <> <Button onClick={() => {handleClickSearch(cus[1])}}>2. {cus[1].city},{cus[1].state_code} {cus[1].postal_code}</Button> <IconButton onClick={() => {removeSearch(cus[1].id, currentUserId)}}><DeleteForeverIcon/></IconButton> </> : ``}</div>
+                  <div>{cus[2] ? <> <Button onClick={() => {handleClickSearch(cus[2])}}>3. {cus[2].city},{cus[2].state_code} {cus[2].postal_code}</Button> <IconButton onClick={() => {removeSearch(cus[2].id, currentUserId)}}><DeleteForeverIcon/></IconButton> </> : ``}</div>
+                  <div>{cus[3] ? <> <Button onClick={() => {handleClickSearch(cus[3])}}>4. {cus[3].city},{cus[3].state_code} {cus[3].postal_code}</Button> <IconButton onClick={() => {removeSearch(cus[3].id, currentUserId)}}><DeleteForeverIcon/></IconButton> </> : ``}</div>
+                  <div>{cus[4] ? <> <Button onClick={() => {handleClickSearch(cus[4])}}>5. {cus[4].city},{cus[4].state_code} {cus[4].postal_code}</Button> <IconButton onClick={() => {removeSearch(cus[4].id, currentUserId)}}><DeleteForeverIcon/></IconButton> </> : ``}</div>
                   </div>}
                 </div>
                 <div className="buttons">
