@@ -88,8 +88,7 @@ export const UserForm = () => {
               <div className="buttons2">
               <div className="uploadButton centerButton">
                 <Button  color="secondary" size="small" variant="contained" component="label">
-                  Choose File
-                  <input accept="image/*" type="file" hidden/>
+                  <input id="file" type="file" onChange={handleControlledPicChange}/>
                 </Button>
               </div>
               <div className="uploadButton">

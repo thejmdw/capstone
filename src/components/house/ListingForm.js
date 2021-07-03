@@ -94,8 +94,8 @@ export const ListingForm = () => {
   }
 
   return (
-    <div className="userForm__container">
-    <form className="userForm">
+    <div className="listingForm__Container">
+    <form className="listingForm">
       <h2 className="userForm__title">Add Listing</h2>
       <fieldset>
         <div className="form-group">
@@ -184,16 +184,16 @@ export const ListingForm = () => {
       </fieldset>
       <Button variant="contained" color="primary" className="btn btn-primary"
           disabled={isLoading}
+          onClick={() => history.push(`/profile`)}>
+          Go Back
+      </Button>
+      <Button variant="contained" color="primary" className="btn btn-primary"
+          disabled={isLoading}
           onClick={event => {
             event.preventDefault() // Prevent browser from submitting the form and refreshing the page
             handleAdd()
           }}>
           Add Listing
-      </Button>
-      <Button variant="contained" color="primary" className="btn btn-primary"
-          disabled={isLoading}
-          onClick={() => history.push(`/profile`)}>
-          Go Back
       </Button>
     </form>
     </div>
