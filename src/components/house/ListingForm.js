@@ -5,6 +5,8 @@ import { useHistory, useParams } from "react-router-dom"
 import { stateCodes } from '../search/stateCodes'
 import { UserContext } from "../user/UserProvider"
 import { HouseContext } from "./HouseProvider"
+import { Button, Input, Select, MenuItem, InputLabel } from "@material-ui/core"
+import { FormControlLabel, Radio } from "@material-ui/core"
 import "../user/User.css"
 
 export const ListingForm = () => {
@@ -39,16 +41,33 @@ export const ListingForm = () => {
     newHouse[e.target.id] = e.target.value
     setHouse(newHouse)
   }
+  const handleControlledStateChange = (event) => {
+    /* When changing a state object or array,
+    always create a copy, make changes, and then set state. */
+    const newHouse = { ...house }
+    /* search is an object with properties.
+    Set the property to the new value 
+    using Object Bracket Notation. */
+    newHouse.state_code = event.target.value
+    //Update State
+    console.log(newHouse)
+    setHouse(newHouse)
+  }
   const handleControlledPicChange = e => {
     const newPic = { ...pic }
     newPic[e.target.id] = e.target.files
     console.log(newPic.file[0])
     setPic(newPic)
   }
+  const handleControlledRadioChange = e => {
+    const newHouse = { ...house }
+    newHouse.userTypeId = e.target.value
+    setHouse(newHouse)
+  }
 
   const handleAdd = (e) => {
     setIsLoading(true)
-    debugger
+    // debugger
     let newHouse = {
       address: {
         line: house.address,
@@ -81,56 +100,60 @@ export const ListingForm = () => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="address">Address:</label>
-          <input type="text" id="address" required autoFocus className="form-control" placeholder="Address" value={house.address.line} onChange={handleControlledInputChange} />
+          <Input type="text" id="address" required autoFocus className="form-control" placeholder="Address" value={house.address.line} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>
         <div className="form-group">
           <label htmlFor="city">City:</label>
-          <input type="text" id="city" required autoFocus className="form-control" placeholder="City" value={house.address.city} onChange={handleControlledInputChange} />
+          <Input type="text" id="city" required className="form-control" placeholder="City" value={house.address.city} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>
           <div className="form-group">
-            <label htmlFor="location">State:</label>
-            <select name="state_mode" required id="state_code" className="SearchForm-control SearchFormDropDown-control" value={house.address.state_code} onChange={handleControlledInputChange}>
-              <option value="0">Select</option>
+            <InputLabel htmlFor="location">State:</InputLabel>
+            <Select name="state_mode" required id="state_code" className="SearchForm-control SearchFormDropDown-control" value={house.state_code} onChange={handleControlledStateChange}>
+              {/* <option value="0">Select</option> */}
               {stateCodes.map(s => (
-                <option key={s} value={s}>
+                <MenuItem key={s} value={s}>
                   {s}
-                </option>
+                </MenuItem>
               ))}
-            </select>
+            </Select>
           </div>
         </fieldset>
       <fieldset>
           <div className="form-group">
             <label htmlFor="PostalCode">Zip Code:</label>
-            <input type="num" id="postal_code" className="SearchForm-control" placeholder="5 Digit Postal Code" value={house.address.postal_code} onChange={handleControlledInputChange} />
+            <Input type="num" id="postal_code" className="SearchForm-control" placeholder="5 Digit Postal Code" value={house.address.postal_code} onChange={handleControlledInputChange} />
           </div>
         </fieldset>
       <fieldset>
         <div className="form-group">
           <label htmlFor="price">Price:</label>
-          <input type="num" id="price" className="SearchForm-control" placeholder="$" value={house.price} onChange={handleControlledInputChange} />
+          <Input type="num" id="price" className="SearchForm-control" placeholder="$" value={house.price} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>
         <div className="form-group">
           <label htmlFor="beds">Bedrooms:</label>
-          <input type="num" id="beds" className="SearchForm-control" placeholder="0" value={house.beds} onChange={handleControlledInputChange} />
+          <Input type="num" id="beds" className="SearchForm-control" placeholder="0" value={house.beds} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>
         <div className="form-group">
           <label htmlFor="baths_full">Full Baths:</label>
-          <input type="num" id="baths_full" className="SearchForm-control" placeholder="0" value={house.baths_full} onChange={handleControlledInputChange} />
+          <Input type="num" id="baths_full" className="SearchForm-control" placeholder="0" value={house.baths_full} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="avatarUrl">Upload Picture:</label>
-          <input type="file" id="file" required autoFocus className="form-control" placeholder="file" onChange={handleControlledPicChange} />
+          {/* <label htmlFor="avatarUrl">Upload Picture:</label> */}
+          <Button color="secondary" size="small" variant="contained" component="label">
+          <input type="file" id="file" required autoFocus className="form-control" 
+                placeholder="file" 
+                onChange={handleControlledPicChange} />
+          </Button>
         </div>
         {/* <button className="btn btn-primary"
           // disabled={isLoading}
@@ -146,28 +169,32 @@ export const ListingForm = () => {
         </div>
       </fieldset> */}
       <fieldset>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label htmlFor="userTypeId">For Rent:</label>
           <input type="radio" id="userTypeId" className="form-control" checked={parseInt(house.userTypeId) === 1 ? true : false} value="1" onChange={handleControlledInputChange} />
         </div>
         <div className="form-group">
           <label htmlFor="userTypeId">For Sale:</label>
           <input type="radio" id="userTypeId" className="form-control" checked={parseInt(house.userTypeId) === 2 ? true : false } value="2" onChange={handleControlledInputChange} />
-        </div>
+        </div> */}
+        <div className="radios">
+                <FormControlLabel className="radio" id="userTypeId"  value="1" checked={parseInt(house.userTypeId) === 1 ? true : false} control={<Radio />} label="For Rent" onChange={handleControlledRadioChange} />
+                <FormControlLabel className="radio" id="userTypeId"  value="2" checked={parseInt(house.userTypeId) === 2 ? true : false } control={<Radio />} label="For Sale" onChange={handleControlledRadioChange} />
+                </div>
       </fieldset>
-      <button className="btn btn-primary"
+      <Button variant="contained" color="primary" className="btn btn-primary"
           disabled={isLoading}
           onClick={event => {
             event.preventDefault() // Prevent browser from submitting the form and refreshing the page
             handleAdd()
           }}>
           Add Listing
-      </button>
-      <button className="btn btn-primary"
+      </Button>
+      <Button variant="contained" color="primary" className="btn btn-primary"
           disabled={isLoading}
           onClick={() => history.push(`/profile`)}>
           Go Back
-      </button>
+      </Button>
     </form>
     </div>
   )

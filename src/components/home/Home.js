@@ -40,7 +40,7 @@ export const Home = () => {
                 </div>
                 <div className="homeCard__buttons">
                   <Button variant="contained" color="primary" onClick={() => history.push("/search")}>New Search</Button>
-                  {currentUser.userTypeId === 3 ? <Button onClick={() => history.push("/listing")}>Add Listing</Button> : ""}
+                  {currentUser.userTypeId === 3 ? <Button variant="contained" color="primary" onClick={() => history.push("/listing")}>Add Listing</Button> : ""}
                   <Button variant="contained" color="primary" onClick={() => history.push("/faves")}>Faves</Button>
                 </div>
               </div>
