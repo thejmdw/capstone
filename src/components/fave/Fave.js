@@ -68,12 +68,12 @@ export const Fave = () => {
                   frameborder="0"
                   style={{border:0}}
                   className="faveMaps"
-                  src={`https://www.google.com/maps/embed/v1/place?q=${faveDetail.address.line}${faveDetail.address.city}${faveDetail.address.state_codeone}&center=${faveDetail.address.lat},${faveDetail.address.lon}&zoom=17&key=AIzaSyBDNm_nEXINx2bsVUSflyt633t7rVecQgA
+                  src={`https://www.google.com/maps/embed/v1/place?q=${faveDetail.address.line}${faveDetail.address.city}${faveDetail.address.state_code}${faveDetail.address.lat ? `&center=${faveDetail.address.lat},${faveDetail.address.lon}` : ""}&zoom=17&key=AIzaSyBDNm_nEXINx2bsVUSflyt633t7rVecQgA
                   &maptype=roadmap`} />
                 </div>
                 <div>
                 </div>
-                <button onClick={() => history.push(`/faves`)}>Back to Faves</button>
+                <Button variant="contained" color="primary" onClick={() => history.push(`/faves`)}>Back to Faves</Button>
               </div>
             
           

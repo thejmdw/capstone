@@ -60,7 +60,9 @@
 }
 
 .homeCard__userAvatar {
-  width: 20vh;
+  width: 17vh;
+  /* height: 17vh; */
+  border-radius: 75px;
   padding-bottom: 1vh;
 }
 
