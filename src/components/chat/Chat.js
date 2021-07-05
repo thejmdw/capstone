@@ -117,51 +117,58 @@ export const Chat = () => {
     <>
       <section className="chatCards__container">
           <h3>Your conversation with {sender?.name}</h3>
+          <div className="chatCard">
           {filteredMessages?.map(message => {
             return (
-              <div className="chatCard" key={message.timestamp} >
-              <div>
+              <div className="chatMessage" key={message.timestamp} >
                 
                   {message.userId === parseInt(localStorage.getItem("swipeHome_user")) ? 
                   <>
                   <div className="chatFlexEnd">
                     <div className="chatFlex end">
-                      <h5>{message.text}</h5>
+                      <div>
+                        <div className="chatFlexMessage end endPadding">
+                      <h5 className="chatFlex end chatMessageText">{message.text}</h5>
+                          <div className="chatFlexMessageTime chatMessageColor">
+                          <IconButton className="buttonPadding" onClick={() => {handleDeleteMessage(message.id)}}>
+                            <DeleteIcon fontSize="small" />
+                          </IconButton>
+                          <h6 className=" chatFlex end">
+                            {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(message.timestamp)}
+                          </h6>
+                          </div>
+                        </div>
+                      </div>
                       <Avatar alt="user profile" src={message.user.avatarURL} />
                       {/* <img className="chatCard__img" src={message.user.avatarURL} alt="profile"/> */}
                     </div>
-                    <div className="chatFlex end">
-                      <IconButton onClick={() => {handleDeleteMessage(message.id)}}>
-                        <DeleteIcon fontSize="small" />
-                      </IconButton>
-                      <h6 className=" chatFlex end endPadding">
-                        {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(message.timestamp)}
-                      </h6>
-                   </div>
+                    
                   </div></> : 
                   <>
                   <div className="chatFlexStart">
                     <div className="chatFlex">
-                    <Avatar alt="user profile" src={message.user.avatarURL} />
-                      {/* <img className="chatCard__img" src={message.user.avatarURL} alt="profile"/> */}
-                      <h5>{message.text}</h5>
-                    </div>
-                    <div className="chatFlex">
-                      <h6 className="startPadding">
-                        {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(message.timestamp)}
-                      </h6>
-                      <IconButton onClick={() => {handleDeleteMessage(message.id)}}>
-                        <DeleteIcon fontSize="small" />
-                      </IconButton>
+                      <Avatar alt="user profile" src={message.user.avatarURL} />
+                        {/* <img className="chatCard__img" src={message.user.avatarURL} alt="profile"/> */}
+                      <div className="chatFlexMessage startPadding">
+                      <h5 className="chatMessageText">{message.text}</h5>
+                      <div className="chatFlexMessageTime chatMessageColor ">
+                        <h6>
+                          {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(message.timestamp)}
+                        </h6>
+                        <IconButton className="buttonPadding" onClick={() => {handleDeleteMessage(message.id)}}>
+                          <DeleteIcon fontSize="small" />
+                        </IconButton>
+                        </div>
+                      </div>
                     </div>
                   </div></>
                   } 
                 </div>
-              </div>
                 
-
-            )
-          })}
+                
+                )
+              })}
+              </div>
 
       <div className="messageForm__Container">
         <form className="messageForm">

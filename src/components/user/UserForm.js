@@ -88,7 +88,8 @@ export const UserForm = () => {
               <div className="buttons2">
               <div className="uploadButton centerButton">
                 <Button  color="secondary" size="small" variant="contained" component="label">
-                  <input id="file" type="file" onChange={handleControlledPicChange}/>
+                  Choose Image
+                  <input id="file" type="file" onChange={handleControlledPicChange} hidden/>
                 </Button>
               </div>
               <div className="uploadButton">
@@ -145,7 +146,7 @@ export const UserForm = () => {
                 <FormControlLabel className="radio" id="userTypeId"  value="3" checked={parseInt(user.userTypeId) === 3 ? true : false} control={<Radio />} label="Agent" onChange={handleControlledRadioChange} />
                 </div>
           </fieldset>
-          <div className="buttons" >
+          <div className="userButtons" >
           <Button variant="contained" color="secondary" className="btn btn-primary"
               disabled={isLoading}
               onClick={() => history.push(`/profile`)}>

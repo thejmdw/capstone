@@ -12,6 +12,20 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.homeIntroCard {
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0px 18px 25px 0 rgba(102, 51, 153, .1);
+  border-radius: 20px;
+  /* height: 25vh; */
+  max-width: 85vh;
+  padding: 20px;
+  position: relative;
+  width: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 .homeCard > h3 {
   position: absolute;
@@ -39,6 +53,11 @@
 .greetingText {
   padding-bottom:1vh
 }
+.greetingTextSmall {
+  display: flex;
+  justify-content: center;
+  padding-bottom:.5vh
+}
 
 .homeCard__userAvatar {
   width: 20vh;
@@ -48,4 +67,11 @@
 .homeCard__buttons {
   display: flex;
   justify-content: space-between;
+}
+
+.homeIntro_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1vh 0;
 }

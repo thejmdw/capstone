@@ -173,12 +173,12 @@ export const Register = (props) => {
                 </div>
               </fieldset>
               <div className="register_buttons">
-                <fieldset className="register_button">
+                <fieldset className="register_buttons">
+                    <Button variant="contained" color="secondary" onClick={() => history.push("/login")}> Go Back </Button>
                     <Button variant="contained" color="primary" type="submit"> Sign in </Button>
                 </fieldset>
-                <fieldset className="register_button">
-                    <Button variant="contained" color="secondary" onClick={() => history.push("/login")}> Go Back </Button>
-                </fieldset>
+                {/* <fieldset className="register_button">
+                </fieldset> */}
               </div>
             </form>
             </div>

@@ -72,14 +72,14 @@ export const User = () => {
             
               <div className="userCard2">
                 <div className="userFlexItem test">
-                  <div className="test">
+                  <div className="userForm_columnFlex">
                     <img src={currentUser.avatarURL} alt="user_avatar" className="userProfile_avatar" />
                     <h3>{currentUser.name}</h3>
                     <h5>{currentUser.email}</h5>
                   </div>
                   <div className="userCard__statButtons">
                     <Button className="padding" variant="contained" color="secondary" onClick={() => {history.push("/faves")}}>Faves: {`${faves.length}`}</Button>
-                    <Button className="padding" variant="contained" color="secondary" onClick={() => {history.push("/searches")}}>Searches: {`${cus.length}`}</Button>
+                    {/* <Button className="padding" variant="contained" color="secondary" onClick={() => {history.push("/searches")}}>Searches: {`${cus.length}`}</Button> */}
                   </div>
                 </div>
                 <div className="userCard__searchList">
@@ -93,7 +93,7 @@ export const User = () => {
                   <div>{cus[4] ? <> <Button onClick={() => {handleClickSearch(cus[4])}}>5. {cus[4].city},{cus[4].state_code} {cus[4].postal_code}</Button> <IconButton onClick={() => {removeSearch(cus[4].id, currentUserId)}}><DeleteForeverIcon/></IconButton> </> : ``}</div>
                   </div>}
                 </div>
-                <div className="buttons">
+                <div className="userButtons">
                   <Button variant="contained" color="primary" onClick={() => {history.push(`/profile/edit/${currentUser.id}`)}}>Edit Info</Button>
                   <Button variant="contained" color="primary" onClick={logOut}>Log Out</Button>
                 </div>

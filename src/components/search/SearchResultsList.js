@@ -111,7 +111,7 @@ export const SearchResultsList = () => {
     }
    
     if (direction === "right") {
-      if (faves.filter(f => f.property_id === property_id).length === 0) {
+      if (faves.filter(f => f.property_id ? f.property_id === property_id : f.id === property_id).length === 0) {
         /* faves doesn't contain the a fave with the same property_id */
         addFave(newFave)
       }
@@ -138,7 +138,7 @@ export const SearchResultsList = () => {
     const cardsLeft = housesList.filter(house => !alreadyRemoved.includes(house.property_id))
     if (cardsLeft.length) {
       const toBeRemoved = cardsLeft[cardsLeft.length - 1].property_id // Find the card object to be removed
-      const index = allHouses.map(house => house.property_id).indexOf(toBeRemoved) // Find the index of which to make the reference to
+      const index = allHouses.map(house => house.property_id ? house.property_id : house.id).indexOf(toBeRemoved) // Find the index of which to make the reference to
       const removed = [ ...alreadyRemoved, toBeRemoved]
       // removed.push(toBeRemoved)
       setAlreadyRemoved(removed) // Make sure the next card gets removed next time if this card do not have time to exit the screen
