@@ -7,6 +7,7 @@ export const HouseContext = createContext()
 export const HouseProvider = (props) => {
   const [ houses, setHouses ] = useState([])
   const [ listing, setListing ] = useState({})
+  const [ listings, setListings ] = useState([])
 
   const getHousesTest = () => {
     return fetch(`https://realty-in-us.p.rapidapi.com/properties/v2/list-for-rent?city=Nashville&state_code=TN&limit=20&offset=0&sort=relevance&postal_code=37207&beds_min=0&allows_dog=true&price_max=3000`, {
@@ -63,12 +64,18 @@ export const HouseProvider = (props) => {
       .then(resp => resp.json())
       // .then(data => data.secure_url) //-----PATCH USER avatarURL 
       }
+  
 
+  const getListingsByUserId = userId => {
+    return axios.get(`http://localhost:8088/houses?userId=${userId}`)
+    .then((res) => res.data)
+    .then(data => setListings(data))
+  }
 
   return (
     <HouseContext.Provider value ={
       {
-        houses, getHousesTest, addListing, getHouseById, uploadListingPic
+        houses, listings, getHousesTest, addListing, getHouseById, uploadListingPic, getListingsByUserId
       }
     }>
       {props.children}

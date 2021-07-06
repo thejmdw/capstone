@@ -8,6 +8,7 @@ import { Button, IconButton } from '@material-ui/core';
 import { SearchContext } from "../search/SearchProvider"
 import { FaveContext } from "../fave/FaveProvider"
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { HouseContext } from "../house/HouseProvider"
 
 
 
@@ -16,6 +17,7 @@ export const User = () => {
   const { getUserById } = useContext(UserContext)
   const { searches, getSearchesByUserId, deleteSearch, getHouses, getHousesForRent, getHousesForSale, getLocalHousesRent, getLocalHousesSale } = useContext(SearchContext)
   const { faves, getFavesByUserId } = useContext(FaveContext)
+  const { listings, getListingsByUserId } = useContext(HouseContext)
   
 
   const [searchesListItems, setSearchesListItems] = useState()
@@ -25,7 +27,7 @@ export const User = () => {
   useEffect(() => {
     getUserById(parseInt(localStorage.getItem("swipeHome_user")))
      .then(setProfile)
-     .then(getSearchesByUserId(localStorage.getItem("swipeHome_user")))
+     .then(getListingsByUserId(localStorage.getItem("swipeHome_user")))
      .then(getFavesByUserId(localStorage.getItem("swipeHome_user")))
   }, [])
 
@@ -79,7 +81,8 @@ export const User = () => {
                   </div>
                   <div className="userCard__statButtons">
                     <Button className="padding" variant="contained" color="secondary" onClick={() => {history.push("/faves")}}>Faves: {`${faves.length}`}</Button>
-                    {/* <Button className="padding" variant="contained" color="secondary" onClick={() => {history.push("/searches")}}>Searches: {`${cus.length}`}</Button> */}
+                    
+                    {currentUser.userTypeId === 3 ? <Button className="padding" variant="contained" color="secondary" onClick={() => {history.push("/listings")}}>Listings: {`${listings.length}`}</Button> : ""}
                   </div>
                 </div>
                 <div className="userCard__searchList">

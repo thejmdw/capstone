@@ -86,6 +86,7 @@ export const Chat = () => {
     // .then(() => {getSenderById(currentUserId)})
     // .then(() => {history.push(`/chat`)})
     // history.push(`/chat`)
+    setMessage({text: ""})
   }
 
   const handleDeleteMessage = (messageId) => {
@@ -151,7 +152,7 @@ export const Chat = () => {
                         {/* <img className="chatCard__img" src={message.user.avatarURL} alt="profile"/> */}
                       <div className="chatFlexMessage startPadding">
                       <h5 className="chatMessageText">{message.text}</h5>
-                      <div className="chatFlexMessageTime chatMessageColor ">
+                      <div className="chatFlexMessageTime chatMessageColor end">
                         <h6>
                           {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(message.timestamp)}
                         </h6>
@@ -177,7 +178,14 @@ export const Chat = () => {
             {/* <fieldset> */}
              
                 {/* <label htmlFor="message">Message</label> */}
-                <Input className="messageForm-control" type="text" id="text" required  placeholder="message" value={message.text} onChange={handleControlledInputChange} />
+                <Input className="messageForm-control" type="text" id="text" required  placeholder="message" value={message.text} onChange={handleControlledInputChange} onKeyPress={(ev) => {
+    console.log(`Pressed keyCode ${ev.key}`);
+    if (ev.key === 'Enter') {
+      // Do code here
+      ev.preventDefault();
+      handleSendMessage()
+    }
+  }}/>
               
             {/* </fieldset> */}
           

@@ -8,6 +8,8 @@
   padding: 20px;
   position: relative;
   width: 40vh;
+  display: flex;
+  align-items: flex-end;
 }
 
 .faveCard > h3 {
@@ -75,4 +77,14 @@
 
 .faveCarousel {
   height: 0%;
+}
+.faveCardTitle {
+  display:flex;
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.9374124649859944) 70%, rgba(255,255,255,0) 100%);
+  border-radius: 0 0 15px 15px ;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  /* border: 2px solid white; */
+  height: 7vh
 }

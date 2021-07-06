@@ -3,7 +3,8 @@
   align-items: flex-end;
   background-position: center;
   background-size: cover;
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  background-color: rgb(255, 255, 255, .75);
+  box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   height: 50vh;
   max-width: 85vh;
@@ -71,7 +72,8 @@
 .searchForm {
   background-position: center;
   background-size: cover;
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  background-color: rgb(255, 255, 255, .75);
+  box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.25);
   border-radius: 20px;
   height: 100%;
   max-width: 85vh;

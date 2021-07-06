@@ -26,24 +26,24 @@ export const NavBar = () => {
 
     <div className="navbar">
       <Link className="navbar__link" to="/search">
-        <IconButton>
+        <IconButton className="navbarButtons">
           <SearchIcon fontSize="large" />
         </IconButton>
       </Link>
       <Link className="navbar__link" to="/">
-        <IconButton>
+        <IconButton className="navbarButtons">
           <HomeWorkIcon fontSize="large" />
         </IconButton>
       </Link>
       <Link className="navbar__link" to="/messages">
-        <IconButton>
+        <IconButton className="navbarButtons">
           <Badge badgeContent={unreadMessages.length} color="secondary">
             <MessageIcon fontSize="large" />
           </Badge>
         </IconButton>
       </Link>
       <Link className="navbar__link" to="/profile">
-        <IconButton>
+        <IconButton className="navbarButtons">
           <PersonIcon fontSize="large"/>
         </IconButton>
       </Link>

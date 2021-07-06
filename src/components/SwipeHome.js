@@ -6,6 +6,7 @@ import { Register } from "./auth/Register";
 import { Route, Redirect } from "react-router-dom"
 import { UserProvider } from "./user/UserProvider"
 import { MessageProvider } from "./chat/MessageProvider"
+import "./SwipeHome.css"
 
 import { createMuiTheme } from '@material-ui/core/styles';
 
@@ -31,7 +32,7 @@ export const SwipeHome = () => (
               <MessageProvider>
                 <NavBar />
               
-                <ApplicationViews />
+                <ApplicationViews/>
               </MessageProvider>
             </>
           );

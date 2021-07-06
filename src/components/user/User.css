@@ -5,6 +5,7 @@
   flex-wrap: wrap; */
   background-position: center;
   background-size: cover;
+  background-color: rgb(255, 255, 255, .75);
   box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
   border-radius: 20px;
   height: 100%;
@@ -20,6 +21,7 @@
   flex-wrap: wrap; */
   background-position: center;
   background-size: cover;
+  background-color: rgb(255, 255, 255, .75);
   box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
   border-radius: 20px;
   height: 100%;
@@ -112,6 +114,7 @@
   /* border: 2px solid black; */
   background-position: center;
   background-size: cover;
+  background-color: rgb(255, 255, 255, .75);
   box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
   border-radius: 20px;
   height: 50vh;
