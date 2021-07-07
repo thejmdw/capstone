@@ -12,6 +12,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite"
 import { UserContext } from "../user/UserProvider"
 import { useHistory } from 'react-router'
 import { Buttons } from "../buttons/Buttons.js"
+import LinearProgress from '@material-ui/core/LinearProgress';
 import "../buttons/Buttons.css"
 
 
@@ -21,10 +22,13 @@ export const SearchResultsList = () => {
   const { getUserById } = useContext(UserContext)
   const [user, setUser ] = useState({})
   const history = useHistory()
+
+  const [ loading, setLoading ] = useState(true)
   
   useEffect(() => {
     getUserById(localStorage.getItem("swipeHome_user"))
     .then(setUser)
+    setLoading(false)
   }, [])
   
   
@@ -136,7 +140,16 @@ export const SearchResultsList = () => {
   const swipe = (dir) => {
     // debugger
     const cardsLeft = housesList.filter(house => !alreadyRemoved.includes(house.property_id))
-    if (cardsLeft.length) {
+    if (cardsLeft.length === 1) {
+      // const toBeRemoved = cardsLeft[cardsLeft.length - 1].property_id // Find the card object to be removed
+      // const index = allHouses.map(house => house.property_id ? house.property_id : house.id).indexOf(toBeRemoved) // Find the index of which to make the reference to
+      // const removed = [ ...alreadyRemoved, toBeRemoved]
+      // removed.push(toBeRemoved)
+      // setAlreadyRemoved(removed) // Make sure the next card gets removed next time if this card do not have time to exit the screen
+      // setLastDirection(dir)
+      // childRefs[index].current.swipe(dir) // Swipe the card!
+      history.push("/profile")
+    } else if (cardsLeft.length) {
       const toBeRemoved = cardsLeft[cardsLeft.length - 1].property_id // Find the card object to be removed
       const index = allHouses.map(house => house.property_id ? house.property_id : house.id).indexOf(toBeRemoved) // Find the index of which to make the reference to
       const removed = [ ...alreadyRemoved, toBeRemoved]
@@ -154,11 +167,12 @@ export const SearchResultsList = () => {
   return (
     user.userTypeId === 1 ? <>
       <section className="searchCard__container">
+      {/* <LinearProgress color="secondary" /> */}
         { housesList.map((search, index) => {
           return (
             <>
             <TinderCard ref={childRefs[index]} 
-                        className='swipe search' 
+                        className='swipe search searchCard__container' 
                         preventSwipe={["up", "down"]} 
                         key={search.property_id} 
                         onSwipe={(dir) => swiped(dir, search.id, search.property_id,
@@ -185,9 +199,9 @@ export const SearchResultsList = () => {
           )
         })}
         <div className="rowButtons">
-          <IconButton className="buttons_repeat" onClick={goBack}>
+          {/* <IconButton className="buttons_repeat" onClick={goBack}>
             <ReplayIcon fontSize="large" />
-          </IconButton>
+          </IconButton> */}
           <IconButton className="buttons_left" onClick={() => swipe('left')}>
             <CloseIcon fontSize="large" />
           </IconButton >
@@ -195,7 +209,7 @@ export const SearchResultsList = () => {
             <FavoriteIcon fontSize="large" />
           </IconButton>
         </div>
-        <button onClick={() => {history.push("/search")}}>Search Again</button>
+        {/* <button onClick={() => {history.push("/search")}}>Search Again</button> */}
       </section>
       
     </> :

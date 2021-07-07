@@ -12,6 +12,7 @@ import { SearchList } from "./search/SearchList"
 import { SearchResultsList } from "./search/SearchResultsList"
 import { FaveList } from "./fave/FaveList"
 import { ChatList } from "./chat/ChatList"
+import { ListingList } from "./house/ListingList"
 //forms
 import { SearchForm } from "./search/SearchForm"
 import { UserForm } from "./user/UserForm"
@@ -50,6 +51,9 @@ export const ApplicationViews = () => {
 
             <Route exact path="/listing">
               <ListingForm />
+            </Route>
+            <Route exact path="/listings">
+              <ListingList />
             </Route>
           
             <Route exact path="/profile">

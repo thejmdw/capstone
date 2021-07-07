@@ -2,7 +2,8 @@
   background-position: center;
   background-size: cover;
   background-color: rgb(255, 255, 255, .75);
-  box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.25);
+  border: 2px solid gray;
   border-radius: 20px;
   /* height: 25vh; */
   max-width: 85vh;
@@ -17,7 +18,9 @@
   background-position: center;
   background-size: cover;
   background-color: seashell;
-  box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.1);
+  border: 2px solid gray;
+  box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.25);
+  
   border-radius: 20px;
   /* height: 25vh; */
   max-width: 85vh;

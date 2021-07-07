@@ -73,7 +73,7 @@ export const Fave = () => {
                 </div>
                 <div>
                 </div>
-                <Button variant="contained" color="primary" onClick={() => history.push(`/faves`)}>Back to Faves</Button>
+                {/* <Button variant="contained" color="primary" onClick={() => history.push(`/faves`)}>Back to Faves</Button> */}
               </div>
             
           

@@ -72,10 +72,14 @@ export const HouseProvider = (props) => {
     .then(data => setListings(data))
   }
 
+  const deleteListingById = id => {
+    return axios.delete(`http://localhost:8088/houses/${id}`)
+  }
+
   return (
     <HouseContext.Provider value ={
       {
-        houses, listings, getHousesTest, addListing, getHouseById, uploadListingPic, getListingsByUserId
+        houses, listings, getHousesTest, addListing, getHouseById, uploadListingPic, getListingsByUserId, deleteListingById
       }
     }>
       {props.children}

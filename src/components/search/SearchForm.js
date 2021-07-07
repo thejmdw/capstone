@@ -5,6 +5,7 @@ import { UserContext } from "../user/UserProvider"
 import { stateCodes } from './stateCodes'
 import "./Search.css"
 import { useHistory } from 'react-router'
+import LinearProgress from '@material-ui/core/LinearProgress';
 import { Button, Input, Select, FormControl, MenuItem, InputLabel } from '@material-ui/core'
 
 export const SearchForm = () => {
@@ -16,6 +17,8 @@ export const SearchForm = () => {
     userId: parseInt(localStorage.getItem("swipeHome_user")),
     
   })
+
+  const [ loading, setLoading ] = useState(false)
 
   const [ user, setUser ] = useState({})
   const currentUser = user
@@ -97,7 +100,7 @@ export const SearchForm = () => {
         <fieldset>
           <div className="form-group">
             <label htmlFor="city"></label>
-            <Input type="text" id="city" required autoFocus className="SearchForm-control" placeholder="City" value={search.city} onChange={handleControlledInputChange} />
+            <Input type="text" id="city" required autoFocus className="SearchForm-control" placeholder="City" value={search.city} autoComplete onChange={handleControlledInputChange} />
           </div>
         </fieldset>
         <fieldset>
@@ -155,7 +158,7 @@ export const SearchForm = () => {
           onClick={event => {
             event.preventDefault() // Prevent browser from submitting the form and refreshing the page
             handleClickSaveSearch()
-            
+            setLoading(true)
           }}>
           Submit Search</Button>
     </form>

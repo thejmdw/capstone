@@ -6,7 +6,8 @@
   background-position: center;
   background-size: cover;
   background-color: rgb(255, 255, 255, .75);
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .25);
+  border: 2px solid gray;
   border-radius: 20px;
   height: 100%;
   max-width: 85vh;
@@ -22,7 +23,8 @@
   background-position: center;
   background-size: cover;
   background-color: rgb(255, 255, 255, .75);
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .25);
+  border: 2px solid gray;
   border-radius: 20px;
   height: 100%;
   max-width: 85vh;
@@ -115,7 +117,8 @@
   background-position: center;
   background-size: cover;
   background-color: rgb(255, 255, 255, .75);
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .25);
+  border: 2px solid gray;
   border-radius: 20px;
   height: 50vh;
   max-width: 85vh;
@@ -153,4 +156,8 @@
   display: flex;
   flex-direction: column;
   align-items: center
+}
+
+.deleteSearchButton {
+  padding: 5px !important;
 }

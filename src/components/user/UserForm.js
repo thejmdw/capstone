@@ -19,6 +19,12 @@ export const UserForm = () => {
     avatarURL: "",
     userTypeId: 0
   })
+  const [userOG, setUserOG] = useState({
+    name: "",
+    email: "",
+    avatarURL: "",
+    userTypeId: 0
+  })
   const [pic, setPic] =useState({
     file: "",
   })
@@ -27,6 +33,7 @@ export const UserForm = () => {
     if (userId) {
       getUserById(parseInt(userId))
       .then(user => {
+        setUserOG(user)
         setUser(user)
         setIsLoading(false)
       })
@@ -63,6 +70,10 @@ export const UserForm = () => {
       updateUser(editedUser)
       .then(() => history.push(`/profile`))
     
+  }
+
+  const resetForm = (e) => {
+    setUser(userOG)
   }
 
   const uploadImage = event => {
@@ -149,8 +160,8 @@ export const UserForm = () => {
           <div className="userButtons" >
           <Button variant="contained" color="secondary" className="btn btn-primary"
               disabled={isLoading}
-              onClick={() => history.push(`/profile`)}>
-              Go Back
+              onClick={resetForm}>
+              Reset
           </Button>
           <Button variant="contained" color="primary" className="btn btn-primary"
               disabled={isLoading}
