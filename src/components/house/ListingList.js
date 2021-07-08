@@ -16,6 +16,7 @@ import EditIcon from '@material-ui/icons/Edit';
 export const ListingList = () => {
   const { deleteListingById, getHouseById } = useContext(HouseContext)
   const { getUserById } = useContext(UserContext)
+  const { getFaveById } = useContext(FaveContext)
   const { listings, getListingsByUserId } = useContext(HouseContext)
   
 
@@ -52,7 +53,7 @@ export const ListingList = () => {
       .then(setListingsListItems)
   }
   const handleListingClick = (id, property_id) => {
-    getHouseById(id)
+    getHouseById(parseInt(id))
     .then(() => history.push(`/listing/detail/${id}`))
   }
   
@@ -60,14 +61,14 @@ export const ListingList = () => {
   
   return (
     <>
-      <section className="houseCards__container" key={currentUser.id}>
+      <section className="listingsList__container" key={currentUser.id}>
         <div className="houseCard">
           <div>Your Listings</div>
       { listings.map((listing) => {
           return (
             <div className="listingList">
             <img className="listingListImage" src={listing.photos[0].href} />
-            <Button onClick={handleListingClick}>{listing.address.line} {listing.address.city}</Button>
+            <Button onClick={() => handleListingClick(listing.id)}>{listing.address.line} {listing.address.city}</Button>
             <IconButton className="listingListButton">
               <EditIcon />
             </IconButton>

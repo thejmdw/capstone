@@ -24,6 +24,12 @@
   display: flex;
   justify-content: center;
   margin-top: 5vh;
+  height: 65vh;
+}
+.searchCard__container2 {
+  display: flex;
+  justify-content: center;
+  margin-top: 5vh;
 }
 .sear
 

@@ -172,7 +172,7 @@ export const SearchResultsList = () => {
           return (
             <>
             <TinderCard ref={childRefs[index]} 
-                        className='swipe search searchCard__container' 
+                        className='swipe search searchCard__container2' 
                         preventSwipe={["up", "down"]} 
                         key={search.property_id} 
                         onSwipe={(dir) => swiped(dir, search.id, search.property_id,

@@ -26,6 +26,7 @@
 .faveCards__container {
   display: flex;
   justify-content: center;
+  height: 65vh;
   margin-top: 5vh;
 }
 

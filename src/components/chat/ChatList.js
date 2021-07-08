@@ -56,7 +56,7 @@ export const ChatList = () => {
     <>
       <section className="chatCards__container">
       
-          {messagesBySender.length === 0 ? <div>You don't have any messages!</div> : 
+          {messagesBySender.length === 0 ? <div className="chatCard">You don't have any messages!</div> : 
             messagesBySender.map(message => {
             return (
               <div className="chatCard" key={message.timestamp} onClick={() => {handleMessageClick(message.userId, message.recipientId)}}>

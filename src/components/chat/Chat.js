@@ -178,7 +178,7 @@ export const Chat = () => {
             {/* <fieldset> */}
              
                 {/* <label htmlFor="message">Message</label> */}
-                <Input className="messageForm-control" type="text" id="text" required  placeholder="message" value={message.text} onChange={handleControlledInputChange} onKeyPress={(ev) => {
+                <Input margin="dense" className="messageForm-control" type="text" id="text" required  placeholder="message" value={message.text} onChange={handleControlledInputChange} onKeyPress={(ev) => {
     console.log(`Pressed keyCode ${ev.key}`);
     if (ev.key === 'Enter') {
       // Do code here

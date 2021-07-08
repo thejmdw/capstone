@@ -77,6 +77,7 @@ export const SearchForm = () => {
     // e.preventDefault()
     search.userTypeId = currentUser.userTypeId
     console.log(search)
+    search.city = search.city.toLowerCase()
     if (search.city === undefined || search.state_code === undefined ) {
       window.alert("Please select a city and state")
       } else if (currentUser.userTypeId === 1) {

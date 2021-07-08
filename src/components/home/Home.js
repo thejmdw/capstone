@@ -29,7 +29,7 @@ export const Home = () => {
     <>
     <ThemeProvider theme={theme}>
       {/* <section className="homeCard__container"> */}
-            <div className='homeProfile_container' className="homeCard__container" key={currentUser.id}>
+            <div  className="homeCard__container" key={currentUser.id}>
               <div className="homeCard">
                 <div className="homeCard__greeting">
                   <img className="homeCard__userAvatar" src={currentUser.avatarURL} alt="user_avatar" />

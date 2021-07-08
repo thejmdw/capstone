@@ -5,7 +5,7 @@ import HomeWorkIcon from '@material-ui/icons/HomeWork';
 import SearchIcon from '@material-ui/icons/Search';
 import MessageIcon from '@material-ui/icons/Message';
 import IconButton from "@material-ui/core/IconButton"
-import Badge from '@material-ui/core/Badge';
+import { Badge, Button, Menu, MenuItem } from '@material-ui/core';
 import "./NavBar.css"
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { MessageContext } from "../chat/MessageProvider";
@@ -21,12 +21,21 @@ export const NavBar = () => {
     history.goBack()
   }
 
+  const [anchorEl, setAnchorEl] = useState(null);
   // const [ unreadMessages, setUnreadMessages ] = useState({})
 
   useEffect(() => {
     getUnreadMessagesByUserId(currentUser)
     .then((data) => { setUnreadMessages(data) })
   }, [])
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   
 
   return (
@@ -69,6 +78,22 @@ export const NavBar = () => {
           <PersonIcon fontSize="large"/>
         </IconButton>
       </Link>
+      {/* <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+        Open Menu
+      </Button>
+      <div>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>Messages</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu>
+      </div> */}
       </div>
     </div>
   )

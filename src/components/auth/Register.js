@@ -75,7 +75,7 @@ export const Register = (props) => {
                 <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
             </dialog>
 
-            <div className="LoginCard">
+            <div className="LoginCard2">
             <form className="form--login" onSubmit={handleRegister}>
               <h1 className="h3 mb-3 font-weight-normal">Register</h1>
               <fieldset>

@@ -24,6 +24,7 @@ import { Home } from "./home/Home"
 import { FirstTimeHome } from "./home/FirstTimeHome"
 import { Fave } from "./fave/Fave"
 import { Chat } from "./chat/Chat"
+import { Listing } from "./house/Listing"
 import { theme } from "./theme"
 import { ThemeProvider } from "@material-ui/core"
 
@@ -54,6 +55,9 @@ export const ApplicationViews = () => {
             </Route>
             <Route exact path="/listings">
               <ListingList />
+            </Route>
+            <Route exact path="/listing/detail/:listingId(\d+)">
+              <Listing />
             </Route>
           
             <Route exact path="/profile">
