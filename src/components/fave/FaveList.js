@@ -61,7 +61,7 @@ export const FaveList = () => {
             <>
             <TinderCard className='swipe fave' preventSwipe={["up", "down"]} key={fave.id} onSwipe={(dir) => swiped(dir, fave.id)} onCardLeftScreen={() => outOfFrame(fave.property_id)}>
             <div style={{backgroundImage: `url(${fave.photo})`}} className="faveCard" onClick={() => {handleFaveClick(fave.id, fave.property_id)}}>
-                <div className="faveCardTitle" onClick={() => {handleFaveClick(fave.id, fave.property_id)}}>
+                <div className="faveCardTitle" onClick={() => {handleFaveClick(fave.id ? fave.id : fave.property_id)}}>
                 {/* <img  alt="house" className="faveList_housePic"/> */}
                 <div className="faveCard_address">
                   <h5>{fave.address} {fave.city}</h5>
