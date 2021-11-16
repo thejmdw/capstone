@@ -12,6 +12,7 @@ import { SearchList } from "./search/SearchList"
 import { SearchResultsList } from "./search/SearchResultsList"
 import { FaveList } from "./fave/FaveList"
 import { ChatList } from "./chat/ChatList"
+import { ListingList } from "./house/ListingList"
 //forms
 import { SearchForm } from "./search/SearchForm"
 import { UserForm } from "./user/UserForm"
@@ -23,6 +24,7 @@ import { Home } from "./home/Home"
 import { FirstTimeHome } from "./home/FirstTimeHome"
 import { Fave } from "./fave/Fave"
 import { Chat } from "./chat/Chat"
+import { Listing } from "./house/Listing"
 import { theme } from "./theme"
 import { ThemeProvider } from "@material-ui/core"
 
@@ -50,6 +52,12 @@ export const ApplicationViews = () => {
 
             <Route exact path="/listing">
               <ListingForm />
+            </Route>
+            <Route exact path="/listings">
+              <ListingList />
+            </Route>
+            <Route exact path="/listing/detail/:listingId(\d+)">
+              <Listing />
             </Route>
           
             <Route exact path="/profile">

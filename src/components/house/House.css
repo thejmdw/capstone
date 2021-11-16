@@ -1,13 +1,18 @@
 .houseCard {
   background-position: center;
   background-size: cover;
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  background-color: rgb(255, 255, 255, .75);
+  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .25);
+  border: 2px solid gray;
   border-radius: 20px;
-  height: 50vh;
+  height: fit-content;
   max-width: 85vh;
   padding: 20px;
   position: relative;
-  width: 600px
+  width: 40vh
+}
+.listingInputField {
+  padding: 0 0 1vh 0;
 }
 
 .houseCard > h3 {
@@ -20,8 +25,90 @@
   display: flex;
   justify-content: center;
   margin-top: 5vh;
+  
+}
+.listingsList__container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5vh;
+  height: 65vh;
 }
 
 .swipe {
   position: absolute;
+}
+.listingButton-flex {
+  display: flex;
+  justify-content: space-between;
+}
+.listingForm {
+  background-position: center;
+  background-size: cover;
+  background-color: rgb(255, 255, 255, .75);
+  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .25);
+  border: 2px solid gray;
+  border-radius: 20px;
+  /* height: 65vh; */
+  max-width: 85vh;
+  padding: 20px;
+  position: relative;
+  width: 40vh;
+}
+.listingFormFlex {
+  display: flex;
+}
+
+.listing-state-field {
+  width: 30vh;
+}
+
+.listingForm-control {
+  display: block;
+  width: 100%;
+  /* height: calc(1em + .75rem + 2px); */
+  /* padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
+}
+
+.listingFormDropDown-control {
+ width: 25% 
+}
+
+.listingForm > h3 {
+  position: aboslute;
+  bottom: 10px;
+  color: white;
+}
+
+.listingForm__Container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5vh;
+  height: 65vh;
+}
+
+.form-group {
+  flex-basis: 40%;
+}
+
+.listingList {
+  display: flex;
+  padding-top: 1vh
+}
+
+.listingListButton {
+  padding: 5px !important;
+}
+
+.listingListImage {
+  height: 40px;
 }

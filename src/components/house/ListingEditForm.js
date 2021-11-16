@@ -97,21 +97,20 @@ export const ListingForm = () => {
     <div className="listingForm__Container">
     <form className="listingForm">
       <h2 className="userForm__title">Add Listing</h2>
-      <fieldset className="listingInputField">
+      <fieldset>
         <div className="form-group">
           <label htmlFor="address">Address:</label>
-          <Input margin="dense" type="text" id="address" required autoFocus className="form-control" placeholder="Address" value={house.address.line} onChange={handleControlledInputChange} />
+          <Input type="text" id="address" required autoFocus className="form-control" placeholder="Address" value={house.address.line} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
-      <fieldset className="listingInputField">
+      <fieldset>
         <div className="form-group">
           <label htmlFor="city">City:</label>
-          <Input margin="dense" type="text" id="city" required className="form-control" placeholder="City" value={house.address.city} onChange={handleControlledInputChange} />
+          <Input type="text" id="city" required className="form-control" placeholder="City" value={house.address.city} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
-      <div className="listingFormFlex">
-      <fieldset className="listingInputField">
-          <div className="form-group listing-state-field">
+      <fieldset>
+          <div className="form-group">
             <InputLabel htmlFor="location">State:</InputLabel>
             <Select name="state_mode" required id="state_code" className="SearchForm-control SearchFormDropDown-control" value={house.state_code} onChange={handleControlledStateChange}>
               {/* <option value="0">Select</option> */}
@@ -123,32 +122,31 @@ export const ListingForm = () => {
             </Select>
           </div>
         </fieldset>
-      <fieldset className="listingInputField">
+      <fieldset>
           <div className="form-group">
             <label htmlFor="PostalCode">Zip Code:</label>
-            <Input  margin="dense"type="num" id="postal_code" className="SearchForm-control" placeholder="5 Digit Postal Code" value={house.address.postal_code} onChange={handleControlledInputChange} />
+            <Input type="num" id="postal_code" className="SearchForm-control" placeholder="5 Digit Postal Code" value={house.address.postal_code} onChange={handleControlledInputChange} />
           </div>
         </fieldset>
-        </div>
-      <fieldset className="listingInputField">
+      <fieldset>
         <div className="form-group">
           <label htmlFor="price">Price:</label>
-          <Input  margin="dense"type="num" id="price" className="SearchForm-control" placeholder="$" value={house.price} onChange={handleControlledInputChange} />
+          <Input type="num" id="price" className="SearchForm-control" placeholder="$" value={house.price} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
-      <fieldset className="listingInputField">
+      <fieldset>
         <div className="form-group">
           <label htmlFor="beds">Bedrooms:</label>
-          <Input margin="dense" type="num" id="beds" className="SearchForm-control" placeholder="0" value={house.beds} onChange={handleControlledInputChange} />
+          <Input type="num" id="beds" className="SearchForm-control" placeholder="0" value={house.beds} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
-      <fieldset className="listingInputField">
+      <fieldset>
         <div className="form-group">
           <label htmlFor="baths_full">Full Baths:</label>
-          <Input margin="dense" type="num" id="baths_full" className="SearchForm-control" placeholder="0" value={house.baths_full} onChange={handleControlledInputChange} />
+          <Input type="num" id="baths_full" className="SearchForm-control" placeholder="0" value={house.baths_full} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
-      <fieldset className="listingInputField">
+      <fieldset>
         <div className="form-group">
           {/* <label htmlFor="avatarUrl">Upload Picture:</label> */}
           <Button color="secondary" size="small" variant="contained" component="label">
@@ -170,7 +168,7 @@ export const ListingForm = () => {
           <input type="text" id="avatarURL" required autoFocus className="form-control" placeholder="Picture URL" value={house.avatarURL} onChange={handleControlledInputChange} />
         </div>
       </fieldset> */}
-      <fieldset  className="listingInputField">
+      <fieldset>
         {/* <div className="form-group">
           <label htmlFor="userTypeId">For Rent:</label>
           <input type="radio" id="userTypeId" className="form-control" checked={parseInt(house.userTypeId) === 1 ? true : false} value="1" onChange={handleControlledInputChange} />
@@ -184,7 +182,6 @@ export const ListingForm = () => {
                 <FormControlLabel className="radio" id="userTypeId"  value="2" checked={parseInt(house.userTypeId) === 2 ? true : false } control={<Radio />} label="For Sale" onChange={handleControlledRadioChange} />
                 </div>
       </fieldset>
-      <div className="listingButton-flex">
       <Button variant="contained" color="primary" className="btn btn-primary"
           disabled={isLoading}
           onClick={() => history.push(`/profile`)}>
@@ -198,7 +195,6 @@ export const ListingForm = () => {
           }}>
           Add Listing
       </Button>
-      </div>
     </form>
     </div>
   )

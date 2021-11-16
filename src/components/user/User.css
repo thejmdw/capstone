@@ -1,17 +1,20 @@
 .userCard {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   /* flex-direction: row;
   flex-wrap: wrap; */
   background-position: center;
   background-size: cover;
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  background-color: rgb(255, 255, 255, .75);
+  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .25);
+  border: 2px solid gray;
   border-radius: 20px;
-  height: 100%;
-  max-width: 85vh;
+  height: fit-content;
+  /* max-width: 85vh; */
   padding: 20px;
   position: relative;
-  width: 55vh;
+  width: 250px;
 }
 .userCard2 {
   /* display: flex; */
@@ -20,13 +23,15 @@
   flex-wrap: wrap; */
   background-position: center;
   background-size: cover;
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  background-color: rgb(255, 255, 255, .75);
+  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .25);
+  border: 2px solid gray;
   border-radius: 20px;
-  height: 100%;
+  height: fit-content;
   max-width: 85vh;
   padding: 20px;
   position: relative;
-  width: 40vh;
+  width: 250px;
 }
 
 /* .test {
@@ -45,7 +50,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-around ;
+  padding: 5px 0;
 }
 .userCard > h3 {
   position: aboslute;
@@ -55,7 +61,7 @@
 .userCard__searchList {
   display: flex;
   flex-direction: column;
-  padding-top: 2vh;
+  padding-top: 10px;
 }
 
 .center {
@@ -65,10 +71,11 @@
   align-items: center;
 }
 
-.buttons {
+.userButtons {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 1vh 0;
 }
 .buttons2 {
   display: flex;
@@ -80,7 +87,14 @@
 .userCard__container {
   display: flex;
   justify-content: center;
+  margin: 10px 0;
+  /* height: 65vh; */
+}
+.userCard__container2 {
+  display: flex;
+  justify-content: center;
   margin-top: 5vh;
+  height: 65vh;
 }
 
 .userProfile_container {
@@ -100,37 +114,40 @@
   /* margin-top: 5vh; */
 }
 .userProfile_avatar {
-  width: 17vh;
-  height: 17vh;
+  width: 140px;
+  height: 140px;
   border-radius: 75px;
-  padding-bottom: 1vh;
+  padding-bottom: 5px;
 }
 
 .userForm {
   /* border: 2px solid black; */
   background-position: center;
   background-size: cover;
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  background-color: rgb(255, 255, 255, .75);
+  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .25);
+  border: 2px solid gray;
   border-radius: 20px;
   height: 50vh;
-  max-width: 85vh;
+  /* max-width: 85vh; */
   padding: 20px;
   position: relative;
-  width: 60vh
+  width: 250px;
 }
 
 .userForm-group {
   /* border: 2px solid black; */
   display: flex;
   flex-direction: column;
-  width: 20vh;
+  width: 200px;
   justify-content: center;
 }
 .userForm-group2 {
   /* border: 2px solid black; */
   display: flex;
   flex-direction: column;
-  width: 30vh;
+  padding: 5px 0 5px;
+  width: 250px;
   justify-content: center;
 }
 .uploadButton {
@@ -142,4 +159,18 @@
   /* border: 2px solid black; */
   display: flex;
   justify-content: center;
+}
+
+.userForm_columnFlex {
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.deleteSearchButton {
+  padding: 5px !important;
+}
+
+#userTypeId {
+  margin-right: 0px;
 }

@@ -19,6 +19,12 @@ export const UserForm = () => {
     avatarURL: "",
     userTypeId: 0
   })
+  const [userOG, setUserOG] = useState({
+    name: "",
+    email: "",
+    avatarURL: "",
+    userTypeId: 0
+  })
   const [pic, setPic] =useState({
     file: "",
   })
@@ -27,6 +33,7 @@ export const UserForm = () => {
     if (userId) {
       getUserById(parseInt(userId))
       .then(user => {
+        setUserOG(user)
         setUser(user)
         setIsLoading(false)
       })
@@ -65,6 +72,10 @@ export const UserForm = () => {
     
   }
 
+  const resetForm = (e) => {
+    setUser(userOG)
+  }
+
   const uploadImage = event => {
     const data = new FormData()
     data.append("file", pic.file[0])
@@ -88,8 +99,8 @@ export const UserForm = () => {
               <div className="buttons2">
               <div className="uploadButton centerButton">
                 <Button  color="secondary" size="small" variant="contained" component="label">
-                  Choose File
-                  <input accept="image/*" type="file" hidden/>
+                  Choose Image
+                  <input id="file" type="file" onChange={handleControlledPicChange} hidden/>
                 </Button>
               </div>
               <div className="uploadButton">
@@ -146,11 +157,11 @@ export const UserForm = () => {
                 <FormControlLabel className="radio" id="userTypeId"  value="3" checked={parseInt(user.userTypeId) === 3 ? true : false} control={<Radio />} label="Agent" onChange={handleControlledRadioChange} />
                 </div>
           </fieldset>
-          <div className="buttons" >
+          <div className="userButtons" >
           <Button variant="contained" color="secondary" className="btn btn-primary"
               disabled={isLoading}
-              onClick={() => history.push(`/profile`)}>
-              Go Back
+              onClick={resetForm}>
+              Reset
           </Button>
           <Button variant="contained" color="primary" className="btn btn-primary"
               disabled={isLoading}

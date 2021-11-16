@@ -1,9 +1,11 @@
 .chatCard {
   background-position: center;
   background-size: cover;
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  background-color: rgba(255, 255, 255, 0.75);
+  box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.25);
+  border: 2px solid gray;
   border-radius: 20px;
-  height: 100%;
+  height: fit-content;
   max-width: 85vh;
   padding: 20px;
   position: relative;
@@ -28,15 +30,46 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-top: 5vh;
+  /* justify-content: center; */
+  margin-top: 2vh;
+  height: 65vh;
+} 
+.chatCards__container > h3 {
+  color: rgba(255, 255, 255, 0.75);
+  padding-bottom: 1.5vh;
 }
 .chatFlex {
   display: flex;
 }
+.chatMessage {
+  padding-bottom: 2vh;
+}
+.chatMessageText {
+  padding-top: .5vh;
+  width: 32vh
+}
+.chatFlexMessage {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: space-between;
+}
+.chatFlexMessageTime {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  width: 32vh;
+  /* justify-content: space-between; */
+}
+.chatMessagePadding {
+  padding-left: 1vh;
+}
+.chatMessageColor {
+  color: rgb(82, 82, 82)
+}
 .chatFlexStart {
   display: flex;
-  background-color:rgba(136, 177, 189, 0.747);
+  background-color:rgba(14, 148, 189, 0.432);
   flex-direction: column;
   border-radius: 20px 20px 20px 0;
   /* justify-content: flex-end; */
@@ -45,7 +78,7 @@
   display: flex;
   border-radius: 20px 20px 0px 20px;
   flex-direction: column;
-  background-color:rgba(143, 189, 136, 0.747);
+  background-color:rgba(46, 196, 23, 0.432);
   justify-content: flex-end;
 }
 .end {
@@ -54,19 +87,23 @@
 }
 .endPadding{
   
-  padding-right: 4vh
+  padding-right: 1vh
 }
 .startPadding {
-  padding-left: 4vh
+  padding-left: 1vh
 }
 .swipe {
   position: absolute;
 }
-
+.buttonPadding {
+  padding: 5px !important;
+}
 .chatDetailCard {
   background-position: center;
   background-size: cover;
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  background-color: rgb(255, 255, 255, .75);
+  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .25);
+  border: 2px solid gray;
   border-radius: 20px;
   height: 100%;
   max-width: 85vh;
@@ -100,14 +137,17 @@
   display: flex;
   justify-content: space-between;
   background-position: center;
+  background-color: rgb(255, 255, 255, .75);
   background-size: cover;
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.25);
+  border: 2px solid gray;
   border-radius: 20px;
   height: 50%;
   max-width: 85vh;
-  padding: 20px;
+  padding: 1vh 2vh 2.5vh 2vh ;
   position: relative;
   width: 40vh;
+  /* margin-bottom: 2vh; */
 }
 
 .messageForm-control {
@@ -140,7 +180,7 @@
 .messageForm__Container {
   display: flex;
   justify-content: center;
-  margin-top: 5vh;
+  margin-top: 1vh;
 }
 
 .sendBtn {

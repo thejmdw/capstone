@@ -28,18 +28,18 @@ export const FirstTimeHome = () => {
       
       <section className="homeCard__container">
             <div className='homeProfile_container' key={currentUser.id}>
-              <div className="homeCard">
+              <div className="homeIntroCard">
                 <div className="homeCard__greeting">
                   <img className="homeCard__userAvatar" src={currentUser.avatarURL} alt="user_avatar" />
                   <div>
-                    <h2>Welcome To SwipeHome!</h2>
-                    <h3>{currentUser.name}</h3>
-                    <p>Get started by searching first.</p>
+                    <h3 className="greetingTextSmall">Welcome To SwipeHome!</h3>
+                    <h3 className="greetingTextSmall">{currentUser.name}</h3>
+                    <p className="greetingTextSmall">Get started by searching first.</p>
                   </div>
                 </div>
                 
-              <div>
-                <Button onClick={() => history.push("/search")}>New Search</Button>
+              <div className="homeIntro_button">
+                <Button variant="contained" color="primary" onClick={() => history.push("/search")}>New Search</Button>
               </div>
               </div>
             </div>

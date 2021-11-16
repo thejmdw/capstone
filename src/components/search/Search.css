@@ -3,13 +3,15 @@
   align-items: flex-end;
   background-position: center;
   background-size: cover;
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  background-color: rgb(255, 255, 255, .75);
+  box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.05);
+  border: 2px solid gray;
   border-radius: 20px;
-  height: 50vh;
+  height: 300px;
   max-width: 85vh;
-  padding: 20px;
+  /* padding: 20px; */
   position: relative;
-  width: 50vh;
+  width: 270px;
 }
 
 .searchCard > h3 {
@@ -19,6 +21,12 @@
 }
 
 .searchCard__container {
+  display: flex;
+  justify-content: center;
+  /* margin-top: 5vh; */
+  /* height: 65vh; */
+}
+.searchCard__container2 {
   display: flex;
   justify-content: center;
   margin-top: 5vh;
@@ -54,8 +62,9 @@
   justify-content: space-around;
   align-items: center;
   width: 100%;
+  padding: 0 5px;
   /* border: 2px solid white; */
-  height: 7vh
+  height: 60px
 }
 
 .swipe {
@@ -71,13 +80,15 @@
 .searchForm {
   background-position: center;
   background-size: cover;
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  background-color: rgb(255, 255, 255, .75);
+  box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.25);
+  border: 2px solid gray;
   border-radius: 20px;
   height: 100%;
   max-width: 85vh;
   padding: 20px;
   position: relative;
-  width: 40vh;
+  width: 250px;
 }
 
 .SearchForm-control {
@@ -110,11 +121,17 @@
 .searchForm__Container {
   display: flex;
   justify-content: center;
-  margin-top: 5vh;
+  margin-top: 1vh;
 }
 
-.form-group {
-  flex-basis: 40%;
+.form-group-select {
+  display: flex;
 }
 
+.searchForm_inputs > fieldset {
+  padding: 1rem 0 0;
+}
 
+.inputRadio {
+  padding-top: 0;
+}

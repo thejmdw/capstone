@@ -7,20 +7,36 @@ fieldset {
     padding: 1rem 0;
     margin: 0;
     border: 0;
-    width: 40vh
+    width: 200px
 }
 
 .LoginCard {
     display: flex;
     background-position: center;
+    background-color: rgb(255, 255, 255, .75);
     background-size: cover;
-    box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+    box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.2);
+    border: 2px solid gray;
     border-radius: 20px;
-    height: 100%;
-    max-width: 85vh;
+    height: 225px;
+    /* max-width: 85vh; */
     padding: 20px;
     position: relative;
-    width: 40vh
+    width: 250px;
+  }
+.LoginCard2 {
+    display: flex;
+    background-position: center;
+    background-color: rgb(255, 255, 255, .75);
+    background-size: cover;
+    box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.2);
+    border: 2px solid gray;
+    border-radius: 20px;
+    height: 360px;
+    /* max-width: 200px; */
+    padding: 20px;
+    position: relative;
+    width: 250px;
   }
 
 
@@ -70,6 +86,7 @@ fieldset {
 }
 .register_buttons {
     display: flex;
+    justify-content: space-between;
 }
 /* .register_button {
     margin-right: 1vh;
@@ -84,9 +101,9 @@ fieldset {
     background-position-x: right;
     /* background-image: url(logo.png); */
     z-index: 1;
-    min-height: 25rem;
-    min-width: 35rem;
-    background-color: hsla(0,0%,100%,0.40);
+    /* min-height: 25rem; */
+    /* min-width: 35rem; */
+    /* background-color: hsla(0,0%,100%,0.40); */
     background-blend-mode: overlay;
     background-repeat: no-repeat;
 }
@@ -106,4 +123,5 @@ fieldset {
     display: flex;
     justify-content: center;
     margin-top: 5vh;
+    height: 65vh;
   }

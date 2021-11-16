@@ -75,7 +75,7 @@ export const Register = (props) => {
                 <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
             </dialog>
 
-            <div className="LoginCard">
+            <div className="LoginCard2">
             <form className="form--login" onSubmit={handleRegister}>
               <h1 className="h3 mb-3 font-weight-normal">Register</h1>
               <fieldset>
@@ -173,12 +173,12 @@ export const Register = (props) => {
                 </div>
               </fieldset>
               <div className="register_buttons">
-                <fieldset className="register_button">
+                <fieldset className="register_buttons">
+                    <Button variant="contained" color="secondary" onClick={() => history.push("/login")}> Go Back </Button>
                     <Button variant="contained" color="primary" type="submit"> Sign in </Button>
                 </fieldset>
-                <fieldset className="register_button">
-                    <Button variant="contained" color="secondary" onClick={() => history.push("/login")}> Go Back </Button>
-                </fieldset>
+                {/* <fieldset className="register_button">
+                </fieldset> */}
               </div>
             </form>
             </div>

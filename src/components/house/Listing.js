@@ -1,26 +1,26 @@
 import React from "react"
 import { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
-import { FaveContext } from "./FaveProvider"
+import { FaveContext } from "../fave/FaveProvider"
 import { HouseContext } from "../house/HouseProvider"
 import { Button } from "@material-ui/core"
-import "./Fave.css"
+import "../fave/Fave.css"
 import TinderCard from "react-tinder-card"
 import Carousel from 'nuka-carousel';
 // import GoogleMapReact from "google-map-react"
 
-export const Fave = () => {
+export const Listing = () => {
   const { getFaveById, getFaveDetail } = useContext(FaveContext)
   const { getHouseById } = useContext(HouseContext)
   const history = useHistory()
-  const { faveId } = useParams()
+  const { listingId } = useParams()
 
-  const [ faveDetail, setFaveDetail ] = useState({address: {}, photos: []})
+  const [ listingDetail, setListingDetail ] = useState({address: {}, photos: []})
 
   useEffect(() => {
-    getFaveById(parseInt(faveId))
-    .then(f => f.property_id ? getFaveDetail(f.property_id) : getHouseById(f.houseId))
-    .then((data) => setFaveDetail(data))
+    getFaveById(parseInt(listingId))
+    .then(l => getHouseById(l.id))
+    .then((data) => setListingDetail(data))
   }, [])
 
   const handleContactAgent = (userId) => {
@@ -43,23 +43,23 @@ export const Fave = () => {
             
               <div className="faveDetailCard">
                 <Carousel className="faveCarousel">
-                  {faveDetail.photos?.slice(0, 16).map(p => <img src={p.href} alt="housing"></img>)}
+                  {listingDetail.photos?.slice(0, 16).map(p => <img src={p.href} alt="housing"></img>)}
                 </Carousel>
                 <div className="faveDetailFlex">
                   
                 <div className="faveDetailFlexColumn">
                     <div>
-                    <h4>{faveDetail.address.line} </h4>
-                    <h4>{faveDetail.address.city},{faveDetail.address.state_code} {faveDetail.address.postal_code}</h4>
-                    <h4>{faveDetail.address.neighborhood_name}</h4>
+                    <h4>{listingDetail.address?.line} </h4>
+                    <h4>{listingDetail.address?.city},{listingDetail.address?.state_code} {listingDetail.address?.postal_code}</h4>
+                    <h4>{listingDetail.address?.neighborhood_name}</h4>
                     {/* <h3>{faveDetail.prop_type}</h3> */}
-                    <h4>Beds: {faveDetail.beds}</h4>
-                    <h4>Baths: {faveDetail.baths}</h4>
-                    <h3>Price: ${faveDetail.price}</h3>
+                    <h4>Beds: {listingDetail.beds}</h4>
+                    <h4>Baths: {listingDetail.baths}</h4>
+                    <h3>Price: ${listingDetail.price}</h3>
                     </div>
                     <div>
                   <h4>Listing Agent</h4>
-                  {faveDetail.branding ? <div><div>{faveDetail.branding.listing_agent.details?.name}</div><div> {faveDetail.branding.listing_office.details.name}</div><div> {faveDetail.branding.listing_office.details.phone}</div></div> : <Button onClick={() => {handleContactAgent(faveDetail.user.id)}}>{faveDetail.user?.name}</Button>}
+                  {listingDetail.branding ? <div><div>{listingDetail.branding.listing_agent.details?.name}</div><div> {listingDetail.branding.listing_office.details.name}</div><div> {listingDetail.branding.listing_office.details.phone}</div></div> : <Button onClick={() => {handleContactAgent(listingDetail.user.id)}}>{listingDetail.user?.name}</Button>}
                   </div>
                   </div>
                 <iframe 
@@ -68,7 +68,7 @@ export const Fave = () => {
                   frameborder="0"
                   style={{border:0}}
                   className="faveMaps"
-                  src={`https://www.google.com/maps/embed/v1/place?q=${faveDetail.address.line}${faveDetail.address.city}${faveDetail.address.state_code}${faveDetail.address.lat ? `&center=${faveDetail.address.lat},${faveDetail.address.lon}` : ""}&zoom=17&key=AIzaSyBDNm_nEXINx2bsVUSflyt633t7rVecQgA
+                  src={`https://www.google.com/maps/embed/v1/place?q=${listingDetail.address?.line}${listingDetail.address?.city}${listingDetail.address?.state_code}${listingDetail.address?.lat ? `&center=${listingDetail.address?.lat},${listingDetail.address?.lon}` : ""}&zoom=17&key=AIzaSyBDNm_nEXINx2bsVUSflyt633t7rVecQgA
                   &maptype=roadmap`} />
                 </div>
                 <div>

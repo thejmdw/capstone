@@ -1,11 +1,13 @@
 import React from "react"
 import { NavBar } from "./nav/NavBar"
+import { Footer } from "./footer/Footer"
 import { ApplicationViews } from "./ApplicationViews"
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import { Route, Redirect } from "react-router-dom"
 import { UserProvider } from "./user/UserProvider"
 import { MessageProvider } from "./chat/MessageProvider"
+import "./SwipeHome.css"
 
 import { createMuiTheme } from '@material-ui/core/styles';
 
@@ -31,7 +33,8 @@ export const SwipeHome = () => (
               <MessageProvider>
                 <NavBar />
               
-                <ApplicationViews />
+                <ApplicationViews/>
+                {/* <Footer/> */}
               </MessageProvider>
             </>
           );

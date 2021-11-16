@@ -1,13 +1,34 @@
 .faveCard {
   background-position: center;
   background-size: cover;
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  background-color: rgb(255, 255, 255, .75);
+  box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.25);
+  border: 2px solid gray;
   border-radius: 20px;
   height: 50vh;
   max-width: 85vh;
   padding: 20px;
   position: relative;
   width: 40vh;
+  display: flex;
+  align-items: flex-end;
+}
+
+.noFaveCard {
+  background-position: center;
+  background-size: cover;
+  background-color: rgb(255, 255, 255, .75);
+  box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.25);
+  border: 2px solid gray;
+  border-radius: 20px;
+  height: 10vh;
+  max-width: 85vh;
+  padding: 20px;
+  position: relative;
+  width: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .faveCard > h3 {
@@ -22,27 +43,41 @@
 .faveCards__container {
   display: flex;
   justify-content: center;
+  height: 65vh;
   margin-top: 5vh;
 }
 
 .swipe {
   position: absolute;
 }
+.faveDetailFlex {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2vh;
+}
+.faveDetailFlexColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 
 .faveDetailCard {
   background-position: center;
   background-size: cover;
-  box-shadow: 0px 18px 25px 0 rgba(0, 0, 0, .1);
+  background-color: rgb(255, 255, 255, .75);
+  box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.25);
+  border: 2px solid gray;
   border-radius: 20px;
   height: 100%;
   max-width: 85vh;
   padding: 20px;
   position: relative;
-  width: 50vh;   
+  width: 250px;   
 }
 
 .faveCard_address {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
@@ -55,9 +90,23 @@
 .faveDetailCard__container {
   display: flex;
   justify-content: center;
-  margin-top: 5vh;
+  margin-top: 10px;
+}
+.faveMaps {
+  width: 20vh;
+  height: 20vh;
 }
 
 .faveCarousel {
   height: 0%;
+}
+.faveCardTitle {
+  display:flex;
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.9374124649859944) 70%, rgba(255,255,255,0) 100%);
+  border-radius: 0 0 15px 15px ;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  /* border: 2px solid white; */
+  height: 7vh
 }

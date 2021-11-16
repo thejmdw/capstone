@@ -56,20 +56,20 @@ export const ChatList = () => {
     <>
       <section className="chatCards__container">
       
-          {messagesBySender.map(message => {
+          {messagesBySender.length === 0 ? <div className="chatCard">You don't have any messages!</div> : 
+            messagesBySender.map(message => {
             return (
               <div className="chatCard" key={message.timestamp} onClick={() => {handleMessageClick(message.userId, message.recipientId)}}>
-              <div>
+              <div className="chatFlexMessage">
                 <div className="chatFlex">
                 <Avatar alt="user profile" src={message.avatarURL} />
                   {/* // <img className="chatCard__img" src={message.avatarURL} alt="profile"/> */}
-                  <div>
+                  <div className="chatMessagePadding">
                     <h3>{message.name}</h3>
-                    {message.text}
+                    <div className="chatMessageColor">{message.text}</div>
                   </div>
                 </div>
-                {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(message.timestamp)
-}
+                <h6 className="chatMessageColor">{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).format(message.timestamp)}</h6>
               </div>
                 
                   
