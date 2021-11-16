@@ -111,7 +111,7 @@ export const SearchForm = () => {
           </div>
         </fieldset>
         <fieldset>
-          <div className="form-group">
+          <div className="form-group-state">
             <InputLabel htmlFor="location">State:</InputLabel>
             <Select name="state_mode" required id="state_code" className="SearchForm-control SearchFormDropDown-control" value={search?.state_code} onChange={handleControlledStateChange} required>
               
@@ -139,7 +139,7 @@ export const SearchForm = () => {
           </div>
         </fieldset>
         <fieldset>
-          <div className="form-group">
+          <div className="form-group-select">
             <InputLabel htmlFor="beds_min">Beds Min:</InputLabel>
             <Select name="beds_min" id="beds_min" className="SearchForm-control SearchFormDropDown-control" value={search?.beds_min} onChange={handleControlledInputChange}>
               <MenuItem value="0">0</MenuItem>
@@ -150,7 +150,7 @@ export const SearchForm = () => {
           </div>
         </fieldset>
         <fieldset>
-          <div className="form-group">
+          <div className="form-group-select">
             <InputLabel htmlFor="baths_min">Baths Min:</InputLabel>
             <Select name="baths_min" id="baths_min" className="SearchForm-control SearchFormDropDown-control" value={search?.baths_min} onChange={handleControlledInputChange}>
               <MenuItem value="1">1</MenuItem>
@@ -159,7 +159,7 @@ export const SearchForm = () => {
             </Select>
           </div>
         </fieldset>
-        <fieldset className="">
+        <fieldset className="inputRadio">
             <div className="radios">
                 <FormControlLabel className="radio" id="userTypeId"  value="1" checked={parseInt(user.userTypeId) === 1 ? true : false} control={<Radio />} label="Renter" onChange={handleControlledRadioChange} />
                 <FormControlLabel className="radio" id="userTypeId"  value="2" checked={parseInt(user.userTypeId) === 2 ? true : false } control={<Radio />} label="Buyer" onChange={handleControlledRadioChange} />

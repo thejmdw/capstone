@@ -32,7 +32,7 @@ export const FirstTimeHome = () => {
                 <div className="homeCard__greeting">
                   <img className="homeCard__userAvatar" src={currentUser.avatarURL} alt="user_avatar" />
                   <div>
-                    <h2 className="greetingTextSmall">Welcome To SwipeHome!</h2>
+                    <h3 className="greetingTextSmall">Welcome To SwipeHome!</h3>
                     <h3 className="greetingTextSmall">{currentUser.name}</h3>
                     <p className="greetingTextSmall">Get started by searching first.</p>
                   </div>

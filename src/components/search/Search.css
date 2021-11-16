@@ -87,7 +87,7 @@
   max-width: 85vh;
   padding: 20px;
   position: relative;
-  width: 40vh;
+  width: 250px;
 }
 
 .SearchForm-control {
@@ -120,11 +120,17 @@
 .searchForm__Container {
   display: flex;
   justify-content: center;
-  margin-top: 5vh;
+  margin-top: 1vh;
 }
 
-.form-group {
-  flex-basis: 40%;
+.form-group-select {
+  display: flex;
 }
 
+.searchForm_inputs > fieldset {
+  padding: 1rem 0 0;
+}
 
+.inputRadio {
+  padding-top: 0;
+}
