@@ -45,23 +45,22 @@ export const Fave = () => {
                 <Carousel className="faveCarousel">
                   {faveDetail.photos?.slice(0, 16).map(p => <img src={p.href} alt="housing"></img>)}
                 </Carousel>
-                <div className="faveDetailFlex">
-                  
-                <div className="faveDetailFlexColumn">
+                <div className="faveDetailFlex">  
+                  <div className="faveDetailFlexColumn">
                     <div>
-                    <h4>{faveDetail.address.line} </h4>
-                    <h4>{faveDetail.address.city},{faveDetail.address.state_code} {faveDetail.address.postal_code}</h4>
-                    <h4>{faveDetail.address.neighborhood_name}</h4>
-                    {/* <h3>{faveDetail.prop_type}</h3> */}
-                    <h4>Beds: {faveDetail.beds}</h4>
-                    <h4>Baths: {faveDetail.baths}</h4>
-                    <h3>Price: ${faveDetail.price}</h3>
+                      <h4>{faveDetail.address.line} </h4>
+                      <h4>{faveDetail.address.city},{faveDetail.address.state_code} {faveDetail.address.postal_code}</h4>
+                      {/* <h4>{faveDetail.address.neighborhood_name}</h4> */}
+                      {/* <h3>{faveDetail.prop_type}</h3> */}
+                      <div className="faveDetailFlex" style={{"alignItems" : "center"}}>
+                        <div>
+                          <h4>Beds: {faveDetail.beds}</h4>
+                          <h4>Baths: {faveDetail.baths}</h4>
+                        </div>
+                        <h3>Price: ${faveDetail.price}</h3>
+                      </div>
                     </div>
-                    <div>
-                  <h4>Listing Agent</h4>
-                  {faveDetail.branding ? <div><div>{faveDetail.branding.listing_agent.details?.name}</div><div> {faveDetail.branding.listing_office.details.name}</div><div> {faveDetail.branding.listing_office.details.phone}</div></div> : <Button onClick={() => {handleContactAgent(faveDetail.user.id)}}>{faveDetail.user?.name}</Button>}
-                  </div>
-                  </div>
+                  <div>
                 <iframe 
                   // width="250"
                   // height="250"
@@ -70,7 +69,11 @@ export const Fave = () => {
                   className="faveMaps"
                   src={`https://www.google.com/maps/embed/v1/place?q=${faveDetail.address.line}${faveDetail.address.city}${faveDetail.address.state_code}${faveDetail.address.lat ? `&center=${faveDetail.address.lat},${faveDetail.address.lon}` : ""}&zoom=17&key=AIzaSyBDNm_nEXINx2bsVUSflyt633t7rVecQgA
                   &maptype=roadmap`} />
+                  <h4>Listing Agent</h4>
+                  {faveDetail.branding ? <div><div>{faveDetail.branding.listing_agent.details?.name}</div><div> {faveDetail.branding.listing_office.details.name}</div><div> {faveDetail.branding.listing_office.details.phone}</div></div> : <Button onClick={() => {handleContactAgent(faveDetail.user.id)}}>{faveDetail.user?.name}</Button>}
+                  </div>
                 </div>
+              </div>
                 <div>
                 </div>
                 {/* <Button variant="contained" color="primary" onClick={() => history.push(`/faves`)}>Back to Faves</Button> */}

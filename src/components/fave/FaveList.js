@@ -64,12 +64,14 @@ export const FaveList = () => {
                 <div className="faveCardTitle" onClick={() => {handleFaveClick(fave.id ? fave.id : fave.property_id)}}>
                 {/* <img  alt="house" className="faveList_housePic"/> */}
                 <div className="faveCard_address">
-                  <h5>{fave.address} {fave.city}</h5>
-                  <h5>{fave.state_code} {fave.postal_code}</h5>
+                  <h5>{fave.address} </h5>
+                  <h5>{fave.city},{fave.state_code} {fave.postal_code}</h5>
                 </div>
-                <h5>Beds: {fave.beds}</h5>
-                <h5>Baths: {fave.baths}</h5>
-                <h2>Price: ${fave.price}</h2>
+                {/* <h5>Beds: {fave.beds}</h5>
+                <h5>Baths: {fave.baths}</h5> */}
+                <div style={{"display": "flex", "alignItems": "flex-end"}}>
+                <h4>${fave.price}</h4>
+                </div>
                 </div>
               </div>
             </TinderCard>
