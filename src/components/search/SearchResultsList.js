@@ -158,10 +158,10 @@ export const SearchResultsList = () => {
             <ReplayIcon />
           </fontSize=IconButton> */}
           <IconButton  className="buttons_left" onClick={() => swipe('left')}>
-            <CloseIcon />
+            <CloseIcon fontSize="large"/>
           </IconButton >
           <IconButton  className="buttons_right" onClick={() => swipe('right')}>
-            <FavoriteIcon />
+            <FavoriteIcon fontSize="large"/>
           </IconButton>
         </div>
         {/* <button onClick={() => {history.push("/search")}}>Search Again</button> */}
