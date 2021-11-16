@@ -7,11 +7,11 @@
   box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.25);
   border: 2px solid gray;
   border-radius: 20px;
-  height: 40vh;
+  height: 300px;
   max-width: 85vh;
-  padding: 20px;
+  /* padding: 20px; */
   position: relative;
-  width: 40vh;
+  width: 270px;
 }
 
 .searchCard > h3 {
@@ -23,8 +23,8 @@
 .searchCard__container {
   display: flex;
   justify-content: center;
-  margin-top: 5vh;
-  height: 65vh;
+  /* margin-top: 5vh; */
+  /* height: 65vh; */
 }
 .searchCard__container2 {
   display: flex;
@@ -62,6 +62,7 @@
   justify-content: space-around;
   align-items: center;
   width: 100%;
+  padding: 0 5px;
   /* border: 2px solid white; */
   height: 7vh
 }

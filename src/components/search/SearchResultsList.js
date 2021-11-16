@@ -35,42 +35,6 @@ export const SearchResultsList = () => {
   const goBack = () => {
     history.goBack()
   }
-  // const swiped = (direction, houseId, 
-  //                 property_id, address, 
-  //                 city, state_code, 
-  //                 postal_code, photo,
-  //                 beds, baths
-  //                 price, brokerName) => {
-  //   const newFave = {
-  //     userId: parseInt(localStorage.getItem("swipeHome_user")),
-  //     houseId,
-  //     property_id,
-  //     address,
-  //     city,
-  //     state_code,
-  //     postal_code,
-  //     beds,
-  //     baths,
-  //     price,
-  //     photo,
-  //     brokerName,
-  //     timeStamp: Date.now()
-  //   }
-   
-  //   if (direction === "right") {
-  //     if (faves.filter(f => f.property_id === property_id).length === 0) {
-  //       /* faves doesn't contain the a fave with the same property_id */
-  //       addFave(newFave)
-  //     }
-  //     setLastDirection(direction)
-  //     alreadyRemoved.push(nameToDelete)
-  //   }
-  // }
-
-  
-  // const outOfFrame = (name) => {
-  //   console.log(name + ' left the screen!')
-  // }
   
     const allHouses = houses?.concat(localHouses)
     
@@ -82,15 +46,6 @@ export const SearchResultsList = () => {
     
     const [alreadyRemoved, setAlreadyRemoved] = useState([])
   const childRefs = useMemo(() => Array(allHouses?.length).fill(0).map(i => React.createRef()), [])
-
-  
-  //-------
-  
-  // const swiped = (direction, nameToDelete) => {  ...---see swiped above
-  //   console.log('removing: ' + nameToDelete)
-  //   setLastDirection(direction)
-  //   alreadyRemoved.push(nameToDelete)
-  // }
 
   const swiped = (direction, houseId, 
                   property_id, address, 
@@ -183,30 +138,30 @@ export const SearchResultsList = () => {
                         onCardLeftScreen={() => outOfFrame(search.property_id)}>
               <div style={{backgroundImage: `url(${search?.photos[0]?.href})`}} className="searchCard">
                 <div className="searchCardTitle">
-                <h3>{search.address.line} {search.address.city},{search.address.state_code} {search.address.postal_code}</h3>
-                <div className="bedsPrice">
-                <div className="bedsBaths">
-                <h4 className="beds">Beds: {search.beds}</h4>
-                <h4>Baths: {search.baths_full}</h4>
+                <h4>{search.address.line} {search.address.city},{search.address.state_code} {search.address.postal_code}</h4>
+                {/* <div className="bedsPrice">
+                <div className="bedsBaths"> */}
+                {/* <h5 className="beds">Beds: {search.beds}</h5>
+                <h5>Baths: {search.baths_full}</h5> */}
+                <h4>${search.price}</h4>
                 </div>
-                <h3>Price: ${search.price}</h3>
                 </div>
-                </div>
-              </div>
+                {/* </div>
+              </div> */}
             </TinderCard>
             {/* <Buttons /> */}
             </>
           )
         })}
         <div className="rowButtons">
-          {/* <IconButton className="buttons_repeat" onClick={goBack}>
-            <ReplayIcon fontSize="large" />
-          </IconButton> */}
-          <IconButton className="buttons_left" onClick={() => swipe('left')}>
-            <CloseIcon fontSize="large" />
+          {/* < IconButton className="buttons_repeat" onClick={goBack}>
+            <ReplayIcon />
+          </fontSize=IconButton> */}
+          <IconButton  className="buttons_left" onClick={() => swipe('left')}>
+            <CloseIcon />
           </IconButton >
-          <IconButton className="buttons_right" onClick={() => swipe('right')}>
-            <FavoriteIcon fontSize="large" />
+          <IconButton  className="buttons_right" onClick={() => swipe('right')}>
+            <FavoriteIcon />
           </IconButton>
         </div>
         {/* <button onClick={() => {history.push("/search")}}>Search Again</button> */}
@@ -232,8 +187,8 @@ export const SearchResultsList = () => {
                 <h3>{search.address.line} {search.address.city},{search.address.state_code} {search.address.postal_code}</h3>
                 <div className="bedsPrice">
                 <div className="bedsBaths">
-                <h4 className="beds">Beds: {search.beds}</h4>
-                <h4>Baths: {search.baths_full}</h4>
+                {/* <h4 className="beds">Beds: {search.beds}</h4>
+                <h4>Baths: {search.baths_full}</h4> */}
                 </div>
                 <h3>Price: ${search.price}</h3>
                 </div>
@@ -247,14 +202,14 @@ export const SearchResultsList = () => {
 
       </section>
       <div className="rowButtons">
-      <IconButton className="buttons_repeat" onClick={goBack}>
-        <ReplayIcon fontSize="large" />
+      <IconButton  className="buttons_repeat" onClick={goBack}>
+        <ReplayIcon />
       </IconButton>
-      <IconButton className="buttons_left" onClick={() => swiped('left')}>
-        <CloseIcon fontSize="large" />
+      <IconButton  className="buttons_left" onClick={() => swiped('left')}>
+        <CloseIcon />
       </IconButton >
-      <IconButton className="buttons_right" onClick={() => swiped('right')}>
-        <FavoriteIcon fontSize="large" />
+      <IconButton  className="buttons_right" onClick={() => swiped('right')}>
+        <FavoriteIcon />
       </IconButton>
     </div>
     </>

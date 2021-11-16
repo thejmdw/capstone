@@ -86,12 +86,14 @@ export const SearchForm = () => {
     search.city = search.city.toLowerCase()
     if (search.city === undefined || search.state_code === undefined ) {
       window.alert("Please select a city and state")
-      } else if (currentUser.userTypeId === 1) {
+      } else if (parseInt(currentUser.userTypeId) === 1) {
+        search.userTypeId = parseInt(currentUser.userTypeId)
         addSearch(search)
         getHousesForRent(search)
         .then(getLocalHousesRent(search))
           .then(() => history.push("/searchResultsList"))
-      } else if (currentUser.userTypeId === 2) {
+      } else if (parseInt(currentUser.userTypeId) === 2) {
+        search.userTypeId = parseInt(currentUser.userTypeId)
           addSearch(search)
           getHousesForSale(search)
           .then(() => {getLocalHousesSale(search)})
@@ -111,7 +113,7 @@ export const SearchForm = () => {
           </div>
         </fieldset>
         <fieldset>
-          <div className="form-group-state">
+          <div className="form-group-select">
             <InputLabel htmlFor="location">State:</InputLabel>
             <Select name="state_mode" required id="state_code" className="SearchForm-control SearchFormDropDown-control" value={search?.state_code} onChange={handleControlledStateChange} required>
               
