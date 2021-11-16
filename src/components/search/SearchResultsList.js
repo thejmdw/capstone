@@ -72,7 +72,7 @@ export const SearchResultsList = () => {
   //   console.log(name + ' left the screen!')
   // }
   
-    const allHouses = houses.concat(localHouses)
+    const allHouses = houses?.concat(localHouses)
     
     let houseState = allHouses
     
@@ -81,7 +81,7 @@ export const SearchResultsList = () => {
     const [lastDirection, setLastDirection] = useState()
     
     const [alreadyRemoved, setAlreadyRemoved] = useState([])
-  const childRefs = useMemo(() => Array(allHouses.length).fill(0).map(i => React.createRef()), [])
+  const childRefs = useMemo(() => Array(allHouses?.length).fill(0).map(i => React.createRef()), [])
 
   
   //-------
@@ -179,7 +179,7 @@ export const SearchResultsList = () => {
                                                  search.address.line, search.address.city,
                                                  search.address.state_code, search.address.postal_code,
                                                  search.photos[0]?.href, search.beds, search.baths_full,
-                                                 search.price, search.branding?.listing_office.list_item.name)} 
+                                                 search.price, search.branding?.listing_office?.list_item?.name)} 
                         onCardLeftScreen={() => outOfFrame(search.property_id)}>
               <div style={{backgroundImage: `url(${search?.photos[0]?.href})`}} className="searchCard">
                 <div className="searchCardTitle">

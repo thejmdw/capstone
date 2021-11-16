@@ -44,38 +44,38 @@ export const NavBar = () => {
       {/* <Link className="navbar__link" to="/search"> */}
       <div>
         <IconButton className="navbarButtons" onClick={goBack}>
-          <ArrowBackIosIcon fontSize="large" />
+          <ArrowBackIosIcon  />
         </IconButton>
         {/* <Link className="navbar__link" to="/search"> */}
         <IconButton className="navbarButtonGone">
-          <SearchIcon fontSize="large" />
+          <SearchIcon  />
         </IconButton>
       {/* </Link> */}
         </div>
       {/* </Link> */}
       {/* <Link className="navbar__link" to="/search">
         <IconButton className="navbarButtons">
-          <SearchIcon fontSize="large" />
+          <SearchIcon  />
         </IconButton>
       </Link> */}
       <Link className="navbar__link" to="/">
         <IconButton className="navbarButtons navbar_center">
           <Logo className="navbarLogo" />
-          {/* <HomeWorkIcon fontSize="large" /> */}
+          {/* <HomeWorkIcon  /> */}
         </IconButton>
       </Link>
       <div>
       <Link className="navbar__link" to="/messages">
         <IconButton className="navbarButtons navbar_end">
           <Badge badgeContent={unreadMessages.length} color="secondary">
-            <MessageIcon fontSize="large" />
+            <MessageIcon  />
           </Badge>
         </IconButton>
       </Link>
       
       <Link className="navbar__link" to="/profile">
         <IconButton className="navbarButtons navbar_end">
-          <PersonIcon fontSize="large"/>
+          <PersonIcon />
         </IconButton>
       </Link>
       {/* <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>

@@ -75,6 +75,9 @@ export const Chat = () => {
 
   const handleSendMessage = () => {
     // getMessageDetail(property_id)
+    if( message.userId === message.recipientId) {
+      window.alert("You can't send messages to yourself")
+    } else {
     message.timestamp = Date.now()
     message.unread = true
     // message.recipientId = senderId
@@ -87,6 +90,7 @@ export const Chat = () => {
     // .then(() => {history.push(`/chat`)})
     // history.push(`/chat`)
     setMessage({text: ""})
+    }
   }
 
   const handleDeleteMessage = (messageId) => {

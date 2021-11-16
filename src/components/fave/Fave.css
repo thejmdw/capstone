@@ -14,6 +14,23 @@
   align-items: flex-end;
 }
 
+.noFaveCard {
+  background-position: center;
+  background-size: cover;
+  background-color: rgb(255, 255, 255, .75);
+  box-shadow: 0px 18px 25px 0 rgba(255, 255, 255, 0.25);
+  border: 2px solid gray;
+  border-radius: 20px;
+  height: 10vh;
+  max-width: 85vh;
+  padding: 20px;
+  position: relative;
+  width: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .faveCard > h3 {
   position: aboslute;
   bottom: 10px;

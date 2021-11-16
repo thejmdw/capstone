@@ -55,7 +55,7 @@ export const FaveList = () => {
   return (
     <>
       <section className="faveCards__container">
-        {shuffledFaves.length === 0 ? <div>You don't have any faves selected!</div> : 
+        {shuffledFaves.length === 0 ? <div className="noFaveCard">You don't have any faves selected!</div> : 
          shuffledFaves.map((fave) => {
           return (
             <>
