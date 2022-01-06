@@ -19,7 +19,7 @@ export const Register = (props) => {
     const [ userTypeIdState, setUserTypeIdState ] = useState(0)
 
     const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/users?email=${email.current.value}`)
+        return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/users?email=${email.current.value}`)
             .then(res => res.json())
             .then(user => !!user.length)
     }
