@@ -121,7 +121,7 @@ export const Chat = () => {
   return (
     <>
       <section className="chatCards__container">
-          <h3>Your conversation with {sender?.name}</h3>
+          <h5 className="convo">Conversation with {sender?.name}</h5>
           <div className="chatCard">
           {filteredMessages?.map(message => {
             return (

@@ -23,9 +23,31 @@ export const FirstTimeHome = () => {
   const currentUser = user
 
   return (
+    currentUser.userTypeId === 3 ? 
+
     <>
-      
-      
+      <section className="homeCard__container">
+            <div className='homeProfile_container' key={currentUser.id}>
+              <div className="homeIntroCard">
+                <div className="homeCard__greeting">
+                  <img className="homeCard__userAvatar" src={currentUser.avatarURL} alt="user_avatar" />
+                  <div>
+                    <h3 className="greetingTextSmall">Welcome To SwipeHome!</h3>
+                    <h3 className="greetingTextSmall">{currentUser.name}</h3>
+                    <p className="greetingTextSmall">Get started by searching or creating a listing.</p>
+                  </div>
+                </div>
+                
+              <div className="homeIntro_button">
+                <Button variant="contained" color="primary" onClick={() => history.push("/search")}>New Search</Button>
+                <Button variant="contained" color="primary" onClick={() => history.push("/listing")}>New Listing</Button>
+              </div>
+              </div>
+            </div>
+      </section>
+    </>
+    :
+    <>
       <section className="homeCard__container">
             <div className='homeProfile_container' key={currentUser.id}>
               <div className="homeIntroCard">

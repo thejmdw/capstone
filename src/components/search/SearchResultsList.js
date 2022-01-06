@@ -113,7 +113,6 @@ export const SearchResultsList = () => {
       // setLastDirection(dir)
       childRefs[index].current.swipe(dir) // Swipe the card!
     }
-    console.log("HEY!")
   }
   
   //-------
@@ -199,7 +198,7 @@ export const SearchResultsList = () => {
             </>
           )
         })}
-
+      
       </section>
       <div className="rowButtons">
       <IconButton  className="buttons_repeat" onClick={goBack}>
