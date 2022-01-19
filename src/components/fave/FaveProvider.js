@@ -9,7 +9,7 @@ export const FaveProvider = (props) => {
 
 
   const addFave = (faveObj) => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/faves`, {
+    return fetch(`https://swipe-home.herokuapp.com/faves`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -20,19 +20,19 @@ export const FaveProvider = (props) => {
   }
 
   const getFavesByUserId = (userId) => {
-      return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/faves?userId=${userId}`)
+      return fetch(`https://swipe-home.herokuapp.com/faves?userId=${userId}`)
       .then(res => res.json())
       .then(data => setFaves(data))
   }
 
   const removeFave = faveId => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/faves/${faveId}`, {
+    return fetch(`https://swipe-home.herokuapp.com/faves/${faveId}`, {
       method: "DELETE"
     })
   }
 
   const getFaveById = faveId => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/faves/${faveId}?_expand=user`)
+    return fetch(`https://swipe-home.herokuapp.com/faves/${faveId}?_expand=user`)
     .then(res => res.json())
     // .then(setFave)
   }

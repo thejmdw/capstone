@@ -13,7 +13,7 @@ export const MessageProvider = (props) => {
 
   const addMessage = (messageObj) => {
     // debugger
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/messages`, {
+    return fetch(`https://swipe-home.herokuapp.com/messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -24,35 +24,35 @@ export const MessageProvider = (props) => {
   }
   
   const getMessagesByUserIdAndSenderId= (userId, senderId) => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/messages?_sort=userId,recipientId&_order=${senderId},${userId}&_expand=user`)
+    return fetch(`https://swipe-home.herokuapp.com/messages?_sort=userId,recipientId&_order=${senderId},${userId}&_expand=user`)
     .then(res => res.json())
     // .then(data => setSentMessages(data))
   }
   const getMessagesByRecipientId = (recipientId) => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/messages?recipientId=${recipientId}&_expand=user`)
+    return fetch(`https://swipe-home.herokuapp.com/messages?recipientId=${recipientId}&_expand=user`)
     .then(res => res.json())
     .then(data => setReceivedMessages(data))
   }
   
   const getMessagesByUserIdAndRecipientId = (recipientId, userId) => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/messages?userId=${recipientId}&recipientId=${userId}&_expand=user`)
+    return fetch(`https://swipe-home.herokuapp.com/messages?userId=${recipientId}&recipientId=${userId}&_expand=user`)
     .then(res => res.json())
     .then(data => setReceivedMessages(data))
   }
   const getMessagesByRecipientIdAndUserId = (userId, recipientId) => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/messages?recipientId=${userId}&userId=${recipientId}&_expand=user`)
+    return fetch(`https://swipe-home.herokuapp.com/messages?recipientId=${userId}&userId=${recipientId}&_expand=user`)
     .then(res => res.json())
     .then(data => setMessages(data))
   }
   
   const getUnreadMessagesByUserId = (userId) => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/messages?recipientId=${userId}&unread=true`)
+    return fetch(`https://swipe-home.herokuapp.com/messages?recipientId=${userId}&unread=true`)
     .then(res => res.json())
     // .then(data => setUnreadMessages(data))
   }
   
   const removeMessage = messageId => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/messages/${messageId}`, {
+    return fetch(`https://swipe-home.herokuapp.com/messages/${messageId}`, {
       method: "DELETE"
     })
   }
@@ -62,7 +62,7 @@ export const MessageProvider = (props) => {
     messageArray.forEach((messageObj) => {
     const messObjCopy = {...messageObj}
     messObjCopy.unread = false
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/messages/${messageObj.id}`, {
+    return fetch(`https://swipe-home.herokuapp.com/messages/${messageObj.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

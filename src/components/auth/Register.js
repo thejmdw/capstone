@@ -19,7 +19,7 @@ export const Register = (props) => {
     const [ userTypeIdState, setUserTypeIdState ] = useState(0)
 
     const existingUserCheck = () => {
-        return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/users?email=${email.current.value}`)
+        return fetch(`https://swipe-home.herokuapp.com/users?email=${email.current.value}`)
             .then(res => res.json())
             .then(user => !!user.length)
     }
@@ -38,7 +38,7 @@ export const Register = (props) => {
         existingUserCheck()
             .then((userExists) => {
                 if (!userExists) {
-                    fetch("https://swipehome-d73a6-default-rtdb.firebaseio.com/users", {
+                    fetch("https://swipe-home.herokuapp.com/users", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"

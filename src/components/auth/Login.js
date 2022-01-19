@@ -12,7 +12,7 @@ export const Login = (props) => {
 	const history = useHistory();
 
 	const existingUserCheck = () => {
-		return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/users?email=${email.current.value}`)
+		return fetch(`https://swipe-home.herokuapp.com/users?email=${email.current.value}`)
 			.then((res) => res.json())
 			.then((user) => (user.length ? user[0] : false));
 	};

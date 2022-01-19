@@ -12,7 +12,7 @@ export const UserProvider = (props) => {
   
 
   const getUsers = () => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/users?_embed=userType`)
+    return fetch(`https://swipe-home.herokuapp.com/users?_embed=userType`)
     .then(response => 
       response.json()
     )    
@@ -24,7 +24,7 @@ export const UserProvider = (props) => {
   }
 
   const getSenderById = (userId) => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/users/${userId}`, {
+    return fetch(`https://swipe-home.herokuapp.com/users/${userId}`, {
       "method": "GET",
       "headers": {
         "Content-Type": "application/json"
@@ -36,7 +36,7 @@ export const UserProvider = (props) => {
     .then(data => setSender(data))
   }
   const getRecipientById = (userId) => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/users/${userId}`, {
+    return fetch(`https://swipe-home.herokuapp.com/users/${userId}`, {
       "method": "GET",
       "headers": {
         "Content-Type": "application/json"
@@ -48,7 +48,7 @@ export const UserProvider = (props) => {
     .then(data => setRecipient(data))
   }
   const getUserById = (userId) => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/users/${userId}`, {
+    return fetch(`https://swipe-home.herokuapp.com/users/${userId}`, {
       "method": "GET",
       "headers": {
         "Content-Type": "application/json"
@@ -60,7 +60,7 @@ export const UserProvider = (props) => {
   }
 
   const updateUser = userObj => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/users/${userObj.id}`, {
+    return fetch(`https://swipe-home.herokuapp.com/users/${userObj.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -72,7 +72,7 @@ export const UserProvider = (props) => {
 
   const putAvatarURL = (userObj, avatarURL, id) => {
     userObj.avatarURL = avatarURL
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/users/${id}`,{
+    return fetch(`https://swipe-home.herokuapp.com/users/${id}`,{
       method:"PUT",
       headers: {
         "Content-Type": "application/json"

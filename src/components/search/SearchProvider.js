@@ -12,7 +12,7 @@ export const SearchProvider = (props) => {
   // const [localHousesSale, setLocalHousesSale] = useState([])
 
   const addSearch = (searchObj) => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/searches`, {
+    return fetch(`https://swipe-home.herokuapp.com/searches`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -23,13 +23,13 @@ export const SearchProvider = (props) => {
   }
 
   const deleteSearch = (searchId)=> {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/searches/${searchId}`, {
+    return fetch(`https://swipe-home.herokuapp.com/searches/${searchId}`, {
       method: "DELETE"
     })
   }
 
   const getSearchesByUserId = (userId) => {
-      return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/searches?userId=${userId}`)
+      return fetch(`https://swipe-home.herokuapp.com/searches?userId=${userId}`)
       .then(res => res.json())
       .then(data => setSearches(data))
   }
@@ -47,7 +47,7 @@ export const SearchProvider = (props) => {
     .catch(err => {console.error(err)})
   }
   const getLocalHousesRent = (search) => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/houses?userTypeId=1&address.city=${search.city.replace(/"/g,"")}&address.state_code=${search.state_code.replace(/"/g,"")}${search.postal_code ? `&address.postal_code=${search.postal_code.replace(/"/g,"")}` : "" }${search.price_max ? `&price_max=${search.price_max.replace(/"/g,"")}` : "" }${search.beds_min ? `&beds_min=${search.beds_min.replace(/"/g,"")}` : "" }${search.baths_min ? `&baths_min=${search.baths_min.replace(/"/g,"")}` : "" }`, {
+    return fetch(`https://swipe-home.herokuapp.com/houses?userTypeId=1&address.city=${search.city.replace(/"/g,"")}&address.state_code=${search.state_code.replace(/"/g,"")}${search.postal_code ? `&address.postal_code=${search.postal_code.replace(/"/g,"")}` : "" }${search.price_max ? `&price_max=${search.price_max.replace(/"/g,"")}` : "" }${search.beds_min ? `&beds_min=${search.beds_min.replace(/"/g,"")}` : "" }${search.baths_min ? `&baths_min=${search.baths_min.replace(/"/g,"")}` : "" }`, {
 	    "method": "GET",
     	"headers": {
 		    "x-rapidapi-host": "realtor.p.rapidapi.com",
@@ -59,7 +59,7 @@ export const SearchProvider = (props) => {
     .catch(err => {console.error(err)})
   }
   const getLocalHousesSale = (search) => {
-    return fetch(`https://swipehome-d73a6-default-rtdb.firebaseio.com/houses?userTypeId=2&address.city=${search.city.toLowerCase().replace(/"/g,"")}&address.state_code=${search.state_code.replace(/"/g,"")}${search.postal_code ? `&address.postal_code=${search.postal_code.replace(/"/g,"")}` : "" }${search.price_max ? `&price_max=${search.price_max.replace(/"/g,"")}` : "" }${search.beds_min ? `&beds_min=${search.beds_min.replace(/"/g,"")}` : "" }${search.baths_min ? `&baths_min=${search.baths_min.replace(/"/g,"")}` : "" }`, {
+    return fetch(`https://swipe-home.herokuapp.com/houses?userTypeId=2&address.city=${search.city.toLowerCase().replace(/"/g,"")}&address.state_code=${search.state_code.replace(/"/g,"")}${search.postal_code ? `&address.postal_code=${search.postal_code.replace(/"/g,"")}` : "" }${search.price_max ? `&price_max=${search.price_max.replace(/"/g,"")}` : "" }${search.beds_min ? `&beds_min=${search.beds_min.replace(/"/g,"")}` : "" }${search.baths_min ? `&baths_min=${search.baths_min.replace(/"/g,"")}` : "" }`, {
 	    "method": "GET",
     	"headers": {
 		    "x-rapidapi-host": "realtor.p.rapidapi.com",
