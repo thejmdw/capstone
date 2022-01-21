@@ -67,7 +67,7 @@ export const Fave = () => {
                   frameborder="0"
                   style={{border:0}}
                   className="faveMaps"
-                  src={`https://www.google.com/maps/embed/v1/place?q=${faveDetail.address.line}${faveDetail.address.city}${faveDetail.address.state_code}${faveDetail.address.lat ? `&center=${faveDetail.address.lat},${faveDetail.address.lon}` : ""}&zoom=17&key=AIzaSyBDNm_nEXINx2bsVUSflyt633t7rVecQgA
+                  src={`https://www.google.com/maps/embed/v1/place?q=${faveDetail.address.line}${faveDetail.address.city}${faveDetail.address.state_code}${faveDetail.address.lat ? `&center=${faveDetail.address.lat},${faveDetail.address.lon}` : ""}&zoom=17&key=AIzaSyCcoYDl4NbSK8CmxVaCHK0NlAel3nYVdiY
                   &maptype=roadmap`} />
                   <h4>Listing Agent</h4>
                   {faveDetail.branding ? <div><div>{faveDetail.branding.listing_agent?.details?.name}</div><div> {faveDetail.branding.listing_office?.details.name}</div><div> {faveDetail.branding.listing_office?.details.phone}</div></div> : <Button onClick={() => {handleContactAgent(faveDetail.user.id)}}>{faveDetail.user?.name}</Button>}

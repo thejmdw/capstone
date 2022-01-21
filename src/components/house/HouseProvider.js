@@ -29,7 +29,7 @@ export const HouseProvider = (props) => {
 
   const addListing = (listingObj) => {
     // debugger
-    return fetch(`http://localhost:8088/houses`, {
+    return fetch(`https://swipe-home.herokuapp.com/houses`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -39,13 +39,13 @@ export const HouseProvider = (props) => {
   }
 
   const getHouseById = houseId => {
-    return fetch(`http://localhost:8088/houses/${houseId}?_expand=user`)
+    return fetch(`https://swipe-home.herokuapp.com/houses/${houseId}?_expand=user`)
     .then(res => res.json())
   }
 
   // const putListingPicURL = (userObj, avatarURL, id) => {
   //   userObj.avatarURL = avatarURL
-  //   return fetch(`http://localhost:8088/users/${id}`,{
+  //   return fetch(`https://swipe-home.herokuapp.com/users/${id}`,{
   //     method:"PUT",
   //     headers: {
   //       "Content-Type": "application/json"
@@ -67,13 +67,13 @@ export const HouseProvider = (props) => {
   
 
   const getListingsByUserId = userId => {
-    return axios.get(`http://localhost:8088/houses?userId=${userId}`)
+    return axios.get(`https://swipe-home.herokuapp.com/houses?userId=${userId}`)
     .then((res) => res.data)
     .then(data => setListings(data))
   }
 
   const deleteListingById = id => {
-    return axios.delete(`http://localhost:8088/houses/${id}`)
+    return axios.delete(`https://swipe-home.herokuapp.com/houses/${id}`)
   }
 
   return (
